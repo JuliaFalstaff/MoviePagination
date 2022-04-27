@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cardview_elevation">8dp</dimen>
+    <dimen name="cardview_corner_radius">4dp</dimen>
+    <dimen name="card_view_margin_top">8dp</dimen>
+    <dimen name="cardview_start">4dp</dimen>
+    <dimen name="cardview_end">4dp</dimen>
+    <dimen name="cardview_bottom">4dp</dimen>
+    <dimen name="text_size_title">24sp</dimen>
+    <dimen name="text_size_date_release">18sp</dimen>
+    <dimen name="text_size_title_info">18sp</dimen>
+    <dimen name="margint_top_overview">16dp</dimen>
+    <dimen name="margin_side_overvie">8dp</dimen>
+    <dimen name="cardview_end_actor">16dp</dimen>
+    <dimen name="cast_text_margin_start">16dp</dimen>
+</resources>

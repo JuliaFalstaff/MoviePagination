@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MoviePagination</string>
+    <string name="cast_title">Cast</string>
 </resources>
