@@ -8,7 +8,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitImpl {
-    private val api by lazy {
+    val api: ApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
@@ -25,6 +25,6 @@ class RetrofitImpl {
     }
 
     companion object {
-        private const val BASE_URL = "https://imdb-api.com/API/InTheaters/"
+        private const val BASE_URL = "https://imdb-api.com"
     }
 }
