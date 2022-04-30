@@ -16,12 +16,17 @@ import com.example.moviepagination.model.data.Item
 import com.example.moviepagination.ui.adapters.IOnListItemClickListener
 import com.example.moviepagination.ui.adapters.MovieListAdapter
 import com.example.moviepagination.viewmodel.MovieListViewModel
+import org.koin.androidx.scope.createScope
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.component.inject
+import org.koin.core.scope.Scope
 
-class MovieListFragment : Fragment() {
+class MovieListFragment : Fragment(), KoinScopeComponent {
 
+    override val scope: Scope by lazy { createScope(this) }
     private var _binding: FragmentMovieListRecyclerViewBinding? = null
     private val binding get() = _binding!!
-    private lateinit var vm: MovieListViewModel
+    val vm: MovieListViewModel by inject()
     private var adapter: MovieListAdapter? = null
     private val onListItemClickListener: IOnListItemClickListener =
         object : IOnListItemClickListener {
@@ -49,8 +54,6 @@ class MovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.movieListRecyclerView.adapter = adapter
-
-        vm = ViewModelProvider(this).get(MovieListViewModel::class.java)
         vm.getLiveData().observe(viewLifecycleOwner, Observer {
             Log.d("MOVIE", it.toString())
             renderData(it)

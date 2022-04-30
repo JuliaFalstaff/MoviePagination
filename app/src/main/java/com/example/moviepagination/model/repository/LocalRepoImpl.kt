@@ -10,11 +10,11 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class LocalRepoImpl(private val db: MovieDataBase) : ILocalRepo {
+class LocalRepoImpl(private val movieItemListDao: MovieItemListDao) : ILocalRepo {
 
     override fun saveMovieList(list: MovieItemList): Completable {
         return Completable.fromCallable {
-            db.movieItemListDao.insertAllMovieList(MovieItemListEntity(0, list.items))
+            movieItemListDao.insertAllMovieList(MovieItemListEntity(0, list.items))
         }
 
 
@@ -23,7 +23,7 @@ class LocalRepoImpl(private val db: MovieDataBase) : ILocalRepo {
     }
 
     override fun getAllMovieList(): Single<MovieItemList> {
-        return db.movieItemListDao.getMovieList().map {
+        return movieItemListDao.getMovieList().map {
             convertFromEntityToMovieList(it)
         }
 

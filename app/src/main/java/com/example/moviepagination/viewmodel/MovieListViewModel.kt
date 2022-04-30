@@ -13,7 +13,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MovieListViewModel(
     val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
-    val remoteRepo: IRemoteRepo = RemoteRepoImpl(RetrofitImpl().api),
+    val remoteRepo: IRemoteRepo,
 //        val localRepo: ILocalRepo = LocalRepoImpl()
 ) : ViewModel() {
 

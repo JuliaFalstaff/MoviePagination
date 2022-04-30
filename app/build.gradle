@@ -88,4 +88,8 @@ dependencies {
     implementation 'com.facebook.stetho:stetho-urlconnection:1.6.0'
     implementation 'com.facebook.stetho:stetho-js-rhino:1.6.0'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.6.0'
+
+    //Koin
+    implementation "io.insert-koin:koin-android:3.1.6"
+    implementation "io.insert-koin:koin-core:3.1.6"
 }

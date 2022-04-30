@@ -17,12 +17,17 @@ import com.example.moviepagination.model.data.Item
 import com.example.moviepagination.model.data.info.MovieInfo
 import com.example.moviepagination.ui.adapters.ActorsListAdapter
 import com.example.moviepagination.viewmodel.MovieInfoViewModel
+import org.koin.androidx.scope.createScope
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.component.inject
+import org.koin.core.scope.Scope
 
-class MovieInfoFragment : Fragment() {
+class MovieInfoFragment : Fragment(), KoinScopeComponent {
 
+    override val scope: Scope by lazy { createScope(this) }
     private var _binding: FragmentMovieInfoBinding? = null
     private val binding get() = _binding!!
-    private lateinit var vm: MovieInfoViewModel
+    val vm: MovieInfoViewModel by inject()
     private lateinit var movieBundle: Item
     private var adapter: ActorsListAdapter? = null
 
@@ -39,7 +44,6 @@ class MovieInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewActors.adapter = adapter
         movieBundle = arguments?.getParcelable(MOVIE_INFO) ?: Item("")
-        vm = ViewModelProvider(this).get(MovieInfoViewModel::class.java)
         vm.getDetailedLiveData().observe(viewLifecycleOwner, Observer {
             renderData(it)
             Log.d("MOVIE-INFO", it.toString())
