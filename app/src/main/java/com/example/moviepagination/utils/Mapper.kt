@@ -10,4 +10,3 @@ fun convertFromDataToEntity(list: MovieItemList): MovieItemListEntity {
 fun convertFromEntityToMovieList(list: MovieItemListEntity): MovieItemList {
     return MovieItemList(list.items)
 }
-
