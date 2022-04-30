@@ -11,21 +11,20 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class MovieListViewModel(
+class MovieInfoViewModel(
     val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
     val remoteRepo: IRemoteRepo = RemoteRepoImpl(RetrofitImpl().api),
-//        val localRepo: ILocalRepo = LocalRepoImpl()
 ) : ViewModel() {
 
-    fun getLiveData(): LiveData<AppState> = liveDataToObserve
+    fun getDetailedLiveData(): LiveData<AppState> = liveDataToObserve
     private val compositeDisposable = CompositeDisposable()
 
-    fun loadMovieListData() {
-        val disposable = remoteRepo.getMovieListFromServer()
+    fun loadMovieById(movieId: String) {
+        val disposable = remoteRepo.getMovieByIdFromServer(movieId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                liveDataToObserve.postValue(AppState.Success(it))
+                liveDataToObserve.postValue(AppState.SuccessMovieInfo(it))
             }, {
                 liveDataToObserve.postValue(AppState.Error(it))
             })

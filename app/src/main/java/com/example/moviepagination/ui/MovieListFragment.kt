@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentMovieListRecyclerViewBinding
 import com.example.moviepagination.model.AppState
@@ -18,26 +17,31 @@ import com.example.moviepagination.ui.adapters.IOnListItemClickListener
 import com.example.moviepagination.ui.adapters.MovieListAdapter
 import com.example.moviepagination.viewmodel.MovieListViewModel
 
-class MovieListFragment: Fragment() {
+class MovieListFragment : Fragment() {
 
     private var _binding: FragmentMovieListRecyclerViewBinding? = null
     private val binding get() = _binding!!
     private lateinit var vm: MovieListViewModel
     private var adapter: MovieListAdapter? = null
-    private val onListItemClickListener: IOnListItemClickListener = object : IOnListItemClickListener {
-        override fun onItemClick(movie: Item) {
-            activity?.supportFragmentManager?.apply {
-                beginTransaction()
-                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                        putParcelable(MovieInfoFragment.MOVIE_INFO, movie)
-                    }))
-                    .addToBackStack("")
-                    .commitAllowingStateLoss()
+    private val onListItemClickListener: IOnListItemClickListener =
+        object : IOnListItemClickListener {
+            override fun onItemClick(movie: Item) {
+                activity?.supportFragmentManager?.apply {
+                    beginTransaction()
+                        .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+                            putParcelable(MovieInfoFragment.MOVIE_INFO, movie)
+                        }))
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
+                }
             }
         }
-    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentMovieListRecyclerViewBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -52,11 +56,10 @@ class MovieListFragment: Fragment() {
             renderData(it)
         })
         vm.loadMovieListData()
-
     }
 
     private fun renderData(state: AppState) {
-        when(state) {
+        when (state) {
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
                 binding.movieListRecyclerView.adapter = movieList.let {
@@ -66,9 +69,14 @@ class MovieListFragment: Fragment() {
                     it.setData(movieList)
                 }
             }
-            is AppState.Loading -> {}
+            is AppState.Loading -> {
+            }
             is AppState.Error -> {
-                Toast.makeText(requireContext(), "Error: ${state.error.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Error: ${state.error.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

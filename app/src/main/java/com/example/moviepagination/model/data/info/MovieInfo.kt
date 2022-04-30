@@ -1,11 +1,14 @@
-package com.example.moviepagination.model.data
+package com.example.moviepagination.model.data.info
 
 import android.os.Parcelable
+import com.example.moviepagination.model.data.Director
+import com.example.moviepagination.model.data.Genre
+import com.example.moviepagination.model.data.Star
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Item(
+data class MovieInfo(
         @SerializedName("id")
         val id: String = "",
         @SerializedName("title")
@@ -14,8 +17,8 @@ data class Item(
         val fullTitle: String = "",
         @SerializedName("year")
         val year: String = "",
-        @SerializedName("releaseState")
-        val releaseState: String = "",
+        @SerializedName("releaseDate")
+        val releaseDate: String = "",
         @SerializedName("image")
         val image: String = "",
         @SerializedName("runtimeMins")
@@ -28,8 +31,6 @@ data class Item(
         val contentRating: String = "",
         @SerializedName("imDbRating")
         val imDbRating: String = "",
-        @SerializedName("imDbRatingCount")
-        val imDbRatingCount: String = "",
         @SerializedName("metacriticRating")
         val metacriticRating: String = "",
         @SerializedName("genres")
@@ -43,5 +44,7 @@ data class Item(
         @SerializedName("stars")
         val stars: String = "",
         @SerializedName("starList")
-        val starList: List<Star>? = null
+        val starList: List<Star>? = null,
+        @SerializedName("actorList")
+        val actorList: List<Actor>? = null
 ) : Parcelable

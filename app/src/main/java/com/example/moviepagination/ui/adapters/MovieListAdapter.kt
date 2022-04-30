@@ -8,7 +8,10 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemMovieRecyclerViewBinding
 import com.example.moviepagination.model.data.Item
 
-class MovieListAdapter(var movieList: List<Item>, private var onListItemListener: IOnListItemClickListener) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
+class MovieListAdapter(
+    var movieList: List<Item>,
+    private var onListItemListener: IOnListItemClickListener
+) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
     fun setData(list: List<Item>) {
         movieList = list
