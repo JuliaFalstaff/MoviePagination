@@ -10,8 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentMovieListRecyclerViewBinding
 import com.example.moviepagination.model.AppState
+import com.example.moviepagination.model.data.Item
+import com.example.moviepagination.ui.adapters.IOnListItemClickListener
 import com.example.moviepagination.ui.adapters.MovieListAdapter
 import com.example.moviepagination.viewmodel.MovieListViewModel
 
@@ -21,6 +24,18 @@ class MovieListFragment: Fragment() {
     private val binding get() = _binding!!
     private lateinit var vm: MovieListViewModel
     private var adapter: MovieListAdapter? = null
+    private val onListItemClickListener: IOnListItemClickListener = object : IOnListItemClickListener {
+        override fun onItemClick(movie: Item) {
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+                        putParcelable(MovieInfoFragment.MOVIE_INFO, movie)
+                    }))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
+            }
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentMovieListRecyclerViewBinding.inflate(inflater, container, false)
@@ -45,7 +60,7 @@ class MovieListFragment: Fragment() {
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
                 binding.movieListRecyclerView.adapter = movieList.let {
-                    MovieListAdapter(it)
+                    MovieListAdapter(it, onListItemClickListener)
                 }
                 adapter?.let {
                     it.setData(movieList)

@@ -3,16 +3,12 @@ package com.example.moviepagination.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemMovieRecyclerViewBinding
 import com.example.moviepagination.model.data.Item
 
-class MovieListAdapter(var movieList: List<Item>) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
-
-//    var movieList = arrayListOf<Item>()
-//        set(value) {
-//            field = value
-//            notifyDataSetChanged()
-//        }
+class MovieListAdapter(var movieList: List<Item>, private var onListItemListener: IOnListItemClickListener) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
     fun setData(list: List<Item>) {
         movieList = list
@@ -42,8 +38,13 @@ class MovieListAdapter(var movieList: List<Item>) : RecyclerView.Adapter<MovieLi
             titleMovieTextView.text = movie.title
             dateOfReleaseTextView.text = movie.year
             movieRatingBar.rating = movie.metacriticRating.toFloat().div(10).div(2)
+            Glide.with(itemView)
+                .load(movie.image)
+                .error(R.drawable.ic_load_error_vector)
+                .into(moviePosterImageView)
+            itemView.setOnClickListener {
+                onListItemListener.onItemClick(movie)
+            }
         }
-
     }
-
 }
