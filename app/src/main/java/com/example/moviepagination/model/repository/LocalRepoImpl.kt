@@ -12,11 +12,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class LocalRepoImpl(private val movieItemListDao: MovieItemListDao) : ILocalRepo {
 
-    override fun saveMovieList(list: MovieItemList): Completable {
-        return Completable.fromCallable {
+    override fun saveMovieList(list: MovieItemList) {
             movieItemListDao.insertAllMovieList(MovieItemListEntity(0, list.items))
-        }
-
 
 //        return movieListDao.insertAllMovieList(MovieItemListEntity(0, list.items))
 
