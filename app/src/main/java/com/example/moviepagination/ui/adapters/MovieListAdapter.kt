@@ -6,13 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviepagination.databinding.ItemMovieRecyclerViewBinding
 import com.example.moviepagination.model.data.Item
 
-class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
+class MovieListAdapter(var movieList: List<Item>) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
-    var movieList = arrayListOf<Item>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+//    var movieList = arrayListOf<Item>()
+//        set(value) {
+//            field = value
+//            notifyDataSetChanged()
+//        }
+
+    fun setData(list: List<Item>) {
+        movieList = list
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
