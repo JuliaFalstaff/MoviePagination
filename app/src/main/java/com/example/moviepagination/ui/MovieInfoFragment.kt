@@ -75,7 +75,6 @@ class MovieInfoFragment : Fragment() {
             dateOfReleaseInfoTextView.text = movie.year
             movieGenresTextView.text = movie.genres
             movieOverviewTextView.text = movie.plot
-            movieInfoRatingBar.rating = movie.metacriticRating.toFloat().div(10).div(2)
 
             Glide.with(requireContext())
                 .load(movie.image)

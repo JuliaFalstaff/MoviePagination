@@ -80,15 +80,6 @@
         app:layout_constraintTop_toBottomOf="@+id/dateOfReleaseInfoTextView"
         tools:text="Criminal, Detective, Exciting, So British" />
 
-    <androidx.appcompat.widget.AppCompatRatingBar
-        android:id="@+id/movieInfoRatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
-        tools:rating="4.5" />
-
     <TextView
         android:id="@+id/movieOverviewTextView"
         android:layout_width="0dp"
