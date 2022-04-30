@@ -34,14 +34,14 @@ data class Item(
         val metacriticRating: String,
         @SerializedName("genres")
         val genres: String,
-//        @SerializedName("genreList")
-//        val genreList: List<Genre>? = null,
+        @SerializedName("genreList")
+        val genreList: List<Genre>? = null,
         @SerializedName("directors")
         val directors: String,
-//        @SerializedName("directorList")
-//        val directorList: List<Director>? = null,
+        @SerializedName("directorList")
+        val directorList: List<Director>? = null,
         @SerializedName("stars")
         val stars: String,
-//        @SerializedName("starList")
-//        val starList: List<Star>? = null
+        @SerializedName("starList")
+        val starList: List<Star>? = null
 ) : Parcelable
