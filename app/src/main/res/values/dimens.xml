@@ -13,4 +13,7 @@
     <dimen name="margin_side_overvie">8dp</dimen>
     <dimen name="cardview_end_actor">16dp</dimen>
     <dimen name="cast_text_margin_start">16dp</dimen>
+    <dimen name="text_size_info">18sp</dimen>
+    <dimen name="text_size_info_year">16sp</dimen>
+    <dimen name="margin_overvie">4dp</dimen>
 </resources>

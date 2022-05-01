@@ -16,6 +16,10 @@ class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
         return apiService.getMovieById(EN_LANG, movieId, MOVIE_API_KEY)
     }
 
+    override fun getComingSoonMoviesFromServer(): Single<MovieItemList> {
+        return apiService.getComingSoonMovies(EN_LANG, MOVIE_API_KEY)
+    }
+
     companion object {
         private const val MOVIE_API_KEY = BuildConfig.IMDb_API_KEY
         private const val EN_LANG = "en"

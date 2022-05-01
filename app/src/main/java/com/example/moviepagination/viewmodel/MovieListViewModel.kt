@@ -21,7 +21,7 @@ class MovieListViewModel(
     private val compositeDisposable = CompositeDisposable()
 
     fun loadMovieListData() {
-        val disposable = remoteRepo.getMovieListFromServer()
+        val disposable = remoteRepo.getComingSoonMoviesFromServer()
                 .doAfterSuccess { localRepo.saveMovieList(it) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

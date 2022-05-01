@@ -14,18 +14,11 @@ class LocalRepoImpl(private val movieItemListDao: MovieItemListDao) : ILocalRepo
 
     override fun saveMovieList(list: MovieItemList) {
             movieItemListDao.insertAllMovieList(MovieItemListEntity(0, list.items))
-
-//        return movieListDao.insertAllMovieList(MovieItemListEntity(0, list.items))
-
     }
 
     override fun getAllMovieList(): Single<MovieItemList> {
         return movieItemListDao.getMovieList().map {
             convertFromEntityToMovieList(it)
         }
-
-
-//        val movieList = movieListDao.getMovieList()
-//        return MovieItemList(movieList.items)
     }
 }

@@ -18,4 +18,10 @@ interface ApiService {
         @Path("id") id: String,
         @Path("apiKey") apiKey: String
     ): Single<MovieInfo>
+
+    @GET("/{lang}/API/ComingSoon/{apiKey}")
+    fun getComingSoonMovies(
+            @Path("lang") lang: String,
+            @Path("apiKey") apiKey: String
+    ): Single<MovieItemList>
 }
