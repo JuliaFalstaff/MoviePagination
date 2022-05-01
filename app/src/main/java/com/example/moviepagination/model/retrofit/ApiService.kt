@@ -24,4 +24,9 @@ interface ApiService {
             @Path("lang") lang: String,
             @Path("apiKey") apiKey: String
     ): Single<MovieItemList>
+
+    @GET("/API/Top250Movies/{apiKey}")
+    fun getTOP250Movies(
+        @Path("apiKey") apiKey: String
+    ): Single<MovieItemList>
 }

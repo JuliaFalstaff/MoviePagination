@@ -40,7 +40,7 @@ class MovieListAdapter(
         fun bind(movie: Item) = with(binding) {
             titleMovieTextView.text = movie.title
             dateOfReleaseTextView.text = movie.year
-//            movieRatingBar.rating = movie.metacriticRating.toFloat().div(10).div(2)
+            movieRatingBar.rating = movie.imDbRating.toFloat().div(2)
             Glide.with(itemView)
                 .load(movie.image)
                 .error(R.drawable.ic_load_error_vector)

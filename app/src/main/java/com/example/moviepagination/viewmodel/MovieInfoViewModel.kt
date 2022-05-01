@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moviepagination.model.AppState
 import com.example.moviepagination.model.repository.IRemoteRepo
-import com.example.moviepagination.model.repository.RemoteRepoImpl
-import com.example.moviepagination.model.retrofit.RetrofitImpl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers

@@ -8,4 +8,5 @@ interface IRemoteRepo {
     fun getMovieListFromServer(): Single<MovieItemList>
     fun getMovieByIdFromServer(movieId: String): Single<MovieInfo>
     fun getComingSoonMoviesFromServer(): Single<MovieItemList>
+    fun getTOP250Movies(): Single<MovieItemList>
 }

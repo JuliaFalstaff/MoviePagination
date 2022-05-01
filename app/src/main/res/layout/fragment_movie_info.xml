@@ -10,12 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:adjustViewBounds="true"
+        android:background="@drawable/shape_background_poster"
         android:scaleType="centerCrop"
-        android:src="@drawable/killingeve_back"
         app:layout_constraintBottom_toTopOf="@+id/barrierPoster"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/killingeve_back" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/smallMoviePosterImageView"
@@ -23,9 +24,9 @@
         android:layout_height="150dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/shape_background_poster"
-        android:src="@drawable/killing_eve_example"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
+        tools:src="@drawable/killing_eve_example" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierPoster"
@@ -114,19 +115,17 @@
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
         app:layout_constraintStart_toStartOf="parent" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewActors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/cardview_bottom"
+        android:background="@drawable/shape_background_poster"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_marginBottom="@dimen/cardview_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom"
-        tools:listitem="@layout/item_actors_recycler_view"/>
-
-
+        tools:listitem="@layout/item_actors_recycler_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>

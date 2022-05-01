@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentMovieListRecyclerViewBinding
 import com.example.moviepagination.model.AppState
@@ -71,8 +70,10 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
                 adapter?.let {
                     it.setData(movieList)
                 }
+                binding.progressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
+                binding.progressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
                 Toast.makeText(
