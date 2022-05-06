@@ -1,6 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MoviePagination</string>
-    <string name="cast_title">Cast</string>
     <string name="now_in_theatres">Now in theatres</string>
     <string name="most_popular_movies">Most Popular Movies</string>
     <string name="most_popular_series">Most Popular Series</string>
