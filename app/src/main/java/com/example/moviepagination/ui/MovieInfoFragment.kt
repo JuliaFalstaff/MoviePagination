@@ -13,8 +13,11 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentMovieInfoBinding
 import com.example.moviepagination.model.AppState
 import com.example.moviepagination.model.data.Item
+import com.example.moviepagination.model.data.info.Actor
 import com.example.moviepagination.model.data.info.MovieInfo
 import com.example.moviepagination.ui.adapters.ActorsListAdapter
+import com.example.moviepagination.ui.adapters.IOnActorClickListener
+import com.example.moviepagination.ui.adapters.IOnListItemClickListener
 import com.example.moviepagination.viewmodel.MovieInfoViewModel
 import org.koin.androidx.scope.createScope
 import org.koin.core.component.KoinScopeComponent
@@ -27,8 +30,20 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
     private var _binding: FragmentMovieInfoBinding? = null
     private val binding get() = _binding!!
     val vm: MovieInfoViewModel by inject()
-    private lateinit var movieBundle: Item
+    private lateinit var movieBundle: String
     private var adapter: ActorsListAdapter? = null
+    private val onListItemClickListener: IOnActorClickListener = object : IOnActorClickListener {
+        override fun onActorItemClick(actor: Actor) {
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                        .replace(R.id.container, ActorInfoFragment.newInstance(Bundle().apply {
+                            putString(ActorInfoFragment.ACTOR_INFO, actor.id)
+                        }))
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,12 +57,12 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewActors.adapter = adapter
-        movieBundle = arguments?.getParcelable(MOVIE_INFO) ?: Item("")
+        movieBundle = arguments?.getString(MOVIE_INFO).toString()
         vm.getDetailedLiveData().observe(viewLifecycleOwner, Observer {
             renderData(it)
             Log.d("MOVIE-INFO", it.toString())
         })
-        vm.loadMovieById(movieBundle.id)
+        vm.loadMovieById(movieBundle)
     }
 
     private fun renderData(appState: AppState) {
@@ -56,7 +71,7 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
                 setData(appState.dataMovie)
                 binding.recyclerViewActors.adapter = appState.dataMovie.actorList?.let {
                     ActorsListAdapter(
-                        it
+                        it, onListItemClickListener
                     )
                 }
                 appState.dataMovie.actorList?.let { adapter?.setActorsData(it) }

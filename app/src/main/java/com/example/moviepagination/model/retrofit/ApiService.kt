@@ -1,6 +1,7 @@
 package com.example.moviepagination.model.retrofit
 
 import com.example.moviepagination.model.data.MovieItemList
+import com.example.moviepagination.model.data.castInfo.ActorInfo
 import com.example.moviepagination.model.data.info.MovieInfo
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
@@ -41,4 +42,11 @@ interface ApiService {
             @Path("lang") lang: String,
             @Path("apiKey") apiKey: String,
     ): Single<MovieItemList>
+
+    @GET("/{lang}/API/Name/{apiKey}/{id}")
+    fun getActorInfoById(
+            @Path("lang") lang: String,
+            @Path("apiKey") apiKey: String,
+            @Path("id") id: String,
+    ): Single<ActorInfo>
 }

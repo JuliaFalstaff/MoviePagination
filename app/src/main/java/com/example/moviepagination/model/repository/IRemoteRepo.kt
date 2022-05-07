@@ -1,8 +1,10 @@
 package com.example.moviepagination.model.repository
 
 import com.example.moviepagination.model.data.MovieItemList
+import com.example.moviepagination.model.data.castInfo.ActorInfo
 import com.example.moviepagination.model.data.info.MovieInfo
 import io.reactivex.rxjava3.core.Single
+import retrofit2.http.Path
 
 interface IRemoteRepo {
     fun getMovieNowInTheatre(): Single<MovieItemList>
@@ -11,4 +13,5 @@ interface IRemoteRepo {
     fun getTOP250Movies(): Single<MovieItemList>
     fun getMostPopularMovies(): Single<MovieItemList>
     fun getMostPopularTVs(): Single<MovieItemList>
+    fun getActorInfoById(actorId: String): Single<ActorInfo>
 }

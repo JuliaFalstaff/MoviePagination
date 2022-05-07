@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="cast_title">Актеры</string>
     <string name="now_in_theatres">Сейчас в кинотеатрах</string>
     <string name="most_popular_movies">Популярные фильмы</string>
     <string name="most_popular_series">Популярные сериалы</string>
     <string name="coming_soon">Скоро в кино</string>
+    <string name="date_of_birth">Дата рождения: %s</string>
+    <string name="awards">Награды: %s</string>
+    <string name="height">Рост:</string>
+    <string name="cast_movies">Фмльмография</string>
 </resources>

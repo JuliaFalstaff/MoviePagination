@@ -2,6 +2,7 @@ package com.example.moviepagination.model.repository
 
 import com.example.moviepagination.BuildConfig
 import com.example.moviepagination.model.data.MovieItemList
+import com.example.moviepagination.model.data.castInfo.ActorInfo
 import com.example.moviepagination.model.data.info.MovieInfo
 import com.example.moviepagination.model.retrofit.ApiService
 import io.reactivex.rxjava3.core.Single
@@ -32,8 +33,13 @@ class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
         return apiService.getMostPopularTVs(EN_LANG, MOVIE_API_KEY)
     }
 
+    override fun getActorInfoById(actorId: String): Single<ActorInfo> {
+        return apiService.getActorInfoById(EN_LANG, MOVIE_API_KEY, actorId)
+    }
+
     companion object {
         private const val MOVIE_API_KEY = BuildConfig.IMDb_API_KEY
         private const val EN_LANG = "en"
+        private const val RU_LANG = "ru"
     }
 }

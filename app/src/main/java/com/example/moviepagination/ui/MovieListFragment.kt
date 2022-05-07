@@ -38,7 +38,7 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
                 activity?.supportFragmentManager?.apply {
                     beginTransaction()
                         .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                            putParcelable(MovieInfoFragment.MOVIE_INFO, movie)
+                            putString(MovieInfoFragment.MOVIE_INFO, movie.id)
                         }))
                         .addToBackStack("")
                         .commitAllowingStateLoss()

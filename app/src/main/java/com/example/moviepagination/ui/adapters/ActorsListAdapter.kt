@@ -9,8 +9,9 @@ import com.example.moviepagination.databinding.ItemActorsRecyclerViewBinding
 import com.example.moviepagination.model.data.info.Actor
 
 class ActorsListAdapter(
-    var actorsList: List<Actor>
-) : RecyclerView.Adapter<ActorsListAdapter.ActorsViewHolder>() {
+    var actorsList: List<Actor>,
+    private var onListItemListener: IOnActorClickListener
+) : RecyclerView.Adapter<ActorsListAdapter.ActorsViewHolder>()  {
 
     fun setActorsData(list: List<Actor>) {
         actorsList = list
@@ -37,12 +38,15 @@ class ActorsListAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(actor: Actor) = with(binding) {
-
             binding.actorNameTexView.text = actor.name
             Glide.with(itemView)
                 .load(actor.image)
                 .error(R.drawable.ic_load_error_vector)
                 .into(actorFotoImageView)
+            itemView.setOnClickListener {
+                onListItemListener.onActorItemClick(actor)
+            }
         }
     }
+
 }

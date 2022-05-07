@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name">MoviePagination</string>
+    <string name="app_name" translatable="false">MoviePagination</string>
     <string name="cast_title">Cast</string>
     <string name="now_in_theatres">Now in theatres</string>
     <string name="most_popular_movies">Most Popular Movies</string>
     <string name="most_popular_series">Most Popular Series</string>
     <string name="coming_soon">Coming Soon</string>
+    <string name="date_of_birth">Date Of Birth: %s</string>
+    <string name="awards">Awards: %s</string>
+    <string name="height">Height:</string>
+    <string name="cast_movies">Cast Movies</string>
 </resources>
