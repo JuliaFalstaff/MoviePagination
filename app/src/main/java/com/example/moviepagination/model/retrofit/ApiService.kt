@@ -9,24 +9,36 @@ import retrofit2.http.Path
 interface ApiService {
     @GET("/API/InTheaters/{apiKey}")
     fun getActiveMoviesInTheatres(
-        @Path("apiKey") apiKey: String
+            @Path("apiKey") apiKey: String,
     ): Single<MovieItemList>
 
     @GET("/{lang}/API/Title/{apiKey}/{id}")
     fun getMovieById(
-        @Path("lang") lang: String,
-        @Path("id") id: String,
-        @Path("apiKey") apiKey: String
+            @Path("lang") lang: String,
+            @Path("id") id: String,
+            @Path("apiKey") apiKey: String,
     ): Single<MovieInfo>
 
     @GET("/{lang}/API/ComingSoon/{apiKey}")
     fun getComingSoonMovies(
             @Path("lang") lang: String,
-            @Path("apiKey") apiKey: String
+            @Path("apiKey") apiKey: String,
     ): Single<MovieItemList>
 
     @GET("/API/Top250Movies/{apiKey}")
     fun getTOP250Movies(
-        @Path("apiKey") apiKey: String
+            @Path("apiKey") apiKey: String,
+    ): Single<MovieItemList>
+
+    @GET("/{lang}/API/MostPopularMovies/{apiKey}")
+    fun getMostPopularMovies(
+            @Path("lang") lang: String,
+            @Path("apiKey") apiKey: String,
+    ): Single<MovieItemList>
+
+    @GET("/{lang}/API/MostPopularTVs/{apiKey}")
+    fun getMostPopularTVs(
+            @Path("lang") lang: String,
+            @Path("apiKey") apiKey: String,
     ): Single<MovieItemList>
 }

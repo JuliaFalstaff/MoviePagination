@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.Single
 
 class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
 
-    override fun getMovieListFromServer(): Single<MovieItemList> {
+    override fun getMovieNowInTheatre(): Single<MovieItemList> {
         return apiService.getActiveMoviesInTheatres(MOVIE_API_KEY)
     }
 
@@ -22,6 +22,14 @@ class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
 
     override fun getTOP250Movies(): Single<MovieItemList> {
         return apiService.getTOP250Movies(MOVIE_API_KEY)
+    }
+
+    override fun getMostPopularMovies(): Single<MovieItemList> {
+        return apiService.getMostPopularMovies(EN_LANG, MOVIE_API_KEY)
+    }
+
+    override fun getMostPopularTVs(): Single<MovieItemList> {
+        return apiService.getMostPopularTVs(EN_LANG, MOVIE_API_KEY)
     }
 
     companion object {

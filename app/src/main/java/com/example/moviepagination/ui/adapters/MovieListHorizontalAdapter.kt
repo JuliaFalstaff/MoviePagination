@@ -8,10 +8,10 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemMovieRecyclerViewBinding
 import com.example.moviepagination.model.data.Item
 
-class MovieListAdapter(
+class MovieListHorizontalAdapter(
     var movieList: List<Item>,
     private var onListItemListener: IOnListItemClickListener
-) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
+) : RecyclerView.Adapter<MovieListHorizontalAdapter.MovieViewHolder>() {
 
     fun setData(list: List<Item>) {
         movieList = list
@@ -40,7 +40,7 @@ class MovieListAdapter(
         fun bind(movie: Item) = with(binding) {
             titleMovieTextView.text = movie.title
             dateOfReleaseTextView.text = movie.year
-            movieRatingBar.rating = movie.imDbRating.toFloat().div(2)
+//            movieRatingBar.rating = movie.imDbRating.toFloat().div(2)
             Glide.with(itemView)
                 .load(movie.image)
                 .error(R.drawable.ic_load_error_vector)
