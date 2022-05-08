@@ -4,6 +4,7 @@ import com.example.moviepagination.BuildConfig
 import com.example.moviepagination.model.data.MovieItemList
 import com.example.moviepagination.model.data.castInfo.ActorInfo
 import com.example.moviepagination.model.data.info.MovieInfo
+import com.example.moviepagination.model.data.search.SearchResult
 import com.example.moviepagination.model.retrofit.ApiService
 import io.reactivex.rxjava3.core.Single
 
@@ -35,6 +36,10 @@ class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
 
     override fun getActorInfoById(actorId: String): Single<ActorInfo> {
         return apiService.getActorInfoById(EN_LANG, MOVIE_API_KEY, actorId)
+    }
+
+    override fun getSearchList(expression: String): Single<SearchResult> {
+        return apiService.getSearchList(MOVIE_API_KEY, expression)
     }
 
     companion object {

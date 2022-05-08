@@ -33,7 +33,10 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_bar_search -> {
-                    TODO()
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, SearchFragment.newInstance())
+                            .commit()
+                    true
                 }
                 R.id.bottom_top250 -> {
                     TODO()

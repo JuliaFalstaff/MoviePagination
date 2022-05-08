@@ -10,9 +10,11 @@ import com.example.moviepagination.model.room.MovieDataBase
 import com.example.moviepagination.ui.ActorInfoFragment
 import com.example.moviepagination.ui.MovieInfoFragment
 import com.example.moviepagination.ui.MovieListFragment
+import com.example.moviepagination.ui.SearchFragment
 import com.example.moviepagination.viewmodel.ActorInfoViewModel
 import com.example.moviepagination.viewmodel.MovieInfoViewModel
 import com.example.moviepagination.viewmodel.MovieListViewModel
+import com.example.moviepagination.viewmodel.SearchViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -40,5 +42,11 @@ val movieInfoScreen = module {
 val actorInfoScreen = module {
     scope<ActorInfoFragment> {
         viewModel { ActorInfoViewModel(remoteRepo = get()) }
+    }
+}
+
+val searchResultScreen = module {
+    scope<SearchFragment> {
+        viewModel { SearchViewModel(remoteRepo = get()) }
     }
 }

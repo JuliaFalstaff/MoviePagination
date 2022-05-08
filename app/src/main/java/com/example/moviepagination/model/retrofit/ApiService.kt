@@ -51,7 +51,7 @@ interface ApiService {
             @Path("id") id: String,
     ): Single<ActorInfo>
 
-    @GET("/API/Name/{apiKey}/{expression}")
+    @GET("/API/Search/{apiKey}/{expression}")
     fun getSearchList(
             @Path("apiKey") apiKey: String,
             @Path("expression") expression: String,
