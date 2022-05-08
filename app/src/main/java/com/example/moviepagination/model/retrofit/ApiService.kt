@@ -3,6 +3,7 @@ package com.example.moviepagination.model.retrofit
 import com.example.moviepagination.model.data.MovieItemList
 import com.example.moviepagination.model.data.castInfo.ActorInfo
 import com.example.moviepagination.model.data.info.MovieInfo
+import com.example.moviepagination.model.data.search.SearchResult
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -49,4 +50,10 @@ interface ApiService {
             @Path("apiKey") apiKey: String,
             @Path("id") id: String,
     ): Single<ActorInfo>
+
+    @GET("/API/Name/{apiKey}/{expression}")
+    fun getSearchList(
+            @Path("apiKey") apiKey: String,
+            @Path("expression") expression: String,
+    ): Single<SearchResult>
 }
