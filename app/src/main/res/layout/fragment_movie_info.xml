@@ -1,131 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/backgroundPosterImageView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:adjustViewBounds="true"
-        android:background="@drawable/shape_background_poster"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/barrierPoster"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/killingeve_back" />
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/smallMoviePosterImageView"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/shape_background_poster"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
-        tools:src="@drawable/killing_eve_example" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backgroundPosterImageView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/shape_background_poster"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/barrierPoster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/killingeve_back" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrierPoster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="backgroundPosterImageView" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/smallMoviePosterImageView"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/shape_background_poster"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
+            tools:src="@drawable/killing_eve_example" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="backgroundPosterImageView" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.30" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
 
-    <TextView
-        android:id="@+id/titleInfoTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/card_view_margin_top"
-        android:textSize="@dimen/text_size_title_info"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/backgroundPosterImageView"
-        tools:text="Killing Eve: Second Season" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.30" />
 
-    <TextView
-        android:id="@+id/dateOfReleaseInfoTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/card_view_margin_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/titleInfoTextView"
-        tools:text="Released: 7 April 2019" />
+        <TextView
+            android:id="@+id/titleInfoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/card_view_margin_top"
+            android:textSize="@dimen/text_size_title_info"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/backgroundPosterImageView"
+            tools:text="Killing Eve: Second Season" />
 
-    <TextView
-        android:id="@+id/movieGenresTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/card_view_margin_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/dateOfReleaseInfoTextView"
-        tools:text="Criminal, Detective, Exciting, So British" />
+        <TextView
+            android:id="@+id/dateOfReleaseInfoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/card_view_margin_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/titleInfoTextView"
+            tools:text="Released: 7 April 2019" />
 
-    <TextView
-        android:id="@+id/movieOverviewTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/margin_side_overvie"
-        android:paddingEnd="@dimen/margin_side_overvie"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/castTitleTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/smallMoviePosterImageView"
-        tools:text="Eve's life as a spy is not adding up to what she had hoped it would be when she started.
+        <TextView
+            android:id="@+id/movieGenresTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/card_view_margin_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/dateOfReleaseInfoTextView"
+            tools:text="Criminal, Detective, Exciting, So British" />
+
+        <TextView
+            android:id="@+id/movieOverviewTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingStart="@dimen/margin_side_overvie"
+            android:paddingEnd="@dimen/margin_side_overvie"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/smallMoviePosterImageView"
+            tools:text="Eve's life as a spy is not adding up to what she had hoped it would be when she started.
         She is a bored, very smart, MI5 security officer who is very desk-bound. Villanelle is a very talented killer,
         mercurial in mood, who clings to the luxuries of her job. Eve and Villanelle go head to head in a fierce game
         of cat and mouse, each woman equally obsessed with the other as Eve is tasked with hunting down the psychopathic assassin." />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.70" />
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtubeVideoTrailer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:autoPlay="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieOverviewTextView" />
 
-    <TextView
-        android:id="@+id/castTitleTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/cast_text_margin_start"
-        android:text="@string/cast_title"
-        android:textSize="@dimen/text_size_title_info"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/castTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cast_text_margin_start"
+            android:layout_marginTop="16dp"
+            android:text="@string/cast_title"
+            android:textSize="@dimen/text_size_title_info"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/youtubeVideoTrailer" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewActors"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/cardview_bottom"
-        android:background="@drawable/shape_background_poster"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineBottom"
-        tools:listitem="@layout/item_actors_recycler_view" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewActors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="@dimen/cardview_bottom"
+            android:background="@drawable/shape_background_poster"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/castTitleTextView"
+            tools:listitem="@layout/item_actors_recycler_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

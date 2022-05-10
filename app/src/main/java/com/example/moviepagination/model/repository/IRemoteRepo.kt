@@ -3,6 +3,7 @@ package com.example.moviepagination.model.repository
 import com.example.moviepagination.model.data.MovieItemList
 import com.example.moviepagination.model.data.castInfo.ActorInfo
 import com.example.moviepagination.model.data.info.MovieInfo
+import com.example.moviepagination.model.data.info.YouTubeTrailer
 import com.example.moviepagination.model.data.search.SearchResult
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Path
@@ -17,4 +18,5 @@ interface IRemoteRepo {
     fun getActorInfoById(actorId: String): Single<ActorInfo>
     fun getSearchList(expression: String): Single<SearchResult>
     fun getTOP250TVs(): Single<MovieItemList>
+    fun getMovieTrailerById(movieId: String): Single<YouTubeTrailer>
 }

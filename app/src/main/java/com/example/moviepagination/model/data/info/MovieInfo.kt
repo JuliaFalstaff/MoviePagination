@@ -46,5 +46,7 @@ data class MovieInfo(
         @SerializedName("starList")
         val starList: List<Star>? = null,
         @SerializedName("actorList")
-        val actorList: List<Actor>? = null
+        val actorList: List<Actor>? = null,
+        @SerializedName("trailer")
+        val trailer: Trailer
 ) : Parcelable

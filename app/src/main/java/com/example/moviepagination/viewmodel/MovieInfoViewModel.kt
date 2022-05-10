@@ -10,11 +10,14 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MovieInfoViewModel(
-    val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
     val remoteRepo: IRemoteRepo
 ) : ViewModel() {
 
+    val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
+    val liveDataTrailerToObserve: MutableLiveData<AppState> = MutableLiveData()
+
     fun getDetailedLiveData(): LiveData<AppState> = liveDataToObserve
+    fun getTrailerLiveData(): LiveData<AppState> = liveDataTrailerToObserve
     private val compositeDisposable = CompositeDisposable()
 
     fun loadMovieById(movieId: String) {
@@ -25,6 +28,18 @@ class MovieInfoViewModel(
                 liveDataToObserve.postValue(AppState.SuccessMovieInfo(it))
             }, {
                 liveDataToObserve.postValue(AppState.Error(it))
+            })
+        compositeDisposable.add(disposable)
+    }
+
+    fun loadMovieTrailer(movieId: String) {
+        val disposable = remoteRepo.getMovieTrailerById(movieId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                liveDataTrailerToObserve.postValue(AppState.SuccessTrailer(it))
+            }, {
+                liveDataTrailerToObserve.postValue(AppState.Error(it))
             })
         compositeDisposable.add(disposable)
     }

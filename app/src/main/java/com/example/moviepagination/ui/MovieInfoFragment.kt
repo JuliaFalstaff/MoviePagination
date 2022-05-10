@@ -12,13 +12,13 @@ import com.bumptech.glide.Glide
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentMovieInfoBinding
 import com.example.moviepagination.model.AppState
-import com.example.moviepagination.model.data.Item
 import com.example.moviepagination.model.data.info.Actor
 import com.example.moviepagination.model.data.info.MovieInfo
 import com.example.moviepagination.ui.adapters.ActorsListAdapter
 import com.example.moviepagination.ui.adapters.IOnActorClickListener
-import com.example.moviepagination.ui.adapters.IOnListItemClickListener
 import com.example.moviepagination.viewmodel.MovieInfoViewModel
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import org.koin.androidx.scope.createScope
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
@@ -63,6 +63,27 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
             Log.d("MOVIE-INFO", it.toString())
         })
         vm.loadMovieById(movieBundle)
+        vm.getTrailerLiveData().observe(viewLifecycleOwner, Observer { renderTrailer(it) })
+        vm.loadMovieTrailer(movieBundle)
+    }
+
+    private fun renderTrailer(appState: AppState) {
+        when (appState) {
+            is AppState.SuccessTrailer -> {
+                appState.trailerMovie.videoId?.let { setTrailer(it) }
+                Log.d("TAG", "Success: ${appState.trailerMovie.videoId}")
+
+            }
+            is AppState.Error -> {
+                Toast.makeText(
+                    requireContext(),
+                    "Error: ${appState.error.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("TAG", "Error: ${appState.error.message}")
+            }
+        }
+
     }
 
     private fun renderData(appState: AppState) {
@@ -79,7 +100,7 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
             is AppState.Error -> {
                 Toast.makeText(
                     requireContext(),
-                    "Error: ${appState.error.message}",
+                    "Error Trailer: ${appState.error.message}",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -103,6 +124,16 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
                 .error(R.drawable.ic_load_error_vector)
                 .into(backgroundPosterImageView)
         }
+    }
+
+    private fun setTrailer(videoId: String) = with(binding) {
+        lifecycle.addObserver(youtubeVideoTrailer)
+        youtubeVideoTrailer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                youTubePlayer.loadVideo(videoId, 0f)
+                Log.d("TAG", "Success: $videoId")
+            }
+        })
     }
 
     companion object {

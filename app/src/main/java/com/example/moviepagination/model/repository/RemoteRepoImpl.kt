@@ -4,6 +4,7 @@ import com.example.moviepagination.BuildConfig
 import com.example.moviepagination.model.data.MovieItemList
 import com.example.moviepagination.model.data.castInfo.ActorInfo
 import com.example.moviepagination.model.data.info.MovieInfo
+import com.example.moviepagination.model.data.info.YouTubeTrailer
 import com.example.moviepagination.model.data.search.SearchResult
 import com.example.moviepagination.model.retrofit.ApiService
 import io.reactivex.rxjava3.core.Single
@@ -44,6 +45,10 @@ class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
 
     override fun getTOP250TVs(): Single<MovieItemList> {
         return apiService.getTOP250TVs(MOVIE_API_KEY)
+    }
+
+    override fun getMovieTrailerById(movieId: String): Single<YouTubeTrailer> {
+        return apiService.getMovieTrailerById(movieId, MOVIE_API_KEY)
     }
 
     companion object {

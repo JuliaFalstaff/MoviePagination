@@ -3,6 +3,7 @@ package com.example.moviepagination.model.retrofit
 import com.example.moviepagination.model.data.MovieItemList
 import com.example.moviepagination.model.data.castInfo.ActorInfo
 import com.example.moviepagination.model.data.info.MovieInfo
+import com.example.moviepagination.model.data.info.YouTubeTrailer
 import com.example.moviepagination.model.data.search.SearchResult
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
@@ -14,7 +15,7 @@ interface ApiService {
             @Path("apiKey") apiKey: String,
     ): Single<MovieItemList>
 
-    @GET("/{lang}/API/Title/{apiKey}/{id}")
+    @GET("/{lang}/API/Title/{apiKey}/{id}/Trailer")
     fun getMovieById(
             @Path("lang") lang: String,
             @Path("id") id: String,
@@ -61,4 +62,10 @@ interface ApiService {
             @Path("apiKey") apiKey: String,
             @Path("expression") expression: String,
     ): Single<SearchResult>
+
+    @GET("/API/YouTubeTrailer/{apiKey}/{id}")
+    fun getMovieTrailerById(
+        @Path("id") id: String,
+        @Path("apiKey") apiKey: String,
+    ): Single<YouTubeTrailer>
 }
