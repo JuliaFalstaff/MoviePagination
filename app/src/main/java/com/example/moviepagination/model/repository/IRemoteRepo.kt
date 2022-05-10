@@ -16,4 +16,5 @@ interface IRemoteRepo {
     fun getMostPopularTVs(): Single<MovieItemList>
     fun getActorInfoById(actorId: String): Single<ActorInfo>
     fun getSearchList(expression: String): Single<SearchResult>
+    fun getTOP250TVs(): Single<MovieItemList>
 }

@@ -39,7 +39,10 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_top250 -> {
-                    TODO()
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, Top250Fragment.newInstance())
+                            .commit()
+                    true
                 }
                 R.id.bottom_bar_fav -> {
                     TODO()

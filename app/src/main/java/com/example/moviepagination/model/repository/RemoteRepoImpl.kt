@@ -42,6 +42,10 @@ class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
         return apiService.getSearchList(MOVIE_API_KEY, expression)
     }
 
+    override fun getTOP250TVs(): Single<MovieItemList> {
+        return apiService.getTOP250TVs(MOVIE_API_KEY)
+    }
+
     companion object {
         private const val MOVIE_API_KEY = BuildConfig.IMDb_API_KEY
         private const val EN_LANG = "en"

@@ -7,14 +7,8 @@ import com.example.moviepagination.model.repository.LocalRepoImpl
 import com.example.moviepagination.model.repository.RemoteRepoImpl
 import com.example.moviepagination.model.retrofit.RetrofitImpl
 import com.example.moviepagination.model.room.MovieDataBase
-import com.example.moviepagination.ui.ActorInfoFragment
-import com.example.moviepagination.ui.MovieInfoFragment
-import com.example.moviepagination.ui.MovieListFragment
-import com.example.moviepagination.ui.SearchFragment
-import com.example.moviepagination.viewmodel.ActorInfoViewModel
-import com.example.moviepagination.viewmodel.MovieInfoViewModel
-import com.example.moviepagination.viewmodel.MovieListViewModel
-import com.example.moviepagination.viewmodel.SearchViewModel
+import com.example.moviepagination.ui.*
+import com.example.moviepagination.viewmodel.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -48,5 +42,11 @@ val actorInfoScreen = module {
 val searchResultScreen = module {
     scope<SearchFragment> {
         viewModel { SearchViewModel(remoteRepo = get()) }
+    }
+}
+
+val top250Screen = module {
+    scope<Top250Fragment> {
+        viewModel { Top250ViewModel(remoteRepo = get(), localRepo = get()) }
     }
 }

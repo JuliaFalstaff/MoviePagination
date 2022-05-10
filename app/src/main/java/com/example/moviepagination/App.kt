@@ -12,7 +12,7 @@ class App: Application() {
         super.onCreate()
         startKoin {
             androidContext(applicationContext)
-            modules(listOf(application, movieInfoScreen, movieListScreen, actorInfoScreen, searchResultScreen))
+            modules(listOf(application, movieInfoScreen, movieListScreen, actorInfoScreen, searchResultScreen, top250Screen))
         }
         Stetho.initializeWithDefaults(this)
     }

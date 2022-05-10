@@ -13,4 +13,6 @@
     <string name="menu_search">Search</string>
     <string name="favourite">Favourite</string>
     <string name="top250">Top 250</string>
+    <string name="top_250_movies">Топ-250 Фильмы</string>
+    <string name="top_250_tv_series">Tоп-250 Сериалы</string>
 </resources>
