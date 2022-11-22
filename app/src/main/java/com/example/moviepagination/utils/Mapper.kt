@@ -1,12 +1,12 @@
 package com.example.moviepagination.utils
 
-import com.example.moviepagination.model.data.MovieItemList
-import com.example.moviepagination.model.room.entities.MovieItemListEntity
+import com.example.moviepagination.domain.entities.MovieItemList
+import com.example.moviepagination.data.model.MovieItemListDbModel
 
-fun convertFromDataToEntity(list: MovieItemList): MovieItemListEntity {
-    return MovieItemListEntity(id = 0, list.items)
+fun convertFromDataToEntity(list: MovieItemList): MovieItemListDbModel {
+    return MovieItemListDbModel(id = 0, list.items)
 }
 
-fun convertFromEntityToMovieList(list: MovieItemListEntity): MovieItemList {
+fun convertFromEntityToMovieList(list: MovieItemListDbModel): MovieItemList {
     return MovieItemList(list.items)
 }

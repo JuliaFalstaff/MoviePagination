@@ -1,22 +1,21 @@
 package com.example.moviepagination.di
 
-import androidx.room.Room
-import com.example.moviepagination.model.repository.ILocalRepo
-import com.example.moviepagination.model.repository.IRemoteRepo
-import com.example.moviepagination.model.repository.LocalRepoImpl
-import com.example.moviepagination.model.repository.RemoteRepoImpl
-import com.example.moviepagination.model.retrofit.RetrofitImpl
-import com.example.moviepagination.model.room.MovieDataBase
-import com.example.moviepagination.ui.*
-import com.example.moviepagination.viewmodel.*
+import com.example.moviepagination.domain.repository.ILocalRepo
+import com.example.moviepagination.domain.repository.IRemoteRepo
+import com.example.moviepagination.data.repository.LocalRepoImpl
+import com.example.moviepagination.data.repository.RemoteRepoImpl
+import com.example.moviepagination.data.network.RetrofitImpl
+import com.example.moviepagination.data.database.MovieDataBase
+import com.example.moviepagination.presentation.*
+import com.example.moviepagination.presentation.viewmodel.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val application = module {
 //    single { Room.databaseBuilder(androidContext(), MovieDataBase::class.java, "movie.db").fallbackToDestructiveMigration().build() }
-    single {MovieDataBase.getInstance(androidContext()).movieItemListDao}
-    single<ILocalRepo> {LocalRepoImpl(movieItemListDao = get())}
+    single { MovieDataBase.getInstance(androidContext()).movieItemListDao}
+    single<ILocalRepo> { LocalRepoImpl(movieItemListDao = get()) }
     single<IRemoteRepo> { RemoteRepoImpl(apiService = RetrofitImpl().api) }
 
 }
