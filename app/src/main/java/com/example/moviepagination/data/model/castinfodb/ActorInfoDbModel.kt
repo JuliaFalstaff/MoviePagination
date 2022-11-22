@@ -1,11 +1,10 @@
-package com.example.moviepagination.domain.entities.castInfo
+package com.example.moviepagination.data.model.castinfodb
 
-import android.os.Parcelable
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
-data class ActorInfo(
+@Entity
+data class ActorInfoDbModel(
     @SerializedName("id")
         val id: String = "",
     @SerializedName("name")
@@ -25,7 +24,9 @@ data class ActorInfo(
     @SerializedName("height")
         val height: String = "",
     @SerializedName("knownFor")
-        val knownFor: List<KnownFor>? = null,
+        val knownFor: List<KnownForDbModel>? = null,
     @SerializedName("castMovies")
-        val castMovies: List<CastMovie>? = null
-        ) : Parcelable
+        val castMovies: List<CastMovieDbModel>? = null,
+    @SerializedName("errorMessage")
+        val errorMessage: String = ""
+        )
