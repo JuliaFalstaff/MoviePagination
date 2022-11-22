@@ -1,4 +1,4 @@
-package com.example.moviepagination.data.model.searchdb
+package com.example.moviepagination.data.network.model.searchdb
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Entity
-data class SearchResultDbModel(
+data class SearchResultDto(
     @SerializedName("searchType")
         var searchType: String? = null,
 
@@ -14,7 +14,7 @@ data class SearchResultDbModel(
         var expression: String? = null,
 
     @SerializedName("results")
-        var results: List<ResultDbModel>? = null,
+        var results: List<ResultDto>? = null,
 
     @SerializedName("errorMessage")
         var errorMessage: String? = null,

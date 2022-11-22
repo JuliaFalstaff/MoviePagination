@@ -1,4 +1,4 @@
-package com.example.moviepagination.data.model
+package com.example.moviepagination.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,5 +11,5 @@ data class MovieItemListDbModel(
         @PrimaryKey(autoGenerate = true)
         val id: Int,
         @TypeConverters(Converter::class)
-        val items: List<Item>,
+        val items: List<ItemDbModel>,
 )

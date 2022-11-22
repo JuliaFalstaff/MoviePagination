@@ -1,4 +1,4 @@
-package com.example.moviepagination.data.model
+package com.example.moviepagination.data.database
 
 import androidx.room.Entity
 

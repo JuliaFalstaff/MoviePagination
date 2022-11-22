@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.moviepagination.data.model.MovieItemListDbModel
+import com.example.moviepagination.data.network.model.MovieItemListDto
 import com.example.moviepagination.utils.Converter
 
-@Database(entities = [MovieItemListDbModel::class], version = 1, exportSchema = false)
+@Database(entities = [MovieItemListDbModel::class], version = 2, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class MovieDataBase : RoomDatabase() {
     abstract val movieItemListDao: MovieItemListDao

@@ -1,10 +1,10 @@
-package com.example.moviepagination.data.model.castinfodb
+package com.example.moviepagination.data.network.model.castinfodb
 
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 @Entity
-data class ActorInfoDbModel(
+data class ActorInfoDto(
     @SerializedName("id")
         val id: String = "",
     @SerializedName("name")
@@ -24,9 +24,9 @@ data class ActorInfoDbModel(
     @SerializedName("height")
         val height: String = "",
     @SerializedName("knownFor")
-        val knownFor: List<KnownForDbModel>? = null,
+        val knownFor: List<KnownForDto>? = null,
     @SerializedName("castMovies")
-        val castMovies: List<CastMovieDbModel>? = null,
+        val castMovies: List<CastMovieDto>? = null,
     @SerializedName("errorMessage")
         val errorMessage: String = ""
         )

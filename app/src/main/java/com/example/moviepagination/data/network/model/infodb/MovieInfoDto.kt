@@ -1,15 +1,15 @@
-package com.example.moviepagination.data.model.infodb
+package com.example.moviepagination.data.network.model.infodb
 
-import android.os.Parcelable
 import androidx.room.Entity
+import com.example.moviepagination.data.network.model.DirectorDto
+import com.example.moviepagination.data.network.model.StarDto
 import com.example.moviepagination.domain.entities.Director
 import com.example.moviepagination.domain.entities.Genre
 import com.example.moviepagination.domain.entities.Star
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
 @Entity
-data class MovieInfoDbModel(
+data class MovieInfoDto(
     @SerializedName("id")
         val id: String = "",
     @SerializedName("title")
@@ -41,13 +41,13 @@ data class MovieInfoDbModel(
     @SerializedName("directors")
         val directors: String = "",
     @SerializedName("directorList")
-        val directorList: List<Director>? = null,
+        val directorList: List<DirectorDto>? = null,
     @SerializedName("stars")
         val stars: String = "",
     @SerializedName("starList")
-        val starList: List<Star>? = null,
+        val starList: List<StarDto>? = null,
     @SerializedName("actorList")
-        val actorList: List<ActorDbModel>? = null,
+        val actorList: List<ActorDto>? = null,
     @SerializedName("trailer")
-        val trailer: TrailerDbModel
+        val trailer: TrailerDto
 )

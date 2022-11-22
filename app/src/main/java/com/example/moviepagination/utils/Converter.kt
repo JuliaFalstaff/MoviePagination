@@ -9,15 +9,15 @@ class Converter {
     private val gson = Gson()
 
     @TypeConverter
-    fun toJson(segments: List<Item?>?): String {
+    fun<T> toJson(segments: List<T>?): String {
         return gson.toJson(segments)
     }
 
     @TypeConverter
-    fun formJson(json: String?): List<Item> {
-        return gson.fromJson<List<Item>>(
+    fun<T> formJson(json: String?): List<T> {
+        return gson.fromJson<List<T>>(
                 json,
-                object : TypeToken<List<Item?>?>() {}.type
+                object : TypeToken<List<T?>?>() {}.type
         )
     }
 }
