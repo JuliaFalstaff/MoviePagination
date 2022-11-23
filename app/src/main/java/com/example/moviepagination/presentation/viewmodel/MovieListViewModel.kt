@@ -4,24 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moviepagination.domain.AppState
-import com.example.moviepagination.domain.repository.ILocalRepo
-import com.example.moviepagination.domain.repository.IRemoteRepo
+import com.example.moviepagination.domain.usecases.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MovieListViewModel(
-    val remoteRepo: IRemoteRepo,
-    val localRepo: ILocalRepo,
+    private val getComingSoonUseCase: GetComingSoonMovieUseCase,
+    private val getNowInTheatreUseCase: GetMovieNowInTheatreUseCase,
+    private val getPopularMoviesUseCase: GetMostPopularMoviesUseCase,
+    private val getMostPopularTVsUseCase: GetMostPopularTVsUseCase
 ) : ViewModel() {
-
-//    init {
-//        loadComingSoonMovies()
-//        loadMostPopularMovies()
-//        loadMostPopularTVs()
-//        loadMoviesNowInTheatre()
-//    }
-
 
     private val nowInTheatreLiveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
     private val comingSoonLiveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
@@ -36,8 +29,8 @@ class MovieListViewModel(
     private val compositeDisposable = CompositeDisposable()
 
     fun loadComingSoonMovies() {
-        val disposable = remoteRepo.getComingSoonMoviesFromServer()
-            .doAfterSuccess { localRepo.saveMovieList(it) }
+        comingSoonLiveDataToObserve.postValue(AppState.Loading)
+        val disposable = getComingSoonUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -50,7 +43,8 @@ class MovieListViewModel(
     }
 
     fun loadMoviesNowInTheatre() {
-        val disposable = remoteRepo.getMovieNowInTheatre()
+        comingSoonLiveDataToObserve.postValue(AppState.Loading)
+        val disposable = getNowInTheatreUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -63,7 +57,8 @@ class MovieListViewModel(
     }
 
     fun loadMostPopularMovies() {
-        val disposable = remoteRepo.getMostPopularMovies()
+        comingSoonLiveDataToObserve.postValue(AppState.Loading)
+        val disposable = getMostPopularTVsUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -76,7 +71,8 @@ class MovieListViewModel(
     }
 
     fun loadMostPopularTVs() {
-        val disposable = remoteRepo.getMostPopularTVs()
+        comingSoonLiveDataToObserve.postValue(AppState.Loading)
+        val disposable = getMostPopularTVsUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

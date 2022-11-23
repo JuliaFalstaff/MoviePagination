@@ -6,23 +6,38 @@ import com.example.moviepagination.data.repository.LocalRepoImpl
 import com.example.moviepagination.data.repository.RemoteRepoImpl
 import com.example.moviepagination.data.network.RetrofitImpl
 import com.example.moviepagination.data.database.MovieDataBase
+import com.example.moviepagination.domain.usecases.GetComingSoonMovieUseCase
+import com.example.moviepagination.domain.usecases.GetMostPopularMoviesUseCase
+import com.example.moviepagination.domain.usecases.GetMostPopularTVsUseCase
+import com.example.moviepagination.domain.usecases.GetMovieNowInTheatreUseCase
 import com.example.moviepagination.presentation.*
 import com.example.moviepagination.presentation.viewmodel.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import kotlin.math.sin
 
 val application = module {
 //    single { Room.databaseBuilder(androidContext(), MovieDataBase::class.java, "movie.db").fallbackToDestructiveMigration().build() }
     single { MovieDataBase.getInstance(androidContext()).movieItemListDao}
     single<ILocalRepo> { LocalRepoImpl(movieItemListDao = get()) }
     single<IRemoteRepo> { RemoteRepoImpl(apiService = RetrofitImpl().api) }
+    single { GetComingSoonMovieUseCase(repository = get())}
+    single { GetMovieNowInTheatreUseCase(repository = get())}
+    single { GetMostPopularTVsUseCase(repository = get())}
+    single { GetMostPopularMoviesUseCase(repository = get())}
+
 
 }
 
 val movieListScreen = module {
     scope<MovieListFragment> {
-        viewModel { MovieListViewModel(remoteRepo = get(), localRepo = get()) }
+        viewModel { MovieListViewModel(
+            getComingSoonUseCase = get(),
+            getNowInTheatreUseCase = get(),
+            getMostPopularTVsUseCase = get(),
+            getPopularMoviesUseCase = get()
+        ) }
     }
 }
 
