@@ -1,10 +1,7 @@
-package com.example.moviepagination.data.network.model
+package com.example.moviepagination.data.network.dto
 
 import androidx.room.Entity
 import androidx.room.TypeConverters
-import com.example.moviepagination.domain.entities.Director
-import com.example.moviepagination.domain.entities.Genre
-import com.example.moviepagination.domain.entities.Star
 import com.example.moviepagination.utils.Converter
 
 @Entity

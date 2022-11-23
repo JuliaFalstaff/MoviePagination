@@ -1,11 +1,9 @@
-package com.example.moviepagination.data.network.model.infodb
+package com.example.moviepagination.data.network.dto.infodb
 
 import androidx.room.Entity
-import com.example.moviepagination.data.network.model.DirectorDto
-import com.example.moviepagination.data.network.model.StarDto
-import com.example.moviepagination.domain.entities.Director
+import com.example.moviepagination.data.network.dto.DirectorDto
+import com.example.moviepagination.data.network.dto.StarDto
 import com.example.moviepagination.domain.entities.Genre
-import com.example.moviepagination.domain.entities.Star
 import com.google.gson.annotations.SerializedName
 
 @Entity

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.moviepagination.data.network.model.MovieItemListDto
+import com.example.moviepagination.data.database.model.MovieItemListDbModel
 import com.example.moviepagination.utils.Converter
 
 @Database(entities = [MovieItemListDbModel::class], version = 2, exportSchema = false)

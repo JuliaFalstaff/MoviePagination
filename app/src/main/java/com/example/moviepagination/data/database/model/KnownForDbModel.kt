@@ -1,4 +1,4 @@
-package com.example.moviepagination.data.network.model.castinfodb
+package com.example.moviepagination.data.database.model
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Entity
-data class KnownForDto(
+data class KnownForDbModel(
         @SerializedName("id")
         var id: String? = null,
         @SerializedName("title")

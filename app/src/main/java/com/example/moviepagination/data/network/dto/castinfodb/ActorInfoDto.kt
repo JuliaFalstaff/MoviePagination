@@ -1,4 +1,4 @@
-package com.example.moviepagination.data.network.model.castinfodb
+package com.example.moviepagination.data.network.dto.castinfodb
 
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName

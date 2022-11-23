@@ -1,21 +1,27 @@
 package com.example.moviepagination.data.repository
 
-import com.example.moviepagination.domain.entities.MovieItemList
 import com.example.moviepagination.data.database.MovieItemListDao
-import com.example.moviepagination.data.network.model.MovieItemListDto
+import com.example.moviepagination.data.mapper.MovieItemListMapper
+import com.example.moviepagination.domain.entities.Item
+import com.example.moviepagination.domain.entities.MovieItemList
 import com.example.moviepagination.domain.repository.ILocalRepo
-import com.example.moviepagination.utils.convertFromEntityToMovieList
 import io.reactivex.rxjava3.core.Single
 
 class LocalRepoImpl(private val movieItemListDao: MovieItemListDao) : ILocalRepo {
 
+    private val movieItemListMapper = MovieItemListMapper()
+
     override fun saveMovieList(list: MovieItemList) {
-            movieItemListDao.insertAllMovieList(MovieItemListDto(0, list.items))
+        movieItemListDao.insertAllMovieList(movieItemListMapper.mapListEntityToDbModel(list))
+    }
+
+    override fun saveMovie(movie: Item) {
+        movieItemListDao.insertMovieToMyList(movieItemListMapper.mapItemEntityToDbModel(movie))
     }
 
     override fun getAllMovieList(): Single<MovieItemList> {
         return movieItemListDao.getMovieList().map {
-            convertFromEntityToMovieList(it)
+            movieItemListMapper.mapDbModelToEntity(it)
         }
     }
 }

@@ -7,17 +7,17 @@ import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.entities.info.YouTubeTrailer
 import com.example.moviepagination.domain.entities.search.SearchResult
 
-interface IMovieRepository {
-    fun getMovieNowInTheatre(): LiveData<MovieItemList>
-    fun getMovieByIdFromServer(movieId: String): LiveData<MovieInfo>
-    fun getComingSoonMoviesFromServer(): LiveData<MovieItemList>
-    fun getTOP250Movies(): LiveData<MovieItemList>
-    fun getMostPopularMovies(): LiveData<MovieItemList>
-    fun getMostPopularTVs(): LiveData<MovieItemList>
-    fun getActorInfoById(actorId: String): LiveData<ActorInfo>
-    fun getSearchList(expression: String): LiveData<SearchResult>
-    fun getTOP250TVs(): LiveData<MovieItemList>
-    fun getMovieTrailerById(movieId: String): LiveData<YouTubeTrailer>
-    fun saveMovieList(list: MovieItemList)
-    fun getAllMovieList(): LiveData<MovieItemList>
-}
+//interface IMovieRepository: IRemoteRepo, ILocalRepo {
+//    override fun getMovieNowInTheatre(): LiveData<MovieItemList>
+//    override fun getMovieByIdFromServer(movieId: String): LiveData<MovieInfo>
+//    override fun getComingSoonMoviesFromServer(): LiveData<MovieItemList>
+//    override fun getTOP250Movies(): LiveData<MovieItemList>
+//    override fun getMostPopularMovies(): LiveData<MovieItemList>
+//    override fun getMostPopularTVs(): LiveData<MovieItemList>
+//    override fun getActorInfoById(actorId: String): LiveData<ActorInfo>
+//    override fun getSearchList(expression: String): LiveData<SearchResult>
+//    override fun getTOP250TVs(): LiveData<MovieItemList>
+//    override fun getMovieTrailerById(movieId: String): LiveData<YouTubeTrailer>
+//    override fun saveMovieList(list: MovieItemList)
+//    override fun getAllMovieList(): LiveData<MovieItemList>
+//}

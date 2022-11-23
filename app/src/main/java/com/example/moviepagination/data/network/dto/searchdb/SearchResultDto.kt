@@ -1,9 +1,7 @@
-package com.example.moviepagination.data.network.model.searchdb
+package com.example.moviepagination.data.network.dto.searchdb
 
-import android.os.Parcelable
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
 
 @Entity
 data class SearchResultDto(

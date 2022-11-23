@@ -1,9 +1,7 @@
-package com.example.moviepagination.data.network.model.infodb
+package com.example.moviepagination.data.network.dto.infodb
 
-import android.os.Parcelable
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
 @Entity
 data class TrailerDto (

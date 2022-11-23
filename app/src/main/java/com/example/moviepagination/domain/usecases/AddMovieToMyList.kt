@@ -1,9 +1,11 @@
 package com.example.moviepagination.domain.usecases
 
+import com.example.moviepagination.domain.entities.Item
 import com.example.moviepagination.domain.entities.MovieItemList
-import com.example.moviepagination.domain.repository.IMovieRepository
+import com.example.moviepagination.domain.repository.ILocalRepo
+import com.example.moviepagination.domain.repository.IRemoteRepo
 
-class AddMovieToMyList(private val repository: IMovieRepository) {
+class AddMovieToMyList(private val repository: ILocalRepo) {
 
-    operator fun invoke(list: MovieItemList) = repository.saveMovieList(list)
+    operator fun invoke(movie: Item) = repository.saveMovie(movie)
 }

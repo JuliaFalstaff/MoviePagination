@@ -1,9 +1,9 @@
-package com.example.moviepagination.data.database
+package com.example.moviepagination.data.network.dto
 
 import androidx.room.Entity
 
 @Entity
-data class StarDbModel(
+data class StarDto(
     val id: String,
     val name: String
 )

@@ -1,7 +1,7 @@
 package com.example.moviepagination.utils
 
 import androidx.room.TypeConverter
-import com.example.moviepagination.domain.entities.Item
+import com.example.moviepagination.data.database.model.ItemDbModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -9,15 +9,16 @@ class Converter {
     private val gson = Gson()
 
     @TypeConverter
-    fun<T> toJson(segments: List<T>?): String {
+    fun toJson(segments: List<ItemDbModel?>?): String {
         return gson.toJson(segments)
     }
 
     @TypeConverter
-    fun<T> formJson(json: String?): List<T> {
-        return gson.fromJson<List<T>>(
-                json,
-                object : TypeToken<List<T?>?>() {}.type
+    fun formJson(json: String?): List<ItemDbModel> {
+        return gson.fromJson<List<ItemDbModel>>(
+            json,
+            object : TypeToken<List<ItemDbModel?>?>() {}.type
         )
     }
+
 }

@@ -1,15 +1,10 @@
 package com.example.moviepagination.data.network
 
-import com.example.moviepagination.data.network.model.MovieItemListDto
-import com.example.moviepagination.data.network.model.castinfodb.ActorInfoDto
-import com.example.moviepagination.data.network.model.infodb.MovieInfoDto
-import com.example.moviepagination.data.network.model.infodb.YouTubeTrailerDto
-import com.example.moviepagination.data.network.model.searchdb.SearchResultDto
-import com.example.moviepagination.domain.entities.MovieItemList
-import com.example.moviepagination.domain.entities.castInfo.ActorInfo
-import com.example.moviepagination.domain.entities.info.MovieInfo
-import com.example.moviepagination.domain.entities.info.YouTubeTrailer
-import com.example.moviepagination.domain.entities.search.SearchResult
+import com.example.moviepagination.data.network.dto.MovieItemListDto
+import com.example.moviepagination.data.network.dto.castinfodb.ActorInfoDto
+import com.example.moviepagination.data.network.dto.infodb.MovieInfoDto
+import com.example.moviepagination.data.network.dto.infodb.YouTubeTrailerDto
+import com.example.moviepagination.data.network.dto.searchdb.SearchResultDto
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
