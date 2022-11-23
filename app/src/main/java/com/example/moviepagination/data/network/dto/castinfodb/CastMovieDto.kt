@@ -6,15 +6,15 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class CastMovieDto(
         @SerializedName("id")
-        val id: String,
+        val id: String = "",
         @SerializedName("role")
-        val role: String,
+        val role: String = "",
         @SerializedName("title")
-        val title: String,
+        val title: String = "",
         @SerializedName("year")
-        val year: String,
+        val year: String = "",
         @SerializedName("description")
-        val description: String
+        val description: String = ""
         )
 
 

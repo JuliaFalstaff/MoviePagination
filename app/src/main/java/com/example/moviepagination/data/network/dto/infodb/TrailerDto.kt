@@ -6,39 +6,39 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class TrailerDto (
     @SerializedName("imDbId")
-    var imDbId: String? = null,
+    var imDbId: String? = "",
 
     @SerializedName("title")
-  var title: String? = null,
+  var title: String? = "",
 
     @SerializedName("fullTitle")
-    var fullTitle: String? = null,
+    var fullTitle: String? = "",
 
     @SerializedName("type")
-    var type: String? = null,
+    var type: String? = "",
 
     @SerializedName("year")
-    var year: String? = null,
+    var year: String? = "",
 
     @SerializedName("videoId")
-    var videoId: String? = null,
+    var videoId: String? = "",
 
     @SerializedName("videoTitle")
-    var videoTitle: String? = null,
+    var videoTitle: String? = "",
 
     @SerializedName("videoDescription")
-    var videoDescription: String? = null,
+    var videoDescription: String? = "",
 
     @SerializedName("thumbnailUrl")
-    var thumbnailUrl: String? = null,
+    var thumbnailUrl: String? = "",
 
     @SerializedName("link")
-    var link: String? = null,
+    var link: String? = "",
 
     @SerializedName("linkEmbed")
-    var linkEmbed: String? = null,
+    var linkEmbed: String? = "",
 
     @SerializedName("errorMessage")
-    var errorMessage: String? = null
+    var errorMessage: String? = ""
 )
 

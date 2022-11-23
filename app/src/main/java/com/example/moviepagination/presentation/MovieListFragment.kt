@@ -105,7 +105,7 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             is AppState.Error -> {
                 Toast.makeText(
                     requireContext(),
-                    "Error: ${state.error.message}",
+                    "Error InTheatre: ${state.error.message}",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -130,9 +130,10 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             is AppState.Error -> {
                 Toast.makeText(
                         requireContext(),
-                        "Error: ${state.error.message}",
+                        "Error PopularMovies: ${state.error.message}",
                         Toast.LENGTH_SHORT
                 ).show()
+                Log.d("TAG Popular movies", "${state.error.stackTrace}")
             }
         }
     }
@@ -156,9 +157,10 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             is AppState.Error -> {
                 Toast.makeText(
                         requireContext(),
-                        "Error: ${state.error.message}",
+                        "Error Coming: ${state.error.message}",
                         Toast.LENGTH_SHORT
                 ).show()
+                Log.d("TAG Data coming", "${state.error.stackTrace}")
             }
         }
     }
@@ -181,7 +183,7 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             is AppState.Error -> {
                 Toast.makeText(
                         requireContext(),
-                        "Error: ${state.error.message}",
+                        "Error Popular TV: ${state.error.message}",
                         Toast.LENGTH_SHORT
                 ).show()
             }

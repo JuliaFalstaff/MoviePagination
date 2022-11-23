@@ -12,7 +12,8 @@ class YoutubeTrailerMapper {
             type = trailerDto.type,
             year = trailerDto.year,
             videoId = trailerDto.videoId,
-            errorMessage = trailerDto.errorMessage
+            errorMessage = trailerDto.errorMessage,
+            videoUrl = trailerDto.videoUrl
         )
     }
 }

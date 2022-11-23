@@ -58,7 +58,7 @@ class MovieListViewModel(
 
     fun loadMostPopularMovies() {
         comingSoonLiveDataToObserve.postValue(AppState.Loading)
-        val disposable = getMostPopularTVsUseCase()
+        val disposable = getPopularMoviesUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

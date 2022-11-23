@@ -6,13 +6,13 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class ResultDto(
         @SerializedName("id")
-        var id: String? = null,
+        var id: String? = "",
         @SerializedName("resultType")
-        var resultType: String? = null,
+        var resultType: String? = "",
         @SerializedName("image")
-        var image: String? = null,
+        var image: String? = "",
         @SerializedName("title")
-        var title: String? = null,
+        var title: String? = "",
         @SerializedName("description")
-        var description: String? = null
+        var description: String? = ""
 )

@@ -6,19 +6,19 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class YouTubeTrailerDto(
     @SerializedName("imDbId")
-    var imDbId: String? = null,
+    var imDbId: String? = "",
     @SerializedName("title")
-    var title: String? = null,
+    var title: String? = "",
     @SerializedName("fullTitle")
-    var fullTitle: String? = null,
+    var fullTitle: String? = "",
     @SerializedName("type")
-    var type: String? = null,
+    var type: String? = "",
     @SerializedName("year")
-    var year: String? = null,
+    var year: String? = "",
     @SerializedName("videoId")
-    var videoId: String? = null,
+    var videoId: String? = "",
     @SerializedName("videoUrl")
-    var videoUrl: String? = null,
+    var videoUrl: String? = "",
     @SerializedName("errorMessage")
-    var errorMessage: String? = null
+    var errorMessage: String? = ""
 )

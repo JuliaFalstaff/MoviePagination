@@ -47,5 +47,5 @@ data class MovieInfoDto(
     @SerializedName("actorList")
         val actorList: List<ActorDto>? = null,
     @SerializedName("trailer")
-        val trailer: TrailerDto
+        val trailer: TrailerDto? = null
 )

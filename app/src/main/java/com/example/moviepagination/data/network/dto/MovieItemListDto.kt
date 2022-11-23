@@ -7,7 +7,6 @@ import com.example.moviepagination.data.converters.ItemConverter
 
 @Entity
 data class MovieItemListDto(
-    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val items: List<ItemDto>,
 )

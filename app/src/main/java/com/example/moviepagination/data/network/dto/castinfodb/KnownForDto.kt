@@ -6,16 +6,16 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class KnownForDto(
         @SerializedName("id")
-        var id: String? = null,
+        var id: String? = "",
         @SerializedName("title")
-        var title: String? = null,
+        var title: String? = "",
         @SerializedName("fullTitle")
-        var fullTitle: String? = null,
+        var fullTitle: String? = "",
         @SerializedName("year")
-        var year: String? = null,
+        var year: String? = "",
         @SerializedName("role")
-        var role: String? = null,
+        var role: String? = "",
         @SerializedName("image")
-        var image: String? = null,
+        var image: String? = "",
 )
 

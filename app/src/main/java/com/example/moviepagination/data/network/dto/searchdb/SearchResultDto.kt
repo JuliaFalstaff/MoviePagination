@@ -6,15 +6,15 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class SearchResultDto(
     @SerializedName("searchType")
-        var searchType: String? = null,
+        var searchType: String? = "",
 
     @SerializedName("expression")
-        var expression: String? = null,
+        var expression: String? = "",
 
     @SerializedName("results")
         var results: List<ResultDto>? = null,
 
     @SerializedName("errorMessage")
-        var errorMessage: String? = null,
+        var errorMessage: String? = "",
 )
 

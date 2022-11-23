@@ -7,15 +7,15 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class SearchResult(
     @SerializedName("searchType")
-        var searchType: String? = null,
+        var searchType: String?,
 
     @SerializedName("expression")
-        var expression: String? = null,
+        var expression: String?,
 
     @SerializedName("results")
-        var results: List<Result>? = null,
+        var results: List<Result>?,
 
     @SerializedName("errorMessage")
-        var errorMessage: String? = null,
+        var errorMessage: String?,
 ) : Parcelable
 

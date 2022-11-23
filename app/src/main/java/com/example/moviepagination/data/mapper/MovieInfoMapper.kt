@@ -15,56 +15,6 @@ import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.entities.info.Trailer
 
 class MovieInfoMapper {
-//
-//    fun mapMovieInfoDbModelToEntity(movieInfoDbModel: MovieInfoDbModel): MovieInfo {
-//        return MovieInfo(
-//            id = movieInfoDbModel.id,
-//            title = movieInfoDbModel.title,
-//            fullTitle = movieInfoDbModel.fullTitle,
-//            year = movieInfoDbModel.year,
-//            releaseDate = movieInfoDbModel.releaseDate,
-//            image = movieInfoDbModel.image,
-//            runtimeMins = movieInfoDbModel.runtimeMins,
-//            runtimeStr = movieInfoDbModel.runtimeStr,
-//            plot = movieInfoDbModel.plot,
-//            contentRating = movieInfoDbModel.contentRating,
-//            imDbRating = movieInfoDbModel.imDbRating,
-//            metacriticRating = movieInfoDbModel.metacriticRating,
-//            genres = movieInfoDbModel.genres,
-//            genreList = movieInfoDbModel.genreList,
-//            directors = movieInfoDbModel.directors,
-//            directorList = convertDirectorListDbModelToDirectorListEntity(movieInfoDbModel.directorList),
-//            stars = movieInfoDbModel.stars,
-//            starList = convertStarListDbModelToStarEntity(movieInfoDbModel.starList),
-//            actorList = convertActorListDbModelToEntity(movieInfoDbModel.actorList),
-//            trailer = convertTrailerDbModelToEntity(movieInfoDbModel.trailer)
-//        )
-//    }
-//
-//    fun mapMovieInfoDtoToDbModel(movieInfoDto: MovieInfoDto): MovieInfoDbModel {
-//        return MovieInfoDbModel(
-//            id = movieInfoDto.id,
-//            title = movieInfoDto.title,
-//            fullTitle = movieInfoDto.fullTitle,
-//            year = movieInfoDto.year,
-//            releaseDate = movieInfoDto.releaseDate,
-//            image = movieInfoDto.image,
-//            runtimeMins = movieInfoDto.runtimeMins,
-//            runtimeStr = movieInfoDto.runtimeStr,
-//            plot = movieInfoDto.plot,
-//            contentRating = movieInfoDto.contentRating,
-//            imDbRating = movieInfoDto.imDbRating,
-//            metacriticRating = movieInfoDto.metacriticRating,
-//            genres = movieInfoDto.genres,
-//            genreList = movieInfoDto.genreList,
-//            directors = movieInfoDto.directors,
-//            directorList = convertDirectorListDtoToDbModel(movieInfoDto.directorList),
-//            stars = movieInfoDto.stars,
-//            starList = convertStarListDtoToDbModel(movieInfoDto.starList),
-//            actorList = convertActorListDtoToDbModel(movieInfoDto.actorList),
-//            trailer = convertTrailerDtoToDbModel(movieInfoDto.trailer)
-//        )
-//    }
 
     fun mapMovieInfoDtoToEntity(movieInfoDto: MovieInfoDto): MovieInfo {
         return MovieInfo(
@@ -108,20 +58,20 @@ class MovieInfoMapper {
         )
     }
 
-    private fun convertTrailerDtoToEntity(trailerDto: TrailerDto): Trailer {
+    private fun convertTrailerDtoToEntity(trailerDto: TrailerDto?): Trailer {
         return Trailer(
-            imDbId = trailerDto.imDbId,
-            title = trailerDto.title,
-            fullTitle = trailerDto.fullTitle,
-            year = trailerDto.year,
-            type = trailerDto.type,
-            videoId = trailerDto.videoId,
-            videoTitle = trailerDto.videoTitle,
-            videoDescription = trailerDto.videoDescription,
-            thumbnailUrl = trailerDto.thumbnailUrl,
-            link = trailerDto.link,
-            linkEmbed = trailerDto.linkEmbed,
-            errorMessage = trailerDto.errorMessage
+            imDbId = trailerDto?.imDbId,
+            title = trailerDto?.title,
+            fullTitle = trailerDto?.fullTitle,
+            year = trailerDto?.year,
+            type = trailerDto?.type,
+            videoId = trailerDto?.videoId,
+            videoTitle = trailerDto?.videoTitle,
+            videoDescription = trailerDto?.videoDescription,
+            thumbnailUrl = trailerDto?.thumbnailUrl,
+            link = trailerDto?.link,
+            linkEmbed = trailerDto?.linkEmbed,
+            errorMessage = trailerDto?.errorMessage
         )
     }
 
