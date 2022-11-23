@@ -1,4 +1,4 @@
-package com.example.moviepagination.utils
+package com.example.moviepagination.data.converters
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

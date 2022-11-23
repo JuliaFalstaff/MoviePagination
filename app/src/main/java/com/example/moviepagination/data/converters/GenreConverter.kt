@@ -1,4 +1,4 @@
-package com.example.moviepagination.utils
+package com.example.moviepagination.data.converters
 
 import com.example.moviepagination.data.database.model.GenreDbModel
 

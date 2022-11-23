@@ -3,7 +3,9 @@ package com.example.moviepagination.data.database.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.moviepagination.utils.Converter
+import com.example.moviepagination.data.converters.DirectorConverter
+import com.example.moviepagination.data.converters.GenreConverter
+import com.example.moviepagination.data.converters.StarConverter
 
 @Entity
 data class ItemDbModel(
@@ -22,12 +24,12 @@ data class ItemDbModel(
     val imDbRatingCount: String,
     val metacriticRating: String,
     val genres: String,
-    @TypeConverters(Converter::class)
-        val genreList: List<GenreDbModel>? = null,
+    @TypeConverters(GenreConverter::class)
+    val genreList: List<GenreDbModel>? = null,
     val directors: String,
-    @TypeConverters(Converter::class)
-        val directorList: List<DirectorDbModel>? = null,
+    @TypeConverters(DirectorConverter::class)
+    val directorList: List<DirectorDbModel>? = null,
     val stars: String,
-    @TypeConverters(Converter::class)
-        val starList: List<StarDbModel>? = null,
+    @TypeConverters(StarConverter::class)
+    val starList: List<StarDbModel>? = null,
 )
