@@ -1,11 +1,13 @@
 package com.example.moviepagination.data.database.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.example.moviepagination.utils.Converter
 
 @Entity
 data class ItemDbModel(
+    @PrimaryKey
     val id: String,
     val title: String,
     val fullTitle: String,
