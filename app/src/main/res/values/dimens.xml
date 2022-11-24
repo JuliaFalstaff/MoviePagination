@@ -16,4 +16,6 @@
     <dimen name="text_size_info">18sp</dimen>
     <dimen name="text_size_info_year">16sp</dimen>
     <dimen name="margin_overvie">4dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="padding_8dp">8dp</dimen>
 </resources>
