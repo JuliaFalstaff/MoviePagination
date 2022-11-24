@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class MovieInfoDto(
     @SerializedName("id")
-        val id: String = "",
+        val id: String? = "",
     @SerializedName("title")
         val title: String = "",
     @SerializedName("fullTitle")

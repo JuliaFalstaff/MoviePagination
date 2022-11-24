@@ -14,8 +14,9 @@ class MovieItemListMapper {
             id = movieItemListDto.id,
             items = movieItemListDto.items.map { itemDto ->
                 ItemDbModel(
-                    id = itemDto.id,
-                    title = itemDto.title,
+                    primaryId = 0,
+                    id = itemDto.id ,
+                    title = itemDto.title ,
                     fullTitle = itemDto.fullTitle,
                     year = itemDto.year,
                     releaseState = itemDto.releaseState,
@@ -43,7 +44,8 @@ class MovieItemListMapper {
             id = 0,
             items = movieItemList.items.map { itemDto ->
                 ItemDbModel(
-                    id = itemDto.id,
+                    primaryId = 0,
+                    id = itemDto.id ?: "",
                     title = itemDto.title,
                     fullTitle = itemDto.fullTitle,
                     year = itemDto.year,
@@ -69,7 +71,8 @@ class MovieItemListMapper {
 
     fun mapItemEntityToDbModel(item: Item): ItemDbModel {
         return ItemDbModel(
-            id = item.id,
+            primaryId = 0,
+            id = item.id ?: "",
             title = item.title,
             fullTitle = item.fullTitle,
             year = item.year,
@@ -123,7 +126,7 @@ class MovieItemListMapper {
         return MovieItemList(
             items = movieItemListDto.items.map { itemDto ->
                 Item (
-                    id = itemDto.id,
+                    id = itemDto.id ?: "",
                     title = itemDto.title,
                     fullTitle = itemDto.fullTitle,
                     year = itemDto.year,

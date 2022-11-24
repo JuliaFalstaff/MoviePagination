@@ -9,6 +9,7 @@ import com.example.moviepagination.data.network.dto.infodb.ActorDto
 import com.example.moviepagination.data.network.dto.infodb.MovieInfoDto
 import com.example.moviepagination.data.network.dto.infodb.TrailerDto
 import com.example.moviepagination.domain.entities.Director
+import com.example.moviepagination.domain.entities.Genre
 import com.example.moviepagination.domain.entities.Star
 import com.example.moviepagination.domain.entities.info.Actor
 import com.example.moviepagination.domain.entities.info.MovieInfo
@@ -41,12 +42,37 @@ class MovieInfoMapper {
         )
     }
 
+    fun mapMovieInfoDbModelToEntity(movieInfoDbModel: MovieInfoDbModel): MovieInfo {
+        return MovieInfo(
+            id = movieInfoDbModel.id,
+            title = movieInfoDbModel.title,
+            fullTitle = movieInfoDbModel.fullTitle,
+            year = movieInfoDbModel.year,
+            releaseDate = movieInfoDbModel.releaseDate,
+            image = movieInfoDbModel.image,
+            runtimeMins = movieInfoDbModel.runtimeMins,
+            runtimeStr = movieInfoDbModel.runtimeStr,
+            plot = movieInfoDbModel.plot,
+            contentRating = movieInfoDbModel.contentRating,
+            imDbRating = movieInfoDbModel.imDbRating,
+            metacriticRating = movieInfoDbModel.metacriticRating,
+            genres = movieInfoDbModel.genres,
+            genreList = convertGenreListDbModelToEntity(movieInfoDbModel.genreList),
+            directors = movieInfoDbModel.directors,
+            directorList = convertDirectorListDbModelToDirectorListEntity(movieInfoDbModel.directorList),
+            stars = movieInfoDbModel.stars,
+            starList = convertStarListDbModelToStarEntity(movieInfoDbModel.starList),
+            actorList = convertActorListDbModelToEntity(movieInfoDbModel.actorList),
+            trailer = convertTrailerDbModelToEntity(movieInfoDbModel.trailer)
+        )
+    }
+
     private fun convertTrailerDbModelToEntity(trailerDbModel: TrailerDbModel): Trailer {
         return Trailer(
             imDbId = trailerDbModel.imDbId,
-            title = trailerDbModel.title,
-            fullTitle = trailerDbModel.fullTitle,
-            year = trailerDbModel.year,
+            title = trailerDbModel.titleTrailer,
+            fullTitle = trailerDbModel.fullTitleTrailer,
+            year = trailerDbModel.yearTrailer,
             type = trailerDbModel.type,
             videoId = trailerDbModel.videoId,
             videoTitle = trailerDbModel.videoTitle,
@@ -78,9 +104,9 @@ class MovieInfoMapper {
     private fun convertTrailerDtoToDbModel(trailerDto: TrailerDto): TrailerDbModel {
         return TrailerDbModel(
             imDbId = trailerDto.imDbId,
-            title = trailerDto.title,
-            fullTitle = trailerDto.fullTitle,
-            year = trailerDto.year,
+            titleTrailer = trailerDto.title,
+            fullTitleTrailer = trailerDto.fullTitle,
+            yearTrailer = trailerDto.year,
             type = trailerDto.type,
             videoId = trailerDto.videoId,
             videoTitle = trailerDto.videoTitle,
@@ -146,6 +172,15 @@ class MovieInfoMapper {
             Star(
                 id = it.id,
                 name = it.name
+            )
+        }
+    }
+
+    private fun convertGenreListDbModelToEntity(genreListDbModel: List<GenreDbModel>?): List<Genre>? {
+        return genreListDbModel?.map {
+            Genre(
+                key = it.key,
+                value = it.value
             )
         }
     }

@@ -11,16 +11,16 @@ data class TrailerDbModel (
     var imDbId: String? = null,
 
     @SerializedName("title")
-  var title: String? = null,
+  var titleTrailer: String? = null,
 
     @SerializedName("fullTitle")
-    var fullTitle: String? = null,
+    var fullTitleTrailer: String? = null,
 
     @SerializedName("type")
     var type: String? = null,
 
     @SerializedName("year")
-    var year: String? = null,
+    var yearTrailer: String? = null,
 
     @SerializedName("videoId")
     var videoId: String? = null,

@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Actor(
     @SerializedName("id")
-    val id: String,
+    val id: String?,
     @SerializedName("image")
     val image: String,
     @SerializedName("name")

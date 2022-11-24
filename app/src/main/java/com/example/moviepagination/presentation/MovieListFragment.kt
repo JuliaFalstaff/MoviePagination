@@ -160,7 +160,8 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
                         "Error Coming: ${state.error.message}",
                         Toast.LENGTH_SHORT
                 ).show()
-                Log.d("TAG Data coming", "${state.error.stackTrace}")
+                Log.d("TAG Error coming", "${state.error.localizedMessage}")
+                Log.d("TAG Error coming", "${state.error.stackTrace.toString()}")
             }
         }
     }

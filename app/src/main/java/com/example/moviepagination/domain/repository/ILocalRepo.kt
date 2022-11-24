@@ -1,11 +1,13 @@
 package com.example.moviepagination.domain.repository
 
+import androidx.lifecycle.LiveData
 import com.example.moviepagination.domain.entities.Item
 import com.example.moviepagination.domain.entities.MovieItemList
-import io.reactivex.rxjava3.core.Single
+import com.example.moviepagination.domain.entities.info.MovieInfo
 
 interface ILocalRepo {
     fun saveMovieList(list: MovieItemList)
     fun saveMovie(movie: Item)
-    fun getAllMovieList(): Single<MovieItemList>
+    fun getAllSavedMovieList(): LiveData<MovieItemList>
+    fun getSavedMovieInfo(movieId: String): LiveData<MovieInfo>
 }

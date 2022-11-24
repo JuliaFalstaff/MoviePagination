@@ -4,6 +4,6 @@ import androidx.room.Entity
 
 @Entity
 data class StarDbModel(
-    val id: String,
+    val id: String?,
     val name: String
 )

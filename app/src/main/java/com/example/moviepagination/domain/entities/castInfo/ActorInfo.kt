@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class ActorInfo(
     @SerializedName("id")
-        val id: String,
+        val id: String?,
     @SerializedName("name")
         val name: String,
     @SerializedName("role")

@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Star(
     @SerializedName("id")
-    val id: String,
+    val id: String?,
     @SerializedName("name")
     val name: String
 ) : Parcelable
