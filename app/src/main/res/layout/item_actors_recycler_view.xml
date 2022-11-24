@@ -2,11 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="130dp"
-    android:layout_height="180dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/cardview_start"
     android:layout_marginTop="@dimen/card_view_margin_top"
     android:layout_marginEnd="@dimen/cardview_end_actor"
+    app:cardUseCompatPadding="true"
     android:elevation="@dimen/cardview_elevation"
     app:cardCornerRadius="@dimen/cardview_corner_radius">
 
@@ -16,8 +17,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/actorFotoImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="140dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,8 +28,9 @@
 
         <TextView
             android:id="@+id/actorNameTexView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:minLines="2"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

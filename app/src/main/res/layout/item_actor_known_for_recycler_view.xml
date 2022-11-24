@@ -7,6 +7,7 @@
     android:layout_marginStart="@dimen/cardview_start"
     android:layout_marginTop="@dimen/card_view_margin_top"
     android:layout_marginEnd="@dimen/cardview_end_actor"
+    app:cardUseCompatPadding="true"
     android:elevation="@dimen/cardview_elevation"
     app:cardCornerRadius="@dimen/cardview_corner_radius">
 <LinearLayout

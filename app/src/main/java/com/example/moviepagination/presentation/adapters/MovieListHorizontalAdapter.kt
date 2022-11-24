@@ -40,7 +40,7 @@ class MovieListHorizontalAdapter(
         fun bind(movie: Item) = with(binding) {
             titleMovieTextView.text = movie.title
             dateOfReleaseTextView.text = movie.year
-//            movieRatingBar.rating = movie.imDbRating.toFloat().div(2)
+            movieRatingTextView.text = movie.imDbRating
             Glide.with(itemView)
                 .load(movie.image)
                 .error(R.drawable.ic_load_error_vector)
