@@ -113,6 +113,9 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
             dateOfReleaseInfoTextView.text = movie.year
             movieGenresTextView.text = movie.genres
             movieOverviewTextView.text = movie.plot
+            movieDirectorTextView.text = movie.directors
+            movieRunTimeTextView.text = movie.runtimeMins
+            movieRatingTextView.text = movie.imDbRating
 
             Glide.with(requireContext())
                 .load(movie.image)
@@ -131,6 +134,7 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
         youtubeVideoTrailer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 youTubePlayer.loadVideo(videoId, 0f)
+                youTubePlayer.pause()
                 Log.d("TAG", "Success: $videoId")
             }
         })

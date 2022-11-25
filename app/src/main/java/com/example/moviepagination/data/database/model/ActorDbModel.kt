@@ -10,9 +10,9 @@ data class ActorDbModel(
     @SerializedName("id")
     val id: String?,
     @SerializedName("image")
-    val image: String,
+    val image: String?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("asCharacter")
-    val asCharacter: String
+    val asCharacter: String?
 )

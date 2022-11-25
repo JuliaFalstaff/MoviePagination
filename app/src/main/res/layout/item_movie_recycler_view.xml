@@ -53,12 +53,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:background="@drawable/rounded_shape"
             android:padding="@dimen/padding_4dp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/white"
-            android:background="@drawable/rounded_shape"
+            app:layout_constraintBottom_toBottomOf="@+id/moviePosterImageView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            tools:backgroundTint="@color/black"
             tools:text="4.5" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

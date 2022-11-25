@@ -15,4 +15,8 @@
     <string name="top250">Top 250</string>
     <string name="top_250_movies">Top 250 movies</string>
     <string name="top_250_tv_series">Top 250 Series</string>
+    <string name="released_date">Released Date:</string>
+    <string name="genres">Genres:</string>
+    <string name="director">Director:</string>
+    <string name="runtime">Runtime:</string>
 </resources>
