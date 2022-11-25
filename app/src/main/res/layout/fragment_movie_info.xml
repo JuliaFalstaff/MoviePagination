@@ -42,7 +42,6 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/titleInfoTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/titleInfoTextView"
             app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
             tools:backgroundTint="@color/black"
             tools:text="4.5" />
@@ -71,11 +70,11 @@
         <TextView
             android:id="@+id/titleInfoTextView"
             android:layout_width="0dp"
-            android:minLines="2"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:textSize="@dimen/text_size_title_info"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/movieRatingTextView"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/backgroundPosterImageView"
             tools:text="Killing Eve: Second Season" />
@@ -115,7 +114,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_marginTop="5dp"
-            android:minLines="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/movieGenresLabelTextView"
             app:layout_constraintTop_toBottomOf="@+id/dateOfReleaseInfoLabelTextView"
@@ -125,8 +123,8 @@
             android:id="@+id/movieDirectorLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/director"
             android:layout_margin="4dp"
+            android:text="@string/director"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/movieGenresTextView" />
 
@@ -144,8 +142,8 @@
             android:id="@+id/movieRunTimeLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/runtime"
             android:layout_margin="4dp"
+            android:text="@string/runtime"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/movieDirectorTextView" />
 
@@ -157,15 +155,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/movieRunTimeLabelTextView"
             app:layout_constraintTop_toBottomOf="@+id/movieDirectorTextView"
-            tools:text="97 min."/>
+            tools:text="97 min." />
 
 
         <TextView
             android:id="@+id/movieOverviewTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_side_overvie"
             android:layout_margin="8dp"
+            android:padding="@dimen/margin_side_overvie"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -190,9 +188,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:textSize="@dimen/text_size_title_info"
             android:padding="@dimen/margin_8dp"
             android:text="@string/cast_title"
+            android:textSize="@dimen/text_size_title_info"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

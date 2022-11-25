@@ -39,10 +39,6 @@ class CastMoviesListAdapter(
             castMovieTitleTextView.text = movie.title
             castMovieRoleTextView.text = movie.role
             castMovieYearTextView.text = movie.year
-//            Glide.with(itemView)
-//                .load(movie.)
-//                .error(R.drawable.ic_load_error_vector)
-//                .into(castMovieImageView)
             itemView.setOnClickListener {
                 onListItemListener.onItemClick(movie)
             }

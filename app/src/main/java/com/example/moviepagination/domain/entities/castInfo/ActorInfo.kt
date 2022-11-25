@@ -9,21 +9,21 @@ data class ActorInfo(
     @SerializedName("id")
         val id: String?,
     @SerializedName("name")
-        val name: String,
+        val name: String?,
     @SerializedName("role")
-        val role: String,
+        val role: String?,
     @SerializedName("image")
-        val image: String,
+        val image: String?,
     @SerializedName("summary")
-        val summary: String,
+        val summary: String?,
     @SerializedName("birthDate")
-        val birthDate: String,
+        val birthDate: String?,
     @SerializedName("deathDate")
-        val deathDate: String,
+        val deathDate: String?,
     @SerializedName("awards")
-        val awards: String,
+        val awards: String?,
     @SerializedName("height")
-        val height: String,
+        val height: String?,
     @SerializedName("knownFor")
         val knownFor: List<KnownFor>?,
     @SerializedName("castMovies")

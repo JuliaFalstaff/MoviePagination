@@ -6,106 +6,128 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/actorPhotoImageView"
-        android:layout_width="250dp"
-        android:layout_height="350dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/actorNameTextView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@tools:sample/full_names"
-        android:text="@string/date_of_birth"
-        app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
-        app:layout_constraintTop_toTopOf="@+id/actorPhotoImageView" />
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/actorProfessionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/full_names"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
-        app:layout_constraintTop_toBottomOf="@+id/actorNameTextView" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/actorPhotoImageView"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_margin="4dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/actorBirthDatTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/date_of_birth"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
-        app:layout_constraintTop_toBottomOf="@+id/actorProfessionTextView" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@string/date_of_birth"
+            app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
+            app:layout_constraintTop_toTopOf="@+id/actorPhotoImageView"
+            tools:text="@tools:sample/full_names" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/actorsAwardsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/awards"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
-        app:layout_constraintTop_toBottomOf="@+id/actorBirthDatTextView" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorProfessionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
+            app:layout_constraintTop_toBottomOf="@+id/actorNameTextView"
+            tools:text="@tools:sample/full_names" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/actorHeightTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/height"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
-        app:layout_constraintTop_toBottomOf="@+id/actorsAwardsTextView" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorBirthDatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@string/date_of_birth"
+            app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
+            app:layout_constraintTop_toBottomOf="@+id/actorProfessionTextView" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/actorBioTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/lorem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actorPhotoImageView" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorsAwardsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@string/awards"
+            app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
+            app:layout_constraintTop_toBottomOf="@+id/actorBirthDatTextView" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/actorCastMoviesTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cast_movies"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actorBioTextView" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorHeightTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@string/height"
+            app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
+            app:layout_constraintTop_toBottomOf="@+id/actorsAwardsTextView" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/actorKnownForRecyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_background_poster"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actorCastMoviesTextView" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorBioTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actorPhotoImageView"
+            tools:text="@tools:sample/lorem" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/actorCastMovieRecyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/shape_background_poster"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actorKnownForRecyclerView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorKnownForMoviesTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@string/known_for_movies"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actorBioTextView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/actorKnownForRecyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/shape_background_poster"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actorKnownForMoviesTitleTextView" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_margin="4dp"
+            android:background="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actorKnownForRecyclerView" />
+
+        <TextView
+            android:id="@+id/actorAllRolesTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@string/all_films_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/actorCastMovieRecyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_background_poster"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actorAllRolesTitleTextView"
+            tools:listitem="@layout/item_actor_cast_movie_recycler_view" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

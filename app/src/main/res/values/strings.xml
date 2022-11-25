@@ -8,7 +8,7 @@
     <string name="date_of_birth">Date Of Birth: %s</string>
     <string name="awards">Awards: %s</string>
     <string name="height">Height:</string>
-    <string name="cast_movies">Cast Movies</string>
+    <string name="known_for_movies">Famous Movies</string>
     <string name="home">Home</string>
     <string name="menu_search">Search</string>
     <string name="favourite">Favourite</string>
@@ -19,4 +19,6 @@
     <string name="genres">Genres:</string>
     <string name="director">Director:</string>
     <string name="runtime">Runtime:</string>
+    <string name="slash">/</string>
+    <string name="all_films_title">All films:</string>
 </resources>
