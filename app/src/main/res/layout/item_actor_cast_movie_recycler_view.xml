@@ -42,15 +42,16 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/castMovieRoleTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:textSize="10sp"
         android:ellipsize="end"
         android:maxLines="1"
         android:singleLine="true"
-        app:layout_constraintStart_toEndOf="@id/slash"
+        android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@+id/castMovieYearTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/slash"
         app:layout_constraintTop_toTopOf="@+id/castMovieYearTextView"
         tools:text="Agent Cooper" />
 </androidx.constraintlayout.widget.ConstraintLayout>
