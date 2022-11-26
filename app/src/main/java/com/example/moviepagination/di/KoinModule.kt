@@ -6,10 +6,7 @@ import com.example.moviepagination.data.repository.LocalRepoImpl
 import com.example.moviepagination.data.repository.RemoteRepoImpl
 import com.example.moviepagination.data.network.RetrofitImpl
 import com.example.moviepagination.data.database.MovieDataBase
-import com.example.moviepagination.domain.usecases.GetComingSoonMovieUseCase
-import com.example.moviepagination.domain.usecases.GetMostPopularMoviesUseCase
-import com.example.moviepagination.domain.usecases.GetMostPopularTVsUseCase
-import com.example.moviepagination.domain.usecases.GetMovieNowInTheatreUseCase
+import com.example.moviepagination.domain.usecases.*
 import com.example.moviepagination.presentation.*
 import com.example.moviepagination.presentation.viewmodel.*
 import org.koin.android.ext.koin.androidContext
@@ -26,8 +23,14 @@ val application = module {
     single { GetMovieNowInTheatreUseCase(repository = get())}
     single { GetMostPopularTVsUseCase(repository = get())}
     single { GetMostPopularMoviesUseCase(repository = get())}
-
-
+    single { GetAllSavedMoviesUseCase(repository = get()) }
+    single { GetMovieByIdUseCase(repository = get())}
+    single { GetMoviesTrailerUseCase(repository = get())}
+    single { GetActorInfoByIdUseCase(repository = get())}
+    single { GetSearchListUseCase(repository = get())}
+    single { GetTop250TvsUseCase(repository = get())}
+    single { GetTop250MoviesUseCase(repository = get())}
+    single { SaveMovieToMyListUseCase(repository = get())}
 }
 
 val movieListScreen = module {
@@ -43,24 +46,31 @@ val movieListScreen = module {
 
 val movieInfoScreen = module {
     scope<MovieInfoFragment> {
-        viewModel { MovieInfoViewModel(remoteRepo = get()) }
+        viewModel { MovieInfoViewModel(getMovieByIdUseCase = get(), getMoviesTrailerUseCase = get(),
+        saveMovieToMyListUseCase = get()) }
     }
 }
 
 val actorInfoScreen = module {
     scope<ActorInfoFragment> {
-        viewModel { ActorInfoViewModel(remoteRepo = get()) }
+        viewModel { ActorInfoViewModel(getActorInfoByIdUseCase = get()) }
     }
 }
 
 val searchResultScreen = module {
     scope<SearchFragment> {
-        viewModel { SearchViewModel(remoteRepo = get()) }
+        viewModel { SearchViewModel(getSearchListUseCase = get()) }
     }
 }
 
 val top250Screen = module {
     scope<Top250Fragment> {
-        viewModel { Top250ViewModel(remoteRepo = get(), localRepo = get()) }
+        viewModel { Top250ViewModel(getTop250MoviesUseCase = get(), getTop250TvsUseCase = get()) }
+    }
+}
+
+val savedMovieListScreen = module {
+    scope<SavedMovieListFragment> {
+        viewModel { SavedMovieListViewModel(getAllSavedMoviesUseCase = get()) }
     }
 }

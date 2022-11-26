@@ -29,8 +29,8 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
     private val viewModel: Top250ViewModel by inject()
     private var top250MoviesAdapter: Top250MoviesAdapter? = null
     private var top250TvSeriesAdapter: Top250TvSeriesAdapter? = null
-    private val onListItemClickListener: IOnListItemClickListener =
-            object : IOnListItemClickListener {
+    private val onListItemClickListener: IOnListItemClickListener<Item> =
+            object : IOnListItemClickListener<Item> {
                 override fun onItemClick(movie: Item) {
                     activity?.supportFragmentManager?.apply {
                         beginTransaction()

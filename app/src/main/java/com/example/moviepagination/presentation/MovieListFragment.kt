@@ -12,8 +12,9 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentMainMoviesRvBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.Item
+import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.presentation.adapters.IOnListItemClickListener
-import com.example.moviepagination.presentation.adapters.MovieListHorizontalAdapter
+import com.example.moviepagination.presentation.adapters.MovieListAdapter
 import com.example.moviepagination.presentation.viewmodel.MovieListViewModel
 import org.koin.androidx.scope.createScope
 import org.koin.core.component.KoinScopeComponent
@@ -26,24 +27,23 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
     private var _binding: FragmentMainMoviesRvBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MovieListViewModel by inject()
-    private var nowInTheatreAdapter: MovieListHorizontalAdapter? = null
-    private var mostPopularMoviesAdapter: MovieListHorizontalAdapter? = null
-    private var mostPopularTVsAdapter: MovieListHorizontalAdapter? = null
-    private var comingSoonAdapter: MovieListHorizontalAdapter? = null
+    private var nowInTheatreAdapter: MovieListAdapter? = null
+    private var mostPopularMoviesAdapter: MovieListAdapter? = null
+    private var mostPopularTVsAdapter: MovieListAdapter? = null
+    private var comingSoonAdapter: MovieListAdapter? = null
 
-    private val onListItemClickListener: IOnListItemClickListener =
-        object : IOnListItemClickListener {
-            override fun onItemClick(movie: Item) {
-                activity?.supportFragmentManager?.apply {
-                    beginTransaction()
-                        .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                            putString(MovieInfoFragment.MOVIE_INFO, movie.id)
-                        }))
-                        .addToBackStack("")
-                        .commitAllowingStateLoss()
-                }
+    private val onItemClickListener = object : IOnListItemClickListener<Item> {
+        override fun onItemClick(movie: Item) {
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+                        putString(MovieInfoFragment.MOVIE_INFO, movie.id)
+                    }))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
             }
         }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -92,7 +92,7 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
                 binding.moviesNowInTheatreRecyclerView.adapter = movieList.let {
-                    MovieListHorizontalAdapter(it, onListItemClickListener)
+                    MovieListAdapter(it, onItemClickListener)
                 }
                 nowInTheatreAdapter?.let {
                     it.setData(movieList)
@@ -117,7 +117,7 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
                 binding.mostPopularMovieRecyclerView.adapter = movieList.let {
-                    MovieListHorizontalAdapter(it, onListItemClickListener)
+                    MovieListAdapter(it, onItemClickListener)
                 }
                 mostPopularMoviesAdapter?.let {
                     it.setData(movieList)
@@ -143,7 +143,7 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
                 binding.comingSoonRecyclerView.adapter = movieList.let {
-                    MovieListHorizontalAdapter(it, onListItemClickListener)
+                    MovieListAdapter(it, onItemClickListener)
                 }
                 comingSoonAdapter?.let {
                     it.setData(movieList)
@@ -171,7 +171,7 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
                 binding.mostPopularSeriesRecyclerView.adapter = movieList.let {
-                    MovieListHorizontalAdapter(it, onListItemClickListener)
+                    MovieListAdapter(it, onItemClickListener)
                 }
                 mostPopularTVsAdapter?.let {
                     it.setData(movieList)

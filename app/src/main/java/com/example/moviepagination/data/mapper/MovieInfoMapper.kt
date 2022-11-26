@@ -63,26 +63,77 @@ class MovieInfoMapper {
             stars = movieInfoDbModel.stars,
             starList = convertStarListDbModelToStarEntity(movieInfoDbModel.starList),
             actorList = convertActorListDbModelToEntity(movieInfoDbModel.actorList),
-            trailer = convertTrailerDbModelToEntity(movieInfoDbModel.trailer)
+            trailer = convertTrailerDbModelToEntity(movieInfoDbModel.trailer),
+
         )
     }
 
-    private fun convertTrailerDbModelToEntity(trailerDbModel: TrailerDbModel): Trailer {
-        return Trailer(
-            imDbId = trailerDbModel.imDbId,
-            title = trailerDbModel.titleTrailer,
-            fullTitle = trailerDbModel.fullTitleTrailer,
-            year = trailerDbModel.yearTrailer,
-            type = trailerDbModel.type,
-            videoId = trailerDbModel.videoId,
-            videoTitle = trailerDbModel.videoTitle,
-            videoDescription = trailerDbModel.videoDescription,
-            thumbnailUrl = trailerDbModel.thumbnailUrl,
-            link = trailerDbModel.link,
-            linkEmbed = trailerDbModel.linkEmbed,
-            errorMessage = trailerDbModel.errorMessage
+    fun mapMovieInfoListDbModelToListEntity(movieInfoDbModelList: List<MovieInfoDbModel>): List<MovieInfo> {
+        return movieInfoDbModelList.map {
+            mapMovieInfoDbModelToEntity(it)
+        }
+    }
+
+    fun mapMovieInfoEntityToDbModel(movieInfo: MovieInfo): MovieInfoDbModel {
+        return MovieInfoDbModel(
+            primaryId = 0,
+            id = movieInfo.id,
+            title = movieInfo.title,
+            fullTitle = movieInfo.fullTitle,
+            year = movieInfo.year,
+            releaseDate = movieInfo.releaseDate,
+            image = movieInfo.image,
+            runtimeMins = movieInfo.runtimeMins,
+            runtimeStr = movieInfo.runtimeStr,
+            plot = movieInfo.plot,
+            contentRating = movieInfo.contentRating,
+            imDbRating = movieInfo.imDbRating,
+            metacriticRating = movieInfo.metacriticRating,
+            genres = movieInfo.genres,
+            genreList = convertGenreListEntityToDbModel(movieInfo.genreList),
+            directors = movieInfo.directors,
+            directorList = convertDirectorListEntityToDbModel(movieInfo.directorList),
+            stars = movieInfo.stars,
+            starList = convertStarListEntityToDbModel(movieInfo.starList),
+            actorList = convertActorListEntityToDbModel(movieInfo.actorList),
+            trailer = convertTrailerEntityToDbModel(movieInfo.trailer)
         )
     }
+
+    private fun convertTrailerDbModelToEntity(trailerDbModel: TrailerDbModel?): Trailer {
+        return Trailer(
+            imDbId = trailerDbModel?.imDbId,
+            title = trailerDbModel?.titleTrailer,
+            fullTitle = trailerDbModel?.fullTitleTrailer,
+            year = trailerDbModel?.yearTrailer,
+            type = trailerDbModel?.type,
+            videoId = trailerDbModel?.videoId,
+            videoTitle = trailerDbModel?.videoTitle,
+            videoDescription = trailerDbModel?.videoDescription,
+            thumbnailUrl = trailerDbModel?.thumbnailUrl,
+            link = trailerDbModel?.link,
+            linkEmbed = trailerDbModel?.linkEmbed,
+            errorMessage = trailerDbModel?.errorMessage
+        )
+    }
+
+    private fun convertTrailerEntityToDbModel(trailer: Trailer): TrailerDbModel? {
+        return TrailerDbModel(
+            imDbId = trailer.imDbId,
+            titleTrailer = trailer.title,
+            fullTitleTrailer = trailer.fullTitle,
+            yearTrailer = trailer.year,
+            type = trailer.type,
+            videoId = trailer.videoId,
+            videoTitle = trailer.videoTitle,
+            videoDescription = trailer.videoDescription,
+            thumbnailUrl = trailer.thumbnailUrl,
+            link = trailer.link,
+            linkEmbed = trailer.linkEmbed,
+            errorMessage = trailer.errorMessage
+        )
+    }
+
 
     private fun convertTrailerDtoToEntity(trailerDto: TrailerDto?): Trailer {
         return Trailer(
@@ -98,23 +149,6 @@ class MovieInfoMapper {
             link = trailerDto?.link,
             linkEmbed = trailerDto?.linkEmbed,
             errorMessage = trailerDto?.errorMessage
-        )
-    }
-
-    private fun convertTrailerDtoToDbModel(trailerDto: TrailerDto): TrailerDbModel {
-        return TrailerDbModel(
-            imDbId = trailerDto.imDbId,
-            titleTrailer = trailerDto.title,
-            fullTitleTrailer = trailerDto.fullTitle,
-            yearTrailer = trailerDto.year,
-            type = trailerDto.type,
-            videoId = trailerDto.videoId,
-            videoTitle = trailerDto.videoTitle,
-            videoDescription = trailerDto.videoDescription,
-            thumbnailUrl = trailerDto.thumbnailUrl,
-            link = trailerDto.link,
-            linkEmbed = trailerDto.linkEmbed,
-            errorMessage = trailerDto.errorMessage
         )
     }
 
@@ -141,6 +175,44 @@ class MovieInfoMapper {
     private fun convertStarListDtoToStarEntity(starListDto: List<StarDto>?): List<Star>? {
         return starListDto?.map {
             Star(
+                id = it.id,
+                name = it.name
+            )
+        }
+    }
+
+    private fun convertActorListEntityToDbModel(actorList: List<Actor>?): List<ActorDbModel>? {
+        return actorList?.map {
+            ActorDbModel(
+                id = it.id,
+                name = it.name,
+                image = it.image,
+                asCharacter = it.asCharacter
+            )
+        }
+    }
+
+    private fun convertGenreListEntityToDbModel(genreList: List<Genre>?): List<GenreDbModel>? {
+        return genreList?.map {
+            GenreDbModel(
+                key = it.key,
+                value = it.value
+            )
+        }
+    }
+
+    private fun convertDirectorListEntityToDbModel(directorList: List<Director>?): List<DirectorDbModel>? {
+        return directorList?.map {
+            DirectorDbModel(
+                id = it.id,
+                name = it.name
+            )
+        }
+    }
+
+    private fun convertStarListEntityToDbModel(starList: List<Star>?): List<StarDbModel>? {
+        return starList?.map {
+            StarDbModel(
                 id = it.id,
                 name = it.name
             )

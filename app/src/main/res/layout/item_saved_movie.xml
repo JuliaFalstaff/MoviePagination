@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/cardview_start"
+    android:layout_marginTop="@dimen/card_view_margin_top"
+    android:layout_marginEnd="@dimen/cardview_end"
+    android:layout_marginBottom="@dimen/cardview_bottom"
+    app:cardCornerRadius="@dimen/cardview_corner_radius"
+    app:cardElevation="@dimen/cardview_elevation">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/moviePosterImageView"
+            android:layout_width="140dp"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/shape_background_poster"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/killing_eve_example" />
+
+        <TextView
+            android:id="@+id/titleMovieTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minLines="2"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/moviePosterImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Killing Eve" />
+
+        <TextView
+            android:id="@+id/dateOfReleaseTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/titleMovieTextView"
+            app:layout_constraintTop_toBottomOf="@+id/titleMovieTextView"
+            tools:text="10 April 2019" />
+
+        <TextView
+            android:id="@+id/movieRatingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_shape"
+            android:padding="@dimen/padding_4dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/moviePosterImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:backgroundTint="@color/black"
+            tools:text="4.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -94,6 +94,7 @@ class MovieItemListMapper {
         )
     }
 
+
     fun mapDbModelToEntity(movieItemListDbModel: MovieItemListDbModel): MovieItemList {
         return MovieItemList(
             items = movieItemListDbModel.items.map { itemDbModel ->

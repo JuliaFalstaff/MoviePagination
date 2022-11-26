@@ -45,7 +45,10 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_bar_fav -> {
-                    TODO()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, SavedMovieListFragment.newInstance())
+                        .commit()
+                    true
                 }
                 else -> false
             }

@@ -83,7 +83,6 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
                 Log.d("TAG", "Error: ${appState.error.message}")
             }
         }
-
     }
 
     private fun renderData(appState: AppState) {
@@ -116,6 +115,9 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
             movieDirectorTextView.text = movie.directors
             movieRunTimeTextView.text = movie.runtimeMins
             movieRatingTextView.text = movie.imDbRating
+            saveToMyListImageButton.setOnClickListener {
+                vm.saveMovieToMyList(movie)
+            }
 
             Glide.with(requireContext())
                 .load(movie.image)

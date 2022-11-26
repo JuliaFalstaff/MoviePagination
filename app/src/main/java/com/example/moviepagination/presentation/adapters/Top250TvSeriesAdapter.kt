@@ -10,7 +10,7 @@ import com.example.moviepagination.domain.entities.Item
 
 class Top250TvSeriesAdapter(
     var movieList: List<Item>,
-    private var onListItemListener: IOnListItemClickListener,
+    private var onListItemListener: IOnListItemClickListener<Item>,
 ) : RecyclerView.Adapter<Top250TvSeriesAdapter.MovieViewHolder>() {
 
     fun setTopTvSeriesData(list: List<Item>) {

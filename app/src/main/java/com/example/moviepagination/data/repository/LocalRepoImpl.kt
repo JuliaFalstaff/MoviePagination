@@ -9,6 +9,8 @@ import com.example.moviepagination.domain.entities.Item
 import com.example.moviepagination.domain.entities.MovieItemList
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.repository.ILocalRepo
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 
 class LocalRepoImpl(private val movieItemListDao: MovieItemListDao) : ILocalRepo {
@@ -16,22 +18,34 @@ class LocalRepoImpl(private val movieItemListDao: MovieItemListDao) : ILocalRepo
     private val movieItemListMapper = MovieItemListMapper()
     private val movieInfoMapper = MovieInfoMapper()
 
-    override fun saveMovieList(list: MovieItemList) {
-        movieItemListDao.insertAllMovieList(movieItemListMapper.mapListEntityToDbModel(list))
+    override fun saveMovieList(list: MovieItemList): Completable {
+        return movieItemListDao.insertAllMovieList(movieItemListMapper.mapListEntityToDbModel(list))
     }
 
-    override fun saveMovie(movie: Item) {
-        movieItemListDao.insertMovieToMyList(movieItemListMapper.mapItemEntityToDbModel(movie))
+    override fun saveMovie(movie: MovieInfo): Completable {
+        return movieItemListDao.insertMovieToMyList(movieInfoMapper.mapMovieInfoEntityToDbModel(movie))
     }
+//
+//    override fun getAllSavedMovieList(): LiveData<MovieItemList> {
+//        return Transformations.map(movieItemListDao.getMovieList()){
+//            movieItemListMapper.mapDbModelToEntity(it)
+//        }
+//    }
+//
+//    override fun getSavedMovieInfo(movieId: String): LiveData<MovieInfo> {
+//        return Transformations.map(movieItemListDao.getSavedMovieInfo(movieId)) {
+//            movieInfoMapper.mapMovieInfoDbModelToEntity(it)
+//        }
+//    }
 
-    override fun getAllSavedMovieList(): LiveData<MovieItemList> {
-        return Transformations.map(movieItemListDao.getMovieList()){
-            movieItemListMapper.mapDbModelToEntity(it)
+    override fun getAllSavedMovieList(): Single<List<MovieInfo>> {
+        return movieItemListDao.getMovieList().map {
+            movieInfoMapper.mapMovieInfoListDbModelToListEntity(it)
         }
     }
 
-    override fun getSavedMovieInfo(movieId: String): LiveData<MovieInfo> {
-        return Transformations.map(movieItemListDao.getSavedMovieInfo(movieId)) {
+    override fun getSavedMovieInfo(movieId: String): Single<MovieInfo> {
+        return movieItemListDao.getSavedMovieInfo(movieId).map {
             movieInfoMapper.mapMovieInfoDbModelToEntity(it)
         }
     }

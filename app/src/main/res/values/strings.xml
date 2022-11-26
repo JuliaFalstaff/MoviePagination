@@ -21,4 +21,5 @@
     <string name="runtime">Runtime:</string>
     <string name="slash">/</string>
     <string name="all_films_title">All films:</string>
+    <string name="my_saved_movies">My list</string>
 </resources>

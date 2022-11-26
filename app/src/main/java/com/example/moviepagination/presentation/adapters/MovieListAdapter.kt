@@ -8,12 +8,12 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemMovieRecyclerViewBinding
 import com.example.moviepagination.domain.entities.Item
 
-class Top250MoviesAdapter(
+class MovieListAdapter(
     var movieList: List<Item>,
     private var onListItemListener: IOnListItemClickListener<Item>
-) : RecyclerView.Adapter<Top250MoviesAdapter.MovieViewHolder>() {
+) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
-    fun setTopMovieData(list: List<Item>) {
+    fun setData(list: List<Item>) {
         movieList = list
         notifyDataSetChanged()
     }

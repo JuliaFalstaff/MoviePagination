@@ -6,13 +6,16 @@ import androidx.lifecycle.ViewModel
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.repository.ILocalRepo
 import com.example.moviepagination.domain.repository.IRemoteRepo
+import com.example.moviepagination.domain.usecases.GetTop250MoviesUseCase
+import com.example.moviepagination.domain.usecases.GetTop250TvsUseCase
+import com.example.moviepagination.presentation.adapters.Top250TvSeriesAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class Top250ViewModel(
-    val remoteRepo: IRemoteRepo,
-    val localRepo: ILocalRepo,
+    private val getTop250MoviesUseCase: GetTop250MoviesUseCase,
+    private val getTop250TvsUseCase: GetTop250TvsUseCase
 ) : ViewModel() {
 
     private val top250MoviesLiveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
@@ -23,7 +26,7 @@ class Top250ViewModel(
     private val compositeDisposable = CompositeDisposable()
 
     fun loadTop250Movies() {
-        val disposable = remoteRepo.getTOP250Movies()
+        val disposable = getTop250MoviesUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -35,7 +38,7 @@ class Top250ViewModel(
     }
 
     fun loadTop250TVs() {
-        val disposable = remoteRepo.getTOP250TVs()
+        val disposable = getTop250TvsUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
