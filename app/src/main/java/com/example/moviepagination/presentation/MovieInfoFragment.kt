@@ -15,7 +15,7 @@ import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.info.Actor
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.presentation.adapters.ActorsListAdapter
-import com.example.moviepagination.presentation.adapters.IOnActorClickListener
+import com.example.moviepagination.presentation.adapters.IOnListItemClickListener
 import com.example.moviepagination.presentation.viewmodel.MovieInfoViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -33,18 +33,20 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
     val vm: MovieInfoViewModel by inject()
     private lateinit var movieBundle: String
     private var adapter: ActorsListAdapter? = null
-    private val onListItemClickListener: IOnActorClickListener = object : IOnActorClickListener {
-        override fun onActorItemClick(actor: Actor) {
-            activity?.supportFragmentManager?.apply {
-                beginTransaction()
-                    .replace(R.id.container, ActorInfoFragment.newInstance(Bundle().apply {
-                        putString(ActorInfoFragment.ACTOR_INFO, actor.id)
-                    }))
-                    .addToBackStack("")
-                    .commitAllowingStateLoss()
+    private val onListItemClickListener: IOnListItemClickListener<Actor> =
+        object : IOnListItemClickListener<Actor> {
+            override fun onItemClick(item: Actor) {
+                activity?.supportFragmentManager?.apply {
+                    beginTransaction()
+                        .replace(R.id.container, ActorInfoFragment.newInstance(Bundle().apply {
+                            putString(ActorInfoFragment.ACTOR_INFO, item.id)
+                        }))
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
+                }
             }
+
         }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

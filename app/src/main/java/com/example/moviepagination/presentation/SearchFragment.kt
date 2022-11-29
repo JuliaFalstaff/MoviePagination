@@ -13,7 +13,7 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentSearchBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.search.Result
-import com.example.moviepagination.presentation.adapters.IOnSearchItemClickListener
+import com.example.moviepagination.presentation.adapters.IOnListItemClickListener
 import com.example.moviepagination.presentation.adapters.SearchResultListAdapter
 import com.example.moviepagination.presentation.viewmodel.SearchViewModel
 import org.koin.androidx.scope.createScope
@@ -29,15 +29,15 @@ class SearchFragment : Fragment(), KoinScopeComponent {
     val viewModel: SearchViewModel by inject()
     private var searchQuery = ""
     private var adapter: SearchResultListAdapter? = null
-    private val onListItemClickListener: IOnSearchItemClickListener = object : IOnSearchItemClickListener {
-        override fun onItemSearchClick(movie: Result) {
+    private val onListItemClickListener: IOnListItemClickListener<Result> = object : IOnListItemClickListener<Result> {
+        override fun onItemClick(item: Result) {
             activity?.supportFragmentManager?.apply {
                 beginTransaction()
-                        .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                            putString(MovieInfoFragment.MOVIE_INFO, movie.id)
-                        }))
-                        .addToBackStack("")
-                        .commitAllowingStateLoss()
+                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+                        putString(MovieInfoFragment.MOVIE_INFO, item.id)
+                    }))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
             }
         }
     }

@@ -31,11 +31,11 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
     private var top250TvSeriesAdapter: Top250TvSeriesAdapter? = null
     private val onListItemClickListener: IOnListItemClickListener<Item> =
             object : IOnListItemClickListener<Item> {
-                override fun onItemClick(movie: Item) {
+                override fun onItemClick(item: Item) {
                     activity?.supportFragmentManager?.apply {
                         beginTransaction()
                                 .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                                    putString(MovieInfoFragment.MOVIE_INFO, movie.id)
+                                    putString(MovieInfoFragment.MOVIE_INFO, item.id)
                                 }))
                                 .addToBackStack("")
                                 .commitAllowingStateLoss()

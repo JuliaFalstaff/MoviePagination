@@ -12,7 +12,6 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentMainMoviesRvBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.Item
-import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.presentation.adapters.IOnListItemClickListener
 import com.example.moviepagination.presentation.adapters.MovieListAdapter
 import com.example.moviepagination.presentation.viewmodel.MovieListViewModel
@@ -33,11 +32,11 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
     private var comingSoonAdapter: MovieListAdapter? = null
 
     private val onItemClickListener = object : IOnListItemClickListener<Item> {
-        override fun onItemClick(movie: Item) {
+        override fun onItemClick(item: Item) {
             activity?.supportFragmentManager?.apply {
                 beginTransaction()
                     .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                        putString(MovieInfoFragment.MOVIE_INFO, movie.id)
+                        putString(MovieInfoFragment.MOVIE_INFO, item.id)
                     }))
                     .addToBackStack("")
                     .commitAllowingStateLoss()

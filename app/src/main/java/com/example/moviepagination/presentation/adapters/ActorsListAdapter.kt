@@ -10,7 +10,7 @@ import com.example.moviepagination.domain.entities.info.Actor
 
 class ActorsListAdapter(
     var actorsList: List<Actor>,
-    private var onListItemListener: IOnActorClickListener
+    private var onListItemListener: IOnListItemClickListener<Actor>
 ) : RecyclerView.Adapter<ActorsListAdapter.ActorsViewHolder>()  {
 
     fun setActorsData(list: List<Actor>) {
@@ -44,7 +44,7 @@ class ActorsListAdapter(
                 .error(R.drawable.ic_load_error_vector)
                 .into(actorFotoImageView)
             itemView.setOnClickListener {
-                onListItemListener.onActorItemClick(actor)
+                onListItemListener.onItemClick(actor)
             }
         }
     }

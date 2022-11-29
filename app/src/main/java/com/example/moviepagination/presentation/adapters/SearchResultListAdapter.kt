@@ -11,7 +11,7 @@ import com.example.moviepagination.domain.entities.search.Result
 
 class SearchResultListAdapter(
     var searchResult: List<Result>,
-    private var onListItemListener: IOnSearchItemClickListener
+    private var onListItemListener: IOnListItemClickListener<Result>
 ) : RecyclerView.Adapter<SearchResultListAdapter.ResultsViewHolder>() {
 
     fun setResultsData(list: List<Result>) {
@@ -46,7 +46,7 @@ class SearchResultListAdapter(
                     .error(R.drawable.ic_load_error_vector)
                     .into(resultPosterImageView)
             itemView.setOnClickListener {
-                onListItemListener.onItemSearchClick(searchResult)
+                onListItemListener.onItemClick(searchResult)
             }
         }
     }

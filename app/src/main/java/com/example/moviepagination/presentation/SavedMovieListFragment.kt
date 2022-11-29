@@ -9,13 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.moviepagination.R
-import com.example.moviepagination.databinding.FragmentMainMoviesRvBinding
 import com.example.moviepagination.databinding.FragmentSavedMoviesRecyclerViewBinding
 import com.example.moviepagination.domain.AppState
-import com.example.moviepagination.domain.entities.Item
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.presentation.adapters.IOnListItemClickListener
-import com.example.moviepagination.presentation.adapters.MovieListAdapter
 import com.example.moviepagination.presentation.adapters.SavedMovieListAdapter
 import com.example.moviepagination.presentation.viewmodel.SavedMovieListViewModel
 import org.koin.androidx.scope.createScope
@@ -32,11 +29,11 @@ class SavedMovieListFragment : Fragment(), KoinScopeComponent {
     private var movieListAdapter: SavedMovieListAdapter? = null
 
     private val onItemClickListener = object : IOnListItemClickListener<MovieInfo> {
-        override fun onItemClick(movie: MovieInfo) {
+        override fun onItemClick(item: MovieInfo) {
             activity?.supportFragmentManager?.apply {
                 beginTransaction()
                     .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                        putString(MovieInfoFragment.MOVIE_INFO, movie.id)
+                        putString(MovieInfoFragment.MOVIE_INFO, item.id)
                     }))
                     .addToBackStack("")
                     .commitAllowingStateLoss()
