@@ -1,16 +1,12 @@
 package com.example.moviepagination.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.example.moviepagination.data.database.MovieItemListDao
 import com.example.moviepagination.data.mapper.MovieInfoMapper
 import com.example.moviepagination.data.mapper.MovieItemListMapper
-import com.example.moviepagination.domain.entities.Item
 import com.example.moviepagination.domain.entities.MovieItemList
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.repository.ILocalRepo
 import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 
 class LocalRepoImpl(private val movieItemListDao: MovieItemListDao) : ILocalRepo {
@@ -44,9 +40,13 @@ class LocalRepoImpl(private val movieItemListDao: MovieItemListDao) : ILocalRepo
         }
     }
 
-    override fun getSavedMovieInfo(movieId: String): Single<MovieInfo> {
+    override fun getSavedMovieInfo(movieId: String?): Single<MovieInfo> {
         return movieItemListDao.getSavedMovieInfo(movieId).map {
             movieInfoMapper.mapMovieInfoDbModelToEntity(it)
         }
+    }
+
+    override fun deleteMovieFromMyList(id: String?): Completable {
+        return movieItemListDao.deleteMovieFromMyList(id)
     }
 }

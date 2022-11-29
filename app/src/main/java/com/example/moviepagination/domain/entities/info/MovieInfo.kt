@@ -48,5 +48,6 @@ data class MovieInfo(
     @SerializedName("actorList")
     val actorList: List<Actor>?,
     @SerializedName("trailer")
-    val trailer: Trailer
+    val trailer: Trailer,
+    val isFavourite: Boolean = false
 ) : Parcelable

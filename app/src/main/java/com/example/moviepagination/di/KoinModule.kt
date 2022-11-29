@@ -31,6 +31,8 @@ val application = module {
     single { GetTop250TvsUseCase(repository = get())}
     single { GetTop250MoviesUseCase(repository = get())}
     single { SaveMovieToMyListUseCase(repository = get())}
+    single { DeleteMovieFromMyList(repository = get())}
+    single { GetSavedMovieByIdUseCase(repository = get())}
 }
 
 val movieListScreen = module {
@@ -47,7 +49,7 @@ val movieListScreen = module {
 val movieInfoScreen = module {
     scope<MovieInfoFragment> {
         viewModel { MovieInfoViewModel(getMovieByIdUseCase = get(), getMoviesTrailerUseCase = get(),
-        saveMovieToMyListUseCase = get()) }
+        saveMovieToMyListUseCase = get(), deleteMovieFromMyList = get(), getSavedMovieByIdUseCase = get()) }
     }
 }
 

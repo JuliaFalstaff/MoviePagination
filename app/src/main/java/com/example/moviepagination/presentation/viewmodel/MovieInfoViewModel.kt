@@ -6,9 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.info.MovieInfo
-import com.example.moviepagination.domain.usecases.GetMovieByIdUseCase
-import com.example.moviepagination.domain.usecases.GetMoviesTrailerUseCase
-import com.example.moviepagination.domain.usecases.SaveMovieToMyListUseCase
+import com.example.moviepagination.domain.usecases.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -16,11 +14,15 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 class MovieInfoViewModel(
     private val getMovieByIdUseCase: GetMovieByIdUseCase,
     private val getMoviesTrailerUseCase: GetMoviesTrailerUseCase,
-    private val saveMovieToMyListUseCase: SaveMovieToMyListUseCase
+    private val saveMovieToMyListUseCase: SaveMovieToMyListUseCase,
+    private val deleteMovieFromMyList: DeleteMovieFromMyList,
+    private val getSavedMovieByIdUseCase: GetSavedMovieByIdUseCase
 ) : ViewModel() {
 
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
     private val liveDataTrailerToObserve: MutableLiveData<AppState> = MutableLiveData()
+    private val _liveDataIsFav: MutableLiveData<Boolean> = MutableLiveData()
+    fun getLiveDataIsFav(): LiveData<Boolean> = _liveDataIsFav
     fun getDetailedLiveData(): LiveData<AppState> = liveDataToObserve
     fun getTrailerLiveData(): LiveData<AppState> = liveDataTrailerToObserve
     private val compositeDisposable = CompositeDisposable()
@@ -54,12 +56,43 @@ class MovieInfoViewModel(
             .subscribeOn(Schedulers.io())
             .subscribe(
                 {
-                    saveMovieToMyListUseCase(movie)
+//                    saveMovieToMyListUseCase(movie)
+                    Log.d("TAG Save", "Saved: ${movie.title}")
                 },
                 {
                     Log.d("TAG", "Error save movie ${it.localizedMessage}")
                 }
             )
+        compositeDisposable.add(disposable)
+
+    }
+
+    fun checkIsFavourite(movie: MovieInfo) {
+        val disposable = getSavedMovieByIdUseCase(movie.id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                _liveDataIsFav.postValue(movie.isFavourite)
+                },{
+                    Log.d("TAG checkIsFav", "${it.localizedMessage}")
+                }
+            )
+        compositeDisposable.add(disposable)
+    }
+
+    fun deleteMovieFromMyList(movie: MovieInfo) {
+        val disposable = deleteMovieFromMyList(movie.id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe (
+                {
+                Log.d("TAG Delete", "Deleted: ${movie.title}")
+                },
+                {
+                    Log.d("TAG Delete", "Deleted ERROR: ${movie.title} ${it.localizedMessage}")
+                }
+                    )
         compositeDisposable.add(disposable)
 
     }

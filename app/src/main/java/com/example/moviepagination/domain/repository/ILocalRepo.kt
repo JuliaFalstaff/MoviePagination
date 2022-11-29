@@ -15,5 +15,6 @@ interface ILocalRepo {
 //    fun getSavedMovieInfo(movieId: String): LiveData<MovieInfo>
 
     fun getAllSavedMovieList(): Single<List<MovieInfo>>
-    fun getSavedMovieInfo(movieId: String): Single<MovieInfo>
+    fun getSavedMovieInfo(movieId: String?): Single<MovieInfo>
+    fun deleteMovieFromMyList(id: String?): Completable
 }

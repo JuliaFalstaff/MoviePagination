@@ -96,7 +96,8 @@ class MovieInfoMapper {
             stars = movieInfo.stars,
             starList = convertStarListEntityToDbModel(movieInfo.starList),
             actorList = convertActorListEntityToDbModel(movieInfo.actorList),
-            trailer = convertTrailerEntityToDbModel(movieInfo.trailer)
+            trailer = convertTrailerEntityToDbModel(movieInfo.trailer),
+            isFavourite = movieInfo.isFavourite
         )
     }
 

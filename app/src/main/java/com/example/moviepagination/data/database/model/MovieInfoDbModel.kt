@@ -37,5 +37,6 @@ data class MovieInfoDbModel(
     @TypeConverters(ActorConverter::class)
     val actorList: List<ActorDbModel>?= null,
     @Embedded
-    val trailer: TrailerDbModel?
+    val trailer: TrailerDbModel?,
+    val isFavourite: Boolean
 )

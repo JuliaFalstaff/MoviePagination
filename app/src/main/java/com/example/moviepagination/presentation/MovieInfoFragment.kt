@@ -62,6 +62,10 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
             renderData(it)
             Log.d("MOVIE-INFO", it.toString())
         })
+        vm.getLiveDataIsFav().observe(viewLifecycleOwner, Observer {
+            setFavButton(it)
+            Log.d("MOVIE-INFO IMAGE", it.toString())
+        })
         vm.loadMovieById(movieBundle)
         vm.getTrailerLiveData().observe(viewLifecycleOwner, Observer { renderTrailer(it) })
         vm.loadMovieTrailer(movieBundle)
@@ -115,8 +119,13 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
             movieDirectorTextView.text = movie.directors
             movieRunTimeTextView.text = movie.runtimeMins
             movieRatingTextView.text = movie.imDbRating
+            setFavButton(movie.isFavourite)
             saveToMyListImageButton.setOnClickListener {
-                vm.saveMovieToMyList(movie)
+                if (!movie.isFavourite) {
+                    vm.saveMovieToMyList(movie.copy(isFavourite = !movie.isFavourite))
+                } else {
+                    vm.deleteMovieFromMyList(movie)
+                }
             }
 
             Glide.with(requireContext())
@@ -128,6 +137,14 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
                 .load(movie.image)
                 .error(R.drawable.ic_load_error_vector)
                 .into(backgroundPosterImageView)
+        }
+    }
+
+    private fun setFavButton(movieIsFav: Boolean){
+        if(movieIsFav) {
+            binding.saveToMyListImageButton.setImageResource(R.drawable.ic_my_list)
+        } else {
+            binding.saveToMyListImageButton.setImageResource(R.drawable.ic_my_list)
         }
     }
 
