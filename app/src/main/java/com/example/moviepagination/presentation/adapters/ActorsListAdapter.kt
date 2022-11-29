@@ -2,6 +2,8 @@ package com.example.moviepagination.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviepagination.R
@@ -9,14 +11,8 @@ import com.example.moviepagination.databinding.ItemActorsRecyclerViewBinding
 import com.example.moviepagination.domain.entities.info.Actor
 
 class ActorsListAdapter(
-    var actorsList: List<Actor>,
     private var onListItemListener: IOnListItemClickListener<Actor>
-) : RecyclerView.Adapter<ActorsListAdapter.ActorsViewHolder>()  {
-
-    fun setActorsData(list: List<Actor>) {
-        actorsList = list
-        notifyDataSetChanged()
-    }
+) : ListAdapter<Actor, ActorsListAdapter.ActorsViewHolder>(ActorItemDiffUtilCallback)  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorsViewHolder {
         return ActorsViewHolder(
@@ -29,10 +25,8 @@ class ActorsListAdapter(
     }
 
     override fun onBindViewHolder(holder: ActorsViewHolder, position: Int) {
-        holder.bind(actorsList[position])
+        holder.bind(getItem(position))
     }
-
-    override fun getItemCount(): Int = actorsList.size
 
     inner class ActorsViewHolder(val binding: ItemActorsRecyclerViewBinding) :
         RecyclerView.ViewHolder(binding.root) {

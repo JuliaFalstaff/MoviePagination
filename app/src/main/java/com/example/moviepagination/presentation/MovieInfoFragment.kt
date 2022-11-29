@@ -59,6 +59,7 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = ActorsListAdapter(onListItemClickListener)
         binding.recyclerViewActors.adapter = adapter
         movieBundle = arguments?.getString(MOVIE_INFO).toString()
         vm.getDetailedLiveData().observe(viewLifecycleOwner, Observer {
@@ -98,12 +99,7 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
         when (appState) {
             is AppState.SuccessMovieInfo -> {
                 setData(appState.dataMovie)
-                binding.recyclerViewActors.adapter = appState.dataMovie.actorList?.let {
-                    ActorsListAdapter(
-                        it, onListItemClickListener
-                    )
-                }
-                appState.dataMovie.actorList?.let { adapter?.setActorsData(it) }
+                     appState.dataMovie.actorList?.let { adapter?.submitList(it) }
             }
             is AppState.Error -> {
                 Toast.makeText(
