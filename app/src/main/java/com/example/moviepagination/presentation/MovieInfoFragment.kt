@@ -29,6 +29,7 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
     override val scope: Scope by lazy { createScope(this) }
     private var _binding: FragmentMovieInfoBinding? = null
     private val binding get() = _binding!!
+    private var isFavourite = false
     val vm: MovieInfoViewModel by inject()
     private lateinit var movieBundle: String
     private var adapter: ActorsListAdapter? = null
@@ -63,10 +64,12 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
             Log.d("MOVIE-INFO", it.toString())
         })
         vm.getLiveDataIsFav().observe(viewLifecycleOwner, Observer {
+            isFavourite = it
             setFavButton(it)
             Log.d("MOVIE-INFO IMAGE", it.toString())
         })
         vm.loadMovieById(movieBundle)
+        vm.checkIsFavourite(movieBundle)
         vm.getTrailerLiveData().observe(viewLifecycleOwner, Observer { renderTrailer(it) })
         vm.loadMovieTrailer(movieBundle)
     }
@@ -119,13 +122,14 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
             movieDirectorTextView.text = movie.directors
             movieRunTimeTextView.text = movie.runtimeMins
             movieRatingTextView.text = movie.imDbRating
-            setFavButton(movie.isFavourite)
+            setFavButton(isFavourite)
             saveToMyListImageButton.setOnClickListener {
-                if (!movie.isFavourite) {
+                if (!isFavourite) {
                     vm.saveMovieToMyList(movie.copy(isFavourite = !movie.isFavourite))
                 } else {
                     vm.deleteMovieFromMyList(movie)
                 }
+                setFavButton(!isFavourite)
             }
 
             Glide.with(requireContext())
@@ -140,9 +144,10 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
         }
     }
 
-    private fun setFavButton(movieIsFav: Boolean){
-        if(movieIsFav) {
-            binding.saveToMyListImageButton.setImageResource(R.drawable.ic_my_list)
+    private fun setFavButton(isFav: Boolean) {
+        isFavourite = isFav
+        if(isFav) {
+            binding.saveToMyListImageButton.setImageResource(R.drawable.ic_my_list_enabled)
         } else {
             binding.saveToMyListImageButton.setImageResource(R.drawable.ic_my_list)
         }

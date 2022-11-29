@@ -14,7 +14,7 @@ interface MovieItemListDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllMovieList(list: MovieItemListDbModel): Completable
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertMovieToMyList(movie: MovieInfoDbModel): Completable
 
     @Query("SELECT * FROM movie_info")

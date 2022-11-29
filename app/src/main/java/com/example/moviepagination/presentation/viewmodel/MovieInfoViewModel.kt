@@ -67,13 +67,14 @@ class MovieInfoViewModel(
 
     }
 
-    fun checkIsFavourite(movie: MovieInfo) {
-        val disposable = getSavedMovieByIdUseCase(movie.id)
+    fun checkIsFavourite(movieId: String) {
+        val disposable = getSavedMovieByIdUseCase(movieId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                _liveDataIsFav.postValue(movie.isFavourite)
+                    _liveDataIsFav.postValue(it.isFavourite)
+
                 },{
                     Log.d("TAG checkIsFav", "${it.localizedMessage}")
                 }
