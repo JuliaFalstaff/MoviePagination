@@ -9,17 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/backgroundPosterImageView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/shape_background_poster"
-            app:layout_constraintBottom_toTopOf="@+id/barrierPoster"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/killingeve_back" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/saveToMyListImageButton"
@@ -37,7 +26,7 @@
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/killing_eve_example" />
 
         <TextView
@@ -53,13 +42,6 @@
             app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
             tools:backgroundTint="@color/black"
             tools:text="4.5" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrierPoster"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="backgroundPosterImageView" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineHorizontal"
@@ -85,7 +67,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.125"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/backgroundPosterImageView"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Killing Eve: Second Season" />
 
         <TextView

@@ -39,16 +39,6 @@
             tools:text="Killing Eve" />
 
         <TextView
-            android:id="@+id/dateOfReleaseTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/titleMovieTextView"
-            app:layout_constraintStart_toStartOf="@+id/titleMovieTextView"
-            app:layout_constraintTop_toBottomOf="@+id/titleMovieTextView"
-            tools:text="10 April 2019" />
-
-        <TextView
             android:id="@+id/movieRatingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -42,7 +42,6 @@ class SavedMovieListAdapter(
 
         fun bind(movie: MovieInfo) = with(binding) {
             titleMovieTextView.text = movie.title
-            dateOfReleaseTextView.text = movie.year
             movieRatingTextView.text = movie.imDbRating
             Glide.with(itemView)
                 .load(movie.image)

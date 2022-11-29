@@ -22,4 +22,6 @@
     <string name="slash">/</string>
     <string name="all_films_title">All films:</string>
     <string name="my_saved_movies">My list</string>
+    <string name="success_saved">Movie saved</string>
+    <string name="success_deleted">Deleted from list</string>
 </resources>

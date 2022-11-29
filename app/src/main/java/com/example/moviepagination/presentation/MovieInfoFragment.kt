@@ -37,11 +37,11 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
         override fun onActorItemClick(actor: Actor) {
             activity?.supportFragmentManager?.apply {
                 beginTransaction()
-                        .replace(R.id.container, ActorInfoFragment.newInstance(Bundle().apply {
-                            putString(ActorInfoFragment.ACTOR_INFO, actor.id)
-                        }))
-                        .addToBackStack("")
-                        .commitAllowingStateLoss()
+                    .replace(R.id.container, ActorInfoFragment.newInstance(Bundle().apply {
+                        putString(ActorInfoFragment.ACTOR_INFO, actor.id)
+                    }))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
             }
         }
     }
@@ -126,8 +126,18 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
             saveToMyListImageButton.setOnClickListener {
                 if (!isFavourite) {
                     vm.saveMovieToMyList(movie.copy(isFavourite = !movie.isFavourite))
+                    Toast.makeText(
+                        requireActivity(),
+                        getString(R.string.success_saved),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     vm.deleteMovieFromMyList(movie)
+                    Toast.makeText(
+                        requireActivity(),
+                        getString(R.string.success_deleted),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 setFavButton(!isFavourite)
             }
@@ -136,17 +146,12 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
                 .load(movie.image)
                 .error(R.drawable.ic_load_error_vector)
                 .into(smallMoviePosterImageView)
-
-            Glide.with(requireContext())
-                .load(movie.image)
-                .error(R.drawable.ic_load_error_vector)
-                .into(backgroundPosterImageView)
         }
     }
 
     private fun setFavButton(isFav: Boolean) {
         isFavourite = isFav
-        if(isFav) {
+        if (isFav) {
             binding.saveToMyListImageButton.setImageResource(R.drawable.ic_my_list_enabled)
         } else {
             binding.saveToMyListImageButton.setImageResource(R.drawable.ic_my_list)
