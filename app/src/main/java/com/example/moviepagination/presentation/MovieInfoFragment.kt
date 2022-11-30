@@ -33,20 +33,6 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
     val vm: MovieInfoViewModel by inject()
     private lateinit var movieBundle: String
     private var adapter: ActorsListAdapter? = null
-    private val onListItemClickListener: IOnListItemClickListener<Actor> =
-        object : IOnListItemClickListener<Actor> {
-            override fun onItemClick(item: Actor) {
-                activity?.supportFragmentManager?.apply {
-                    beginTransaction()
-                        .replace(R.id.container, ActorInfoFragment.newInstance(Bundle().apply {
-                            putString(ActorInfoFragment.ACTOR_INFO, item.id)
-                        }))
-                        .addToBackStack("")
-                        .commitAllowingStateLoss()
-                }
-            }
-
-        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,7 +45,7 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = ActorsListAdapter(onListItemClickListener)
+        adapter = ActorsListAdapter()
         binding.recyclerViewActors.adapter = adapter
         movieBundle = arguments?.getString(MOVIE_INFO).toString()
         vm.getDetailedLiveData().observe(viewLifecycleOwner, Observer {
@@ -75,6 +61,20 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
         vm.checkIsFavourite(movieBundle)
         vm.getTrailerLiveData().observe(viewLifecycleOwner, Observer { renderTrailer(it) })
         vm.loadMovieTrailer(movieBundle)
+        setRVListeners()
+    }
+
+    private fun setRVListeners() {
+        adapter?.onItemClickListener = { item ->
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.container, ActorInfoFragment.newInstance(Bundle().apply {
+                        putString(ActorInfoFragment.ACTOR_INFO, item.id)
+                    }))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
+            }
+        }
     }
 
     private fun renderTrailer(appState: AppState) {

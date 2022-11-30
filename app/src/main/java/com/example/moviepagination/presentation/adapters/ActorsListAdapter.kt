@@ -9,9 +9,10 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemActorsRecyclerViewBinding
 import com.example.moviepagination.domain.entities.info.Actor
 
-class ActorsListAdapter(
-    private var onListItemListener: IOnListItemClickListener<Actor>
-) : ListAdapter<Actor, ActorsListAdapter.ActorsViewHolder>(ActorItemDiffUtilCallback) {
+class ActorsListAdapter :
+    ListAdapter<Actor, ActorsListAdapter.ActorsViewHolder>(ActorItemDiffUtilCallback) {
+
+    var onItemClickListener: ((Actor) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorsViewHolder {
         return ActorsViewHolder(
@@ -37,7 +38,7 @@ class ActorsListAdapter(
                 .error(R.drawable.ic_load_error_vector)
                 .into(actorFotoImageView)
             itemView.setOnClickListener {
-                onListItemListener.onItemClick(actor)
+                onItemClickListener?.invoke(actor)
             }
         }
     }
