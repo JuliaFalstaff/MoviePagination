@@ -12,8 +12,6 @@ import androidx.lifecycle.Observer
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentSearchBinding
 import com.example.moviepagination.domain.AppState
-import com.example.moviepagination.domain.entities.search.Result
-import com.example.moviepagination.presentation.adapters.IOnListItemClickListener
 import com.example.moviepagination.presentation.adapters.SearchResultListAdapter
 import com.example.moviepagination.presentation.viewmodel.SearchViewModel
 import org.koin.androidx.scope.createScope
@@ -29,8 +27,27 @@ class SearchFragment : Fragment(), KoinScopeComponent {
     val viewModel: SearchViewModel by inject()
     private var searchQuery = ""
     private var adapter: SearchResultListAdapter? = null
-    private val onListItemClickListener: IOnListItemClickListener<Result> = object : IOnListItemClickListener<Result> {
-        override fun onItemClick(item: Result) {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        adapter = SearchResultListAdapter()
+        binding.searchResultRecyclerView.adapter = adapter
+        setRVListener()
+        viewModel.getSearchResultLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
+        initSearch()
+    }
+
+    private fun setRVListener() {
+        adapter?.listener = { item ->
             activity?.supportFragmentManager?.apply {
                 beginTransaction()
                     .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
@@ -42,63 +59,48 @@ class SearchFragment : Fragment(), KoinScopeComponent {
         }
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?,
-    ): View? {
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.searchResultRecyclerView.adapter = adapter
-        viewModel.getSearchResultLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
-        initSearch()
-    }
-
     private fun initSearch() {
-      binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-          override fun onQueryTextSubmit(query: String?): Boolean {
-              return when (searchQuery.trim()) {
-                  "" -> {
-                      false
-                  }
-                  else -> {
-                      true
-                  }
-              }
-          }
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return when (searchQuery.trim()) {
+                    "" -> {
+                        false
+                    }
+                    else -> {
+                        viewModel.loadSearchResultFromApi(query.toString())
+                        true
+                    }
+                }
+            }
 
-          override fun onQueryTextChange(newText: String?): Boolean {
-              searchQuery = newText.toString()
-              viewModel.loadSearchResultFromApi(searchQuery)
-              return true
-          }
-      })
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchQuery = newText.toString()
+                viewModel.loadSearchResultFromApi(searchQuery)
+                return true
+            }
+        })
     }
 
     private fun renderData(appState: AppState) {
-        when(appState) {
+        when (appState) {
             is AppState.SuccessSearchResult -> {
                 val data = appState.searchResult.results
-                binding.searchResultRecyclerView.adapter = data?.let {
-                    SearchResultListAdapter(it, onListItemClickListener)
-                }
-                data?.let { adapter?.setResultsData(it) }
-
+                adapter?.submitList(data)
+                binding.searchProgressBar.visibility = View.INVISIBLE
                 Log.d("TAG SUCCESS", "${appState.searchResult}")
             }
             is AppState.Error -> {
+                binding.searchProgressBar.visibility = View.INVISIBLE
                 Toast.makeText(
-                        requireContext(),
-                        "Error: ${appState.error.message}",
-                        Toast.LENGTH_SHORT
+                    requireContext(),
+                    "Error: ${appState.error.message}",
+                    Toast.LENGTH_SHORT
                 ).show()
             }
+            is AppState.Loading -> {
+                binding.searchProgressBar.visibility = View.VISIBLE
+            }
         }
-
     }
 
     companion object {
