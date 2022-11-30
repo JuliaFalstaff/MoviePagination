@@ -2,23 +2,19 @@ package com.example.moviepagination.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviepagination.databinding.ItemActorCastMovieRecyclerViewBinding
 import com.example.moviepagination.domain.entities.castInfo.CastMovie
 
-class CastMoviesListAdapter(
-    var moviesList: List<CastMovie>,
-    private var onListItemListener: IOnMovieItemClickListener
-) : RecyclerView.Adapter<CastMoviesListAdapter.CastMoviesViewHolder>()  {
+class CastMoviesListAdapter :
+    ListAdapter<CastMovie, CastMoviesListAdapter.CastMoviesViewHolder>(CastItemDiffUtilCallback) {
 
-    fun setMovieData(list: List<CastMovie>) {
-        moviesList = list
-        notifyDataSetChanged()
-    }
+    var onItemCastClickListener: ((CastMovie) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CastMoviesViewHolder {
         return CastMoviesViewHolder(
-                ItemActorCastMovieRecyclerViewBinding.inflate(
+            ItemActorCastMovieRecyclerViewBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -27,10 +23,8 @@ class CastMoviesListAdapter(
     }
 
     override fun onBindViewHolder(holder: CastMoviesViewHolder, position: Int) {
-        holder.bind(moviesList[position])
+        holder.bind(getItem(position))
     }
-
-    override fun getItemCount(): Int = moviesList.size
 
     inner class CastMoviesViewHolder(val binding: ItemActorCastMovieRecyclerViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -40,9 +34,8 @@ class CastMoviesListAdapter(
             castMovieRoleTextView.text = movie.role
             castMovieYearTextView.text = movie.year
             itemView.setOnClickListener {
-                onListItemListener.onItemClick(movie)
+                onItemCastClickListener?.invoke(movie)
             }
         }
     }
-
 }

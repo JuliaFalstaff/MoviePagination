@@ -12,10 +12,7 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentActorInfoBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.castInfo.ActorInfo
-import com.example.moviepagination.domain.entities.castInfo.CastMovie
-import com.example.moviepagination.domain.entities.castInfo.KnownFor
 import com.example.moviepagination.presentation.adapters.CastMoviesListAdapter
-import com.example.moviepagination.presentation.adapters.IOnMovieItemClickListener
 import com.example.moviepagination.presentation.adapters.KnownForMoviesListAdapter
 import com.example.moviepagination.presentation.viewmodel.ActorInfoViewModel
 import org.koin.androidx.scope.createScope
@@ -30,37 +27,13 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
     private val binding get() = _binding!!
     val viewModel: ActorInfoViewModel by inject()
     private lateinit var actorBundle: String
-    private var adapter: CastMoviesListAdapter? = null
+    private var adapterCast: CastMoviesListAdapter? = null
     private var adapterKnownFor: KnownForMoviesListAdapter? = null
-    private val onListItemClickListener: IOnMovieItemClickListener =
-            object : IOnMovieItemClickListener {
-                override fun onItemClick(movie: CastMovie) {
-                    activity?.supportFragmentManager?.apply {
-                        beginTransaction()
-                                .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                                    putString(MovieInfoFragment.MOVIE_INFO, movie.id)
-                                }))
-                                .addToBackStack("")
-                                .commitAllowingStateLoss()
-                    }
-                }
-
-                override fun onItemKnownClick(movie: KnownFor) {
-                    activity?.supportFragmentManager?.apply {
-                        beginTransaction()
-                                .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                                    putString(MovieInfoFragment.MOVIE_INFO, movie.id)
-                                }))
-                                .addToBackStack("")
-                                .commitAllowingStateLoss()
-                    }
-                }
-            }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentActorInfoBinding.inflate(inflater, container, false)
         return binding.root
@@ -68,34 +41,52 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapterCast = CastMoviesListAdapter()
+        adapterKnownFor = KnownForMoviesListAdapter()
+        binding.actorCastMovieRecyclerView.adapter = adapterCast
+        binding.actorKnownForRecyclerView.adapter = adapterKnownFor
         arguments?.let { actorBundle = it.getString(ACTOR_INFO).toString() }
         viewModel.getActorInfoLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
         viewModel.loadActorInfoById(actorBundle)
+        setRVListeners()
+    }
+
+    private fun setRVListeners() {
+        adapterCast?.onItemCastClickListener = { movie ->
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+                        putString(MovieInfoFragment.MOVIE_INFO, movie.id)
+                    }))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
+            }
+        }
+
+        adapterKnownFor?.onItemKnownForClickListener = { movie ->
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+                        putString(MovieInfoFragment.MOVIE_INFO, movie.id)
+                    }))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
+            }
+        }
     }
 
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.SuccessActorInfo -> {
                 setData(appState.actorInfo)
-                binding.actorCastMovieRecyclerView.adapter = appState.actorInfo.castMovies?.let {
-                    CastMoviesListAdapter(
-                            it, onListItemClickListener
-                    )
-                }
-                appState.actorInfo.castMovies?.let { adapter?.setMovieData(it) }
-
-                binding.actorKnownForRecyclerView.adapter = appState.actorInfo.knownFor?.let {
-                    KnownForMoviesListAdapter(
-                            it, onListItemClickListener
-                    )
-                }
-                appState.actorInfo.knownFor?.let { adapterKnownFor?.setKnownMovieData(it) }
+                adapterCast?.submitList(appState.actorInfo.castMovies)
+                adapterKnownFor?.submitList(appState.actorInfo.knownFor)
             }
             is AppState.Error -> {
                 Toast.makeText(
-                        requireContext(),
-                        "Error: ${appState.error.message}",
-                        Toast.LENGTH_SHORT
+                    requireContext(),
+                    "Error: ${appState.error.message}",
+                    Toast.LENGTH_SHORT
                 ).show()
             }
         }
@@ -110,9 +101,9 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
             actorBioTextView.text = actor.summary
             actorsAwardsTextView.text = actor.awards
             Glide.with(requireContext())
-                    .load(actor.image)
-                    .error(R.drawable.ic_load_error_vector)
-                    .into(actorPhotoImageView)
+                .load(actor.image)
+                .error(R.drawable.ic_load_error_vector)
+                .into(actorPhotoImageView)
         }
     }
 
