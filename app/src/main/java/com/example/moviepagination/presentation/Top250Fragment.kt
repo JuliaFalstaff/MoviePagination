@@ -30,23 +30,23 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
     private var top250MoviesAdapter: Top250MoviesAdapter? = null
     private var top250TvSeriesAdapter: Top250TvSeriesAdapter? = null
     private val onListItemClickListener: IOnListItemClickListener<Item> =
-            object : IOnListItemClickListener<Item> {
-                override fun onItemClick(item: Item) {
-                    activity?.supportFragmentManager?.apply {
-                        beginTransaction()
-                                .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                                    putString(MovieInfoFragment.MOVIE_INFO, item.id)
-                                }))
-                                .addToBackStack("")
-                                .commitAllowingStateLoss()
-                    }
+        object : IOnListItemClickListener<Item> {
+            override fun onItemClick(item: Item) {
+                activity?.supportFragmentManager?.apply {
+                    beginTransaction()
+                        .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+                            putString(MovieInfoFragment.MOVIE_INFO, item.id)
+                        }))
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
                 }
             }
+        }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentTop250Binding.inflate(inflater, container, false)
         return binding.root
@@ -54,6 +54,8 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        top250MoviesAdapter = Top250MoviesAdapter(onListItemClickListener)
+        top250TvSeriesAdapter = Top250TvSeriesAdapter(onListItemClickListener)
         binding.top250MoviesRecyclerView.adapter = top250MoviesAdapter
         binding.top250TvSeriesRecyclerView.adapter = top250TvSeriesAdapter
         initViewModels()
@@ -76,17 +78,14 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
     private fun renderDataTop250Movies(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
-                val data = appState.dataMovie.items
-                binding.top250MoviesRecyclerView.adapter = data.let {
-                    Top250MoviesAdapter(it, onListItemClickListener)
-                }
-                data.let { top250MoviesAdapter?.setTopMovieData(it) }
+                val movies = appState.dataMovie.items
+                top250MoviesAdapter?.submitList(movies)
             }
             is AppState.Error -> {
                 Toast.makeText(
-                        requireContext(),
-                        "Error: ${appState.error.message}",
-                        Toast.LENGTH_SHORT
+                    requireContext(),
+                    "Error: ${appState.error.message}",
+                    Toast.LENGTH_SHORT
                 ).show()
             }
         }
@@ -95,17 +94,14 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
     private fun renderDataTop250TVs(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
-                val data = appState.dataMovie.items
-                binding.top250TvSeriesRecyclerView.adapter = data.let {
-                    Top250MoviesAdapter(it, onListItemClickListener)
-                }
-                data.let { top250TvSeriesAdapter?.setTopTvSeriesData(it) }
+                val series = appState.dataMovie.items
+                top250TvSeriesAdapter?.submitList(series)
             }
             is AppState.Error -> {
                 Toast.makeText(
-                        requireContext(),
-                        "Error: ${appState.error.message}",
-                        Toast.LENGTH_SHORT
+                    requireContext(),
+                    "Error: ${appState.error.message}",
+                    Toast.LENGTH_SHORT
                 ).show()
             }
         }
