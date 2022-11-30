@@ -2,7 +2,6 @@ package com.example.moviepagination.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -12,7 +11,7 @@ import com.example.moviepagination.domain.entities.info.Actor
 
 class ActorsListAdapter(
     private var onListItemListener: IOnListItemClickListener<Actor>
-) : ListAdapter<Actor, ActorsListAdapter.ActorsViewHolder>(ActorItemDiffUtilCallback)  {
+) : ListAdapter<Actor, ActorsListAdapter.ActorsViewHolder>(ActorItemDiffUtilCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorsViewHolder {
         return ActorsViewHolder(

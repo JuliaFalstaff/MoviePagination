@@ -80,7 +80,8 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             renderDataPopularTvs(it)
         })
 
-        viewModel.loadComingSoonMovies()
+//        viewModel.loadComingSoonMovies()
+        //TODO
 //        viewModel.loadMoviesNowInTheatre()
 //        viewModel.loadMostPopularTVs()
 //        viewModel.loadMostPopularMovies()

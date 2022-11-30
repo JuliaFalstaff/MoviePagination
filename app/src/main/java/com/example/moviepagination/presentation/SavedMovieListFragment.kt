@@ -45,13 +45,14 @@ class SavedMovieListFragment : Fragment(), KoinScopeComponent {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSavedMoviesRecyclerViewBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        movieListAdapter = SavedMovieListAdapter(onItemClickListener)
         binding.savedMovieListRecyclerView.adapter = movieListAdapter
         initViewModels()
     }
@@ -68,11 +69,8 @@ class SavedMovieListFragment : Fragment(), KoinScopeComponent {
         when (state) {
             is AppState.SuccessMovieInfoList -> {
                 val movieList = state.dataMovie
-                binding.savedMovieListRecyclerView.adapter =
-                    SavedMovieListAdapter(movieList, onItemClickListener)
-                movieListAdapter?.setData(movieList)
+                movieListAdapter?.submitList(movieList)
                 binding.progressBar.visibility = View.INVISIBLE
-
             }
             is AppState.Loading -> {
                 binding.progressBar.visibility = View.VISIBLE
