@@ -19,7 +19,11 @@ class SavedMovieListViewModel(
     val savedMoviesLiveData: LiveData<AppState> get() = _savedMovieLiveDataToObserve
     private val compositeDisposable = CompositeDisposable()
 
-    fun loadSaveMovies() {
+    init {
+        loadSaveMovies()
+    }
+
+    private fun loadSaveMovies() {
         _savedMovieLiveDataToObserve.postValue(AppState.Loading)
         val disposable = getAllSavedMoviesUseCase()
             .subscribeOn(Schedulers.io())
