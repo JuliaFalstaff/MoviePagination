@@ -2,21 +2,15 @@ package com.example.moviepagination.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemMovieRecyclerViewBinding
 import com.example.moviepagination.domain.entities.Item
 
-class MovieListAdapter(
-    var movieList: List<Item>,
-    private var onListItemListener: IOnListItemClickListener<Item>
-) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
-
-    fun setData(list: List<Item>) {
-        movieList = list
-        notifyDataSetChanged()
-    }
+class MovieListAdapter(private var onListItemListener: IOnListItemClickListener<Item>) :
+    ListAdapter<Item, MovieListAdapter.MovieViewHolder>(MovieItemDiffUtilCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
@@ -29,10 +23,8 @@ class MovieListAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(movieList[position])
+        holder.bind(getItem(position))
     }
-
-    override fun getItemCount(): Int = movieList.size
 
     inner class MovieViewHolder(val binding: ItemMovieRecyclerViewBinding) :
         RecyclerView.ViewHolder(binding.root) {

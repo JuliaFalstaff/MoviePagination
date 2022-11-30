@@ -55,8 +55,19 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.moviesNowInTheatreRecyclerView.adapter = nowInTheatreAdapter
+        setRecyclerViewAdapters()
         initViewModels()
+    }
+
+    private fun setRecyclerViewAdapters() {
+        nowInTheatreAdapter = MovieListAdapter(onItemClickListener)
+        mostPopularMoviesAdapter = MovieListAdapter(onItemClickListener)
+        mostPopularTVsAdapter = MovieListAdapter(onItemClickListener)
+        comingSoonAdapter = MovieListAdapter(onItemClickListener)
+        binding.moviesNowInTheatreRecyclerView.adapter = nowInTheatreAdapter
+        binding.mostPopularMovieRecyclerView.adapter = mostPopularMoviesAdapter
+        binding.mostPopularSeriesRecyclerView.adapter = mostPopularTVsAdapter
+        binding.comingSoonRecyclerView.adapter = comingSoonAdapter
     }
 
     private fun initViewModels() {
@@ -80,23 +91,17 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             renderDataPopularTvs(it)
         })
 
-//        viewModel.loadComingSoonMovies()
-        //TODO
-//        viewModel.loadMoviesNowInTheatre()
-//        viewModel.loadMostPopularTVs()
-//        viewModel.loadMostPopularMovies()
+        viewModel.loadComingSoonMovies()
+        viewModel.loadMoviesNowInTheatre()
+        viewModel.loadMostPopularTVs()
+        viewModel.loadMostPopularMovies()
     }
 
     private fun renderDataInTheatre(state: AppState) {
         when (state) {
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
-                binding.moviesNowInTheatreRecyclerView.adapter = movieList.let {
-                    MovieListAdapter(it, onItemClickListener)
-                }
-                nowInTheatreAdapter?.let {
-                    it.setData(movieList)
-                }
+                nowInTheatreAdapter?.submitList(movieList)
                 binding.progressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
@@ -116,12 +121,7 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
         when (state) {
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
-                binding.mostPopularMovieRecyclerView.adapter = movieList.let {
-                    MovieListAdapter(it, onItemClickListener)
-                }
-                mostPopularMoviesAdapter?.let {
-                    it.setData(movieList)
-                }
+                mostPopularMoviesAdapter?.submitList(movieList)
                 binding.progressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
@@ -129,9 +129,9 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             }
             is AppState.Error -> {
                 Toast.makeText(
-                        requireContext(),
-                        "Error PopularMovies: ${state.error.message}",
-                        Toast.LENGTH_SHORT
+                    requireContext(),
+                    "Error PopularMovies: ${state.error.message}",
+                    Toast.LENGTH_SHORT
                 ).show()
                 Log.d("TAG Popular movies", "${state.error.stackTrace}")
             }
@@ -142,13 +142,7 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
         when (state) {
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
-                binding.comingSoonRecyclerView.adapter = movieList.let {
-                    MovieListAdapter(it, onItemClickListener)
-                }
-                comingSoonAdapter?.let {
-                    it.setData(movieList)
-                }
-
+                comingSoonAdapter?.submitList(movieList)
                 binding.progressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
@@ -156,9 +150,9 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             }
             is AppState.Error -> {
                 Toast.makeText(
-                        requireContext(),
-                        "Error Coming: ${state.error.message}",
-                        Toast.LENGTH_SHORT
+                    requireContext(),
+                    "Error Coming: ${state.error.message}",
+                    Toast.LENGTH_SHORT
                 ).show()
                 Log.d("TAG Error coming", "${state.error.localizedMessage}")
                 Log.d("TAG Error coming", "${state.error.stackTrace.toString()}")
@@ -170,12 +164,7 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
         when (state) {
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
-                binding.mostPopularSeriesRecyclerView.adapter = movieList.let {
-                    MovieListAdapter(it, onItemClickListener)
-                }
-                mostPopularTVsAdapter?.let {
-                    it.setData(movieList)
-                }
+                mostPopularTVsAdapter?.submitList(movieList)
                 binding.progressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
@@ -183,9 +172,9 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             }
             is AppState.Error -> {
                 Toast.makeText(
-                        requireContext(),
-                        "Error Popular TV: ${state.error.message}",
-                        Toast.LENGTH_SHORT
+                    requireContext(),
+                    "Error Popular TV: ${state.error.message}",
+                    Toast.LENGTH_SHORT
                 ).show()
             }
         }
