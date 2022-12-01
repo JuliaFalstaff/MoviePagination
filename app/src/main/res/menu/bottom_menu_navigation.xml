@@ -2,25 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/bottom_bar_home"
+        android:id="@+id/menu_list"
         android:icon="@drawable/home"
         android:title="@string/home"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/bottom_bar_search"
+        android:id="@+id/menu_search"
         android:icon="@drawable/ic_search"
         android:title="@string/menu_search"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/bottom_bar_fav"
+        android:id="@+id/menu_saved"
         android:icon="@drawable/ic_my_list"
         android:title="@string/favourite"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/bottom_top250"
+        android:id="@+id/menu_top250"
         android:icon="@drawable/ic_top250"
         android:title="@string/top250"
         app:showAsAction="always" />

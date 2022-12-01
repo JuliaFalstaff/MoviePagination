@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentSavedMoviesRecyclerViewBinding
 import com.example.moviepagination.domain.AppState
@@ -29,14 +30,18 @@ class SavedMovieListFragment : Fragment(), KoinScopeComponent {
 
     private val onItemClickListener = object : IOnListItemClickListener<MovieInfo> {
         override fun onItemClick(item: MovieInfo) {
-            activity?.supportFragmentManager?.apply {
-                beginTransaction()
-                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+//            activity?.supportFragmentManager?.apply {
+//                beginTransaction()
+//                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+//                        putString(MovieInfoFragment.MOVIE_INFO, item.id)
+//                    }))
+//                    .addToBackStack("")
+//                    .commitAllowingStateLoss()
+//            }
+            val args = Bundle().apply {
                         putString(MovieInfoFragment.MOVIE_INFO, item.id)
-                    }))
-                    .addToBackStack("")
-                    .commitAllowingStateLoss()
-            }
+                    }
+            findNavController().navigate(R.id.action_savedMovieListFragment_to_movieInfoFragment, args)
         }
     }
 

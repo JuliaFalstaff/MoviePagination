@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentSearchBinding
 import com.example.moviepagination.domain.AppState
@@ -48,14 +49,18 @@ class SearchFragment : Fragment(), KoinScopeComponent {
 
     private fun setRVListener() {
         adapter?.listener = { item ->
-            activity?.supportFragmentManager?.apply {
-                beginTransaction()
-                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+//            activity?.supportFragmentManager?.apply {
+//                beginTransaction()
+//                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+//                        putString(MovieInfoFragment.MOVIE_INFO, item.id)
+//                    }))
+//                    .addToBackStack("")
+//                    .commitAllowingStateLoss()
+//            }
+            val args = Bundle().apply {
                         putString(MovieInfoFragment.MOVIE_INFO, item.id)
-                    }))
-                    .addToBackStack("")
-                    .commitAllowingStateLoss()
-            }
+                    }
+            findNavController().navigate(R.id.action_searchFragment_to_movieInfoFragment, args)
         }
     }
 
