@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentActorInfoBinding
@@ -26,6 +28,7 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
     private var _binding: FragmentActorInfoBinding? = null
     private val binding get() = _binding!!
     val viewModel: ActorInfoViewModel by inject()
+    private val args by navArgs<ActorInfoFragmentArgs>()
     private lateinit var actorBundle: String
     private var adapterCast: CastMoviesListAdapter? = null
     private var adapterKnownFor: KnownForMoviesListAdapter? = null
@@ -45,7 +48,7 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
         adapterKnownFor = KnownForMoviesListAdapter()
         binding.actorCastMovieRecyclerView.adapter = adapterCast
         binding.actorKnownForRecyclerView.adapter = adapterKnownFor
-        arguments?.let { actorBundle = it.getString(ACTOR_INFO).toString() }
+        actorBundle = args.actorId.toString()
         viewModel.getActorInfoLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
         viewModel.loadActorInfoById(actorBundle)
         setRVListeners()
@@ -53,25 +56,30 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
 
     private fun setRVListeners() {
         adapterCast?.onItemCastClickListener = { movie ->
-            activity?.supportFragmentManager?.apply {
-                beginTransaction()
-                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                        putString(MovieInfoFragment.MOVIE_INFO, movie.id)
-                    }))
-                    .addToBackStack("")
-                    .commitAllowingStateLoss()
-            }
+//            activity?.supportFragmentManager?.apply {
+//                beginTransaction()
+//                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+//                        putString(MovieInfoFragment.MOVIE_INFO, movie.id)
+//                    }))
+//                    .addToBackStack("")
+//                    .commitAllowingStateLoss()
+//            }
+            ActorInfoFragmentDirections.actionActorInfoFragmentToMovieInfoFragment(movie.id)
         }
 
         adapterKnownFor?.onItemKnownForClickListener = { movie ->
-            activity?.supportFragmentManager?.apply {
-                beginTransaction()
-                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-                        putString(MovieInfoFragment.MOVIE_INFO, movie.id)
-                    }))
-                    .addToBackStack("")
-                    .commitAllowingStateLoss()
-            }
+//            activity?.supportFragmentManager?.apply {
+//                beginTransaction()
+//                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
+//                        putString(MovieInfoFragment.MOVIE_INFO, movie.id)
+//                    }))
+//                    .addToBackStack("")
+//                    .commitAllowingStateLoss()
+//            }
+            findNavController().navigate(
+                ActorInfoFragmentDirections
+                    .actionActorInfoFragmentToMovieInfoFragment(movie.id)
+            )
         }
     }
 
@@ -104,15 +112,6 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
                 .load(actor.image)
                 .error(R.drawable.ic_load_error_vector)
                 .into(actorPhotoImageView)
-        }
-    }
-
-    companion object {
-        const val ACTOR_INFO = "Actor"
-        fun newInstance(bundle: Bundle): ActorInfoFragment {
-            val fragment = ActorInfoFragment()
-            fragment.arguments = bundle
-            return fragment
         }
     }
 }

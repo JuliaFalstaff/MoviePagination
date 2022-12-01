@@ -34,15 +34,6 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
 
     private val onItemClickListener = object : IOnListItemClickListener<Item> {
         override fun onItemClick(item: Item) {
-//            activity?.supportFragmentManager?.apply {
-//                beginTransaction()
-//                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-//                        putString(MovieInfoFragment.MOVIE_INFO, item.id)
-//                    }))
-//                    .addToBackStack("")
-//                    .commitAllowingStateLoss()
-//            }
-
             findNavController().navigate(
                 MovieListFragmentDirections.actionMovieListFragmentToMovieInfoFragment(item.id)
             )

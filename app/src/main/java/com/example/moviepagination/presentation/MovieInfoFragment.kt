@@ -50,7 +50,6 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
         super.onViewCreated(view, savedInstanceState)
         adapter = ActorsListAdapter()
         binding.recyclerViewActors.adapter = adapter
-//        movieBundle = arguments?.getString(MOVIE_INFO).toString()
         movieBundle = args.itemId.toString()
         vm.getDetailedLiveData().observe(viewLifecycleOwner, Observer {
             renderData(it)
@@ -69,19 +68,10 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
     }
 
     private fun setRVListeners() {
-        adapter?.onItemClickListener = { item ->
-//            activity?.supportFragmentManager?.apply {
-//                beginTransaction()
-//                    .replace(R.id.container, ActorInfoFragment.newInstance(Bundle().apply {
-//                        putString(ActorInfoFragment.ACTOR_INFO, item.id)
-//                    }))
-//                    .addToBackStack("")
-//                    .commitAllowingStateLoss()
-//            }
-            val args = Bundle().apply {
-                putString(ActorInfoFragment.ACTOR_INFO, item.id)
-            }
-            findNavController().navigate(R.id.action_movieInfoFragment_to_actorInfoFragment, args)
+        adapter?.onItemClickListener = { actor ->
+            findNavController().navigate(
+                MovieInfoFragmentDirections.actionMovieInfoFragmentToActorInfoFragment(actor.id)
+            )
         }
     }
 
@@ -173,14 +163,5 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
                 Log.d("TAG", "Success: $videoId")
             }
         })
-    }
-
-    companion object {
-        const val MOVIE_INFO = "Movie"
-        fun newInstance(bundle: Bundle): MovieInfoFragment {
-            val fragment = MovieInfoFragment()
-            fragment.arguments = bundle
-            return fragment
-        }
     }
 }

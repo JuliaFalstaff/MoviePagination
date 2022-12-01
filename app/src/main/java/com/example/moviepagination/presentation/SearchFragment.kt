@@ -10,7 +10,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentSearchBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.presentation.adapters.SearchResultListAdapter
@@ -57,10 +56,11 @@ class SearchFragment : Fragment(), KoinScopeComponent {
 //                    .addToBackStack("")
 //                    .commitAllowingStateLoss()
 //            }
-            val args = Bundle().apply {
-                        putString(MovieInfoFragment.MOVIE_INFO, item.id)
-                    }
-            findNavController().navigate(R.id.action_searchFragment_to_movieInfoFragment, args)
+            findNavController().navigate(
+                SearchFragmentDirections.actionSearchFragmentToMovieInfoFragment(
+                    item.id
+                )
+            )
         }
     }
 
