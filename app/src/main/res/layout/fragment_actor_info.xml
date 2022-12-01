@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@string/date_of_birth"
+            android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
             app:layout_constraintTop_toTopOf="@+id/actorPhotoImageView"
             tools:text="@tools:sample/full_names" />
@@ -36,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
             app:layout_constraintTop_toBottomOf="@+id/actorNameTextView"
             tools:text="@tools:sample/full_names" />
@@ -46,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@string/date_of_birth"
+            android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
             app:layout_constraintTop_toBottomOf="@+id/actorProfessionTextView" />
 
@@ -55,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@string/awards"
+            android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
             app:layout_constraintTop_toBottomOf="@+id/actorBirthDatTextView" />
 
@@ -64,6 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@string/height"
+            android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
             app:layout_constraintTop_toBottomOf="@+id/actorsAwardsTextView" />
 
@@ -72,6 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/actorPhotoImageView"
@@ -92,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@string/known_for_movies"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewAfterBio" />
@@ -124,6 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@string/all_films_title"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 

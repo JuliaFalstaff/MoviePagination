@@ -8,6 +8,7 @@
     android:layout_marginTop="@dimen/card_view_margin_top"
     android:layout_marginEnd="@dimen/cardview_end"
     android:layout_marginBottom="@dimen/cardview_bottom"
+    android:backgroundTint="@color/background_dark"
     app:cardCornerRadius="@dimen/cardview_corner_radius"
     app:cardElevation="@dimen/cardview_elevation">
 
@@ -31,6 +32,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_4dp"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/moviePosterImageView"
@@ -43,8 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:padding="8dp"
             android:background="@drawable/rounded_shape"
+            android:padding="8dp"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -7,36 +7,41 @@
     android:layout_marginStart="@dimen/cardview_start"
     android:layout_marginTop="@dimen/card_view_margin_top"
     android:layout_marginEnd="@dimen/cardview_end_actor"
-    app:cardUseCompatPadding="true"
+    android:backgroundTint="@color/background_dark"
     android:elevation="@dimen/cardview_elevation"
-    app:cardCornerRadius="@dimen/cardview_corner_radius">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    app:cardCornerRadius="@dimen/cardview_corner_radius"
+    app:cardUseCompatPadding="true">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/knownForImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:src="@tools:sample/avatars" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/knownForTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/lorem" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/knownForImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@tools:sample/avatars" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/knownForYearTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/date/ddmmyy" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/knownForTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            tools:text="@tools:sample/lorem" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/knownForRoleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/lorem" />
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/knownForYearTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/knownForRoleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            tools:text="@tools:sample/lorem" />
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

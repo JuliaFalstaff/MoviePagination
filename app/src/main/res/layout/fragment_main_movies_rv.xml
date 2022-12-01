@@ -17,6 +17,7 @@
             android:layout_margin="@dimen/margin_8dp"
             android:padding="@dimen/padding_8dp"
             android:text="@string/now_in_theatres"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,8 +26,8 @@
             android:id="@+id/moviesNowInTheatreRecyclerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_margin="@dimen/margin_8dp"
+            android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +51,7 @@
             android:layout_margin="@dimen/margin_8dp"
             android:padding="@dimen/padding_8dp"
             android:text="@string/most_popular_movies"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/moviesNowInTheatreRecyclerView" />
@@ -64,15 +66,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mostPopularMovieTitleTextView"
-            tools:listitem="@layout/item_actors_recycler_view"/>
+            tools:listitem="@layout/item_actors_recycler_view" />
 
         <TextView
             android:id="@+id/mostPopularSeriesTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/most_popular_series"
             android:layout_margin="@dimen/margin_8dp"
             android:padding="@dimen/padding_8dp"
+            android:text="@string/most_popular_series"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mostPopularMovieRecyclerView" />
@@ -94,9 +97,10 @@
             android:id="@+id/comingSoonTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/coming_soon"
             android:layout_margin="@dimen/margin_8dp"
             android:padding="@dimen/padding_8dp"
+            android:text="@string/coming_soon"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mostPopularSeriesRecyclerView" />
@@ -105,13 +109,13 @@
             android:id="@+id/comingSoonRecyclerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_margin="@dimen/margin_8dp"
-            app:layout_constraintTop_toBottomOf="@id/comingSoonTextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/item_actors_recycler_view"/>
+            app:layout_constraintTop_toBottomOf="@id/comingSoonTextView"
+            tools:listitem="@layout/item_actors_recycler_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

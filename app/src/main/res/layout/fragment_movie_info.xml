@@ -62,6 +62,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_title_info"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,6 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@string/released_date"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/titleInfoTextView" />
 
@@ -84,6 +86,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/dateOfReleaseInfoLabelTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/dateOfReleaseInfoLabelTextView"
@@ -96,6 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@string/genres"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/dateOfReleaseInfoLabelTextView" />
 
@@ -105,6 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_marginTop="5dp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/movieGenresLabelTextView"
             app:layout_constraintTop_toBottomOf="@+id/dateOfReleaseInfoLabelTextView"
@@ -116,6 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@string/director"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/movieGenresTextView" />
 
@@ -124,6 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/movieDirectorLabelTextView"
             app:layout_constraintTop_toBottomOf="@+id/movieGenresTextView"
@@ -135,6 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@string/runtime"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/movieDirectorTextView" />
 
@@ -143,6 +151,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/movieRunTimeLabelTextView"
             app:layout_constraintTop_toBottomOf="@+id/movieDirectorTextView"
@@ -154,6 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:padding="@dimen/margin_side_overvie"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -180,6 +190,7 @@
             android:layout_margin="8dp"
             android:padding="@dimen/margin_8dp"
             android:text="@string/cast_title"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_title_info"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
