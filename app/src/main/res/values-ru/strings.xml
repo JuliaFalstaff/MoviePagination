@@ -15,13 +15,13 @@
     <string name="top250">Top 250</string>
     <string name="top_250_movies">Топ-250 Фильмы</string>
     <string name="top_250_tv_series">Tоп-250 Сериалы</string>
-    <string name="released_date">Released Date</string>
-    <string name="genres">Genres:</string>
-    <string name="director">Director:</string>
-    <string name="runtime">Runtime:</string>
+    <string name="released_date">Дата Релиза:</string>
+    <string name="genres">Жанры:</string>
+    <string name="director">Режиссер:</string>
+    <string name="runtime">Хронометраж:</string>
     <string name="slash">/</string>
-    <string name="all_films_title">All films:</string>
-    <string name="my_saved_movies">My list</string>
-    <string name="success_saved">Movie saved</string>
-    <string name="success_deleted">Deleted from list</string>
+    <string name="all_films_title">Фильмография:</string>
+    <string name="my_saved_movies">Мой список</string>
+    <string name="success_saved">Фильм сохранен</string>
+    <string name="success_deleted">Фильм удален</string>
 </resources>
