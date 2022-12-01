@@ -4,7 +4,7 @@ import com.example.moviepagination.domain.repository.ILocalRepo
 import com.example.moviepagination.domain.repository.IRemoteRepo
 import com.example.moviepagination.data.repository.LocalRepoImpl
 import com.example.moviepagination.data.repository.RemoteRepoImpl
-import com.example.moviepagination.data.network.RetrofitImpl
+import com.example.moviepagination.data.network.ApiFactory
 import com.example.moviepagination.data.database.MovieDataBase
 import com.example.moviepagination.domain.usecases.*
 import com.example.moviepagination.presentation.*
@@ -12,13 +12,13 @@ import com.example.moviepagination.presentation.viewmodel.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import kotlin.math.sin
 
 val application = module {
 //    single { Room.databaseBuilder(androidContext(), MovieDataBase::class.java, "movie.db").fallbackToDestructiveMigration().build() }
     single { MovieDataBase.getInstance(androidContext()).movieItemListDao}
+    single { ApiFactory.api }
     single<ILocalRepo> { LocalRepoImpl(movieItemListDao = get()) }
-    single<IRemoteRepo> { RemoteRepoImpl(apiService = RetrofitImpl().api) }
+    single<IRemoteRepo> { RemoteRepoImpl(apiService = get()) }
     single { GetComingSoonMovieUseCase(repository = get())}
     single { GetMovieNowInTheatreUseCase(repository = get())}
     single { GetMostPopularTVsUseCase(repository = get())}
