@@ -92,9 +92,9 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
         })
 
         viewModel.loadComingSoonMovies()
-        viewModel.loadMoviesNowInTheatre()
-        viewModel.loadMostPopularTVs()
-        viewModel.loadMostPopularMovies()
+//        viewModel.loadMoviesNowInTheatre()
+//        viewModel.loadMostPopularTVs()
+//        viewModel.loadMostPopularMovies()
     }
 
     private fun renderDataInTheatre(state: AppState) {
