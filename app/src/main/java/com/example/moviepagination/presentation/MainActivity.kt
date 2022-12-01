@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
@@ -19,43 +22,16 @@ class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
-    val navController by lazy {  Navigation.findNavController(this, R.id.container) }
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initBottomNavigation()
-    }
-
-    private fun initBottomNavigation() {
+        navController = binding.container.getFragment<NavHostFragment>().navController
+        binding.bottomAppNavigation.setupWithNavController(navController)
         binding.bottomAppNavigation.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.menu_list -> {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, MovieListFragment.newInstance())
-                            .commit()
-                    true
-                }
-                R.id.menu_search -> {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, SearchFragment.newInstance())
-                            .commit()
-                    true
-                }
-                R.id.menu_top250 -> {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, Top250Fragment.newInstance())
-                            .commit()
-                    true
-                }
-                R.id.menu_saved -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, SavedMovieListFragment.newInstance())
-                        .commit()
-                    true
-                }
-                else -> false
-            }
+            NavigationUI.onNavDestinationSelected(it, navController)
         }
     }
 

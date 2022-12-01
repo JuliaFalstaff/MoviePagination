@@ -180,8 +180,4 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
         _binding = null
         super.onDestroy()
     }
-
-    companion object {
-        fun newInstance() = MovieListFragment()
-    }
 }

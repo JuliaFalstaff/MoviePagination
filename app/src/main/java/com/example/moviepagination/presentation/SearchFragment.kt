@@ -107,8 +107,4 @@ class SearchFragment : Fragment(), KoinScopeComponent {
             }
         }
     }
-
-    companion object {
-        fun newInstance() = SearchFragment()
-    }
 }

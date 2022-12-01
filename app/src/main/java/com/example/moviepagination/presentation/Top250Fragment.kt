@@ -111,8 +111,4 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
             }
         }
     }
-
-    companion object {
-        fun newInstance() = Top250Fragment()
-    }
 }

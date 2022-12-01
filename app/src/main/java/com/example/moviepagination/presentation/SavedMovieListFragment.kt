@@ -84,8 +84,4 @@ class SavedMovieListFragment : Fragment(), KoinScopeComponent {
         _binding = null
         super.onDestroy()
     }
-
-    companion object {
-        fun newInstance() = SavedMovieListFragment()
-    }
 }

@@ -56,26 +56,13 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
 
     private fun setRVListeners() {
         adapterCast?.onItemCastClickListener = { movie ->
-//            activity?.supportFragmentManager?.apply {
-//                beginTransaction()
-//                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-//                        putString(MovieInfoFragment.MOVIE_INFO, movie.id)
-//                    }))
-//                    .addToBackStack("")
-//                    .commitAllowingStateLoss()
-//            }
-            ActorInfoFragmentDirections.actionActorInfoFragmentToMovieInfoFragment(movie.id)
+            findNavController().navigate(
+                ActorInfoFragmentDirections
+                    .actionActorInfoFragmentToMovieInfoFragment(movie.id)
+            )
         }
 
         adapterKnownFor?.onItemKnownForClickListener = { movie ->
-//            activity?.supportFragmentManager?.apply {
-//                beginTransaction()
-//                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-//                        putString(MovieInfoFragment.MOVIE_INFO, movie.id)
-//                    }))
-//                    .addToBackStack("")
-//                    .commitAllowingStateLoss()
-//            }
             findNavController().navigate(
                 ActorInfoFragmentDirections
                     .actionActorInfoFragmentToMovieInfoFragment(movie.id)
