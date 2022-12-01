@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/movieListFragment">
+
+    <fragment
+        android:id="@+id/actorInfoFragment"
+        android:name="com.example.moviepagination.presentation.ActorInfoFragment"
+        android:label="ActorInfoFragment" />
+    <fragment
+        android:id="@+id/movieInfoFragment"
+        android:name="com.example.moviepagination.presentation.MovieInfoFragment"
+        android:label="MovieInfoFragment" />
+    <fragment
+        android:id="@+id/movieListFragment"
+        android:name="com.example.moviepagination.presentation.MovieListFragment"
+        android:label="MovieListFragment" />
+    <fragment
+        android:id="@+id/savedMovieListFragment"
+        android:name="com.example.moviepagination.presentation.SavedMovieListFragment"
+        android:label="SavedMovieListFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.moviepagination.presentation.SearchFragment"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/top250Fragment"
+        android:name="com.example.moviepagination.presentation.Top250Fragment"
+        android:label="Top250Fragment" />
+</navigation>
