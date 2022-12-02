@@ -24,4 +24,5 @@
     <string name="my_saved_movies">My list</string>
     <string name="success_saved">Movie saved</string>
     <string name="success_deleted">Deleted from list</string>
+    <string name="no_data">no data</string>
 </resources>

@@ -24,4 +24,5 @@
     <string name="my_saved_movies">Мой список</string>
     <string name="success_saved">Фильм сохранен</string>
     <string name="success_deleted">Фильм удален</string>
+    <string name="no_data">no data</string>
 </resources>
