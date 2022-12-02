@@ -20,11 +20,11 @@ class MovieInfoViewModel(
 ) : ViewModel() {
 
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
-    private val liveDataTrailerToObserve: MutableLiveData<AppState> = MutableLiveData()
+    private val liveDataTrailerToObserve: MutableLiveData<String> = MutableLiveData()
     private val _liveDataIsFav: MutableLiveData<Boolean> = MutableLiveData()
     fun getLiveDataIsFav(): LiveData<Boolean> = _liveDataIsFav
     fun getDetailedLiveData(): LiveData<AppState> = liveDataToObserve
-    fun getTrailerLiveData(): LiveData<AppState> = liveDataTrailerToObserve
+    fun getTrailerLiveData(): LiveData<String> = liveDataTrailerToObserve
     private val compositeDisposable = CompositeDisposable()
 
     fun loadMovieById(movieId: String) {
@@ -44,9 +44,9 @@ class MovieInfoViewModel(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                liveDataTrailerToObserve.postValue(AppState.SuccessTrailer(it))
+                liveDataTrailerToObserve.postValue(it.videoId ?: "")
             }, {
-                liveDataTrailerToObserve.postValue(AppState.Error(it))
+                liveDataTrailerToObserve.postValue(it.localizedMessage)
             })
         compositeDisposable.add(disposable)
     }

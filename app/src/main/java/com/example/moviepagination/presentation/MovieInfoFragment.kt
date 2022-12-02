@@ -14,10 +14,8 @@ import com.bumptech.glide.Glide
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentMovieInfoBinding
 import com.example.moviepagination.domain.AppState
-import com.example.moviepagination.domain.entities.info.Actor
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.presentation.adapters.ActorsListAdapter
-import com.example.moviepagination.presentation.adapters.IOnListItemClickListener
 import com.example.moviepagination.presentation.viewmodel.MovieInfoViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -62,7 +60,7 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
         })
         vm.loadMovieById(movieBundle)
         vm.checkIsFavourite(movieBundle)
-        vm.getTrailerLiveData().observe(viewLifecycleOwner, Observer { renderTrailer(it) })
+        vm.getTrailerLiveData().observe(viewLifecycleOwner, Observer { setTrailer(it) })
         vm.loadMovieTrailer(movieBundle)
         setRVListeners()
     }
@@ -75,29 +73,11 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
         }
     }
 
-    private fun renderTrailer(appState: AppState) {
-        when (appState) {
-            is AppState.SuccessTrailer -> {
-                appState.trailerMovie.videoId?.let { setTrailer(it) }
-                Log.d("TAG", "Success: ${appState.trailerMovie.videoId}")
-
-            }
-            is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.d("TAG", "Error: ${appState.error.message}")
-            }
-        }
-    }
-
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.SuccessMovieInfo -> {
                 setData(appState.dataMovie)
-                     appState.dataMovie.actorList?.let { adapter?.submitList(it) }
+                appState.dataMovie.actorList?.let { adapter?.submitList(it) }
             }
             is AppState.Error -> {
                 Toast.makeText(
