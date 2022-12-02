@@ -13,6 +13,7 @@
         android:backgroundTint="@color/grey"
         android:elevation="8dp"
         android:textColor="@color/white"
+        android:theme="@style/AppTheme.DarkSearchView"
         app:queryHint="Search movie/TV show here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
