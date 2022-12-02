@@ -24,7 +24,7 @@
     <style name="AppTheme.DarkSearchView">
         <item name="colorControlNormal">@color/white</item>
         <item name="hintTextColor">@color/white</item>
-        <item name="android:editTextColor">@android:color/white</item>
-        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
     </style>
 </resources>
