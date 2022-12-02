@@ -19,6 +19,7 @@ class ActorInfoViewModel(
     private val compositeDisposable = CompositeDisposable()
 
     fun loadActorInfoById(actorId: String) {
+        liveDataToObserve.postValue(AppState.Loading)
         val disposable = getActorInfoByIdUseCase(actorId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

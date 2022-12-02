@@ -21,7 +21,6 @@
             android:layout_width="140dp"
             android:layout_height="200dp"
             android:adjustViewBounds="true"
-            android:background="@drawable/shape_background_poster"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/killing_eve_example" />

@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.moviepagination.App
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentActorInfoBinding
 import com.example.moviepagination.domain.AppState
@@ -76,6 +77,7 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
                 setData(appState.actorInfo)
                 adapterCast?.submitList(appState.actorInfo.castMovies)
                 adapterKnownFor?.submitList(appState.actorInfo.knownFor)
+                binding.actorInfoProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
                 Toast.makeText(
@@ -83,6 +85,9 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
                     "Error: ${appState.error.message}",
                     Toast.LENGTH_SHORT
                 ).show()
+            }
+            is AppState.Loading -> {
+                binding.actorInfoProgressBar.visibility = View.VISIBLE
             }
         }
     }

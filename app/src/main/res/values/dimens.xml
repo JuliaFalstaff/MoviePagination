@@ -19,4 +19,5 @@
     <dimen name="margin_8dp">8dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="padding_4dp">4dp</dimen>
+    <dimen name="margin_4dp">4dp</dimen>
 </resources>
