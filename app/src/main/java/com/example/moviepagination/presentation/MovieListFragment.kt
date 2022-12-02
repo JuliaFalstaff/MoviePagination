@@ -27,7 +27,6 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
     private var _binding: FragmentMainMoviesRvBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MovieListViewModel by inject()
-    private var nowInTheatreAdapter: MovieListAdapter? = null
     private var mostPopularMoviesAdapter: MovieListAdapter? = null
     private var mostPopularTVsAdapter: MovieListAdapter? = null
     private var comingSoonAdapter: MovieListAdapter? = null
@@ -56,22 +55,15 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
     }
 
     private fun setRecyclerViewAdapters() {
-        nowInTheatreAdapter = MovieListAdapter(onItemClickListener)
         mostPopularMoviesAdapter = MovieListAdapter(onItemClickListener)
         mostPopularTVsAdapter = MovieListAdapter(onItemClickListener)
         comingSoonAdapter = MovieListAdapter(onItemClickListener)
-        binding.moviesNowInTheatreRecyclerView.adapter = nowInTheatreAdapter
         binding.mostPopularMovieRecyclerView.adapter = mostPopularMoviesAdapter
         binding.mostPopularSeriesRecyclerView.adapter = mostPopularTVsAdapter
         binding.comingSoonRecyclerView.adapter = comingSoonAdapter
     }
 
     private fun initViewModels() {
-        viewModel.getNowInTheatreLiveData().observe(viewLifecycleOwner, Observer {
-            Log.d("MOVIE", it.toString())
-            renderDataInTheatre(it)
-        })
-
         viewModel.getComingSoonLiveData().observe(viewLifecycleOwner, Observer {
             Log.d("MOVIE", it.toString())
             renderDataComingSoon(it)
@@ -87,30 +79,9 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
             renderDataPopularTvs(it)
         })
 
-//        viewModel.loadComingSoonMovies()
-//        viewModel.loadMoviesNowInTheatre()
+        viewModel.loadComingSoonMovies()
 //        viewModel.loadMostPopularTVs()
 //        viewModel.loadMostPopularMovies()
-    }
-
-    private fun renderDataInTheatre(state: AppState) {
-        when (state) {
-            is AppState.Success -> {
-                val movieList = state.dataMovie.items
-                nowInTheatreAdapter?.submitList(movieList)
-                binding.progressBar.visibility = View.INVISIBLE
-            }
-            is AppState.Loading -> {
-                binding.progressBar.visibility = View.VISIBLE
-            }
-            is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error InTheatre: ${state.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
     }
 
     private fun renderDataPopularMovies(state: AppState) {

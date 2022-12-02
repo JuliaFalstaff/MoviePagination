@@ -60,4 +60,12 @@
             android:id="@+id/action_top250Fragment_to_movieInfoFragment"
             app:destination="@id/movieInfoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/theatreFragment"
+        android:name="com.example.moviepagination.presentation.MovieListNowInTheatreFragment"
+        android:label="NowInTheatreFragment" >
+        <action
+            android:id="@+id/action_movieListNowInTheatreFragment_to_movieInfoFragment"
+            app:destination="@id/movieInfoFragment" />
+    </fragment>
 </navigation>

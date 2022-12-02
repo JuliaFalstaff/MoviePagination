@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="cast_title">Актеры</string>
-    <string name="now_in_theatres">Сейчас в кинотеатрах</string>
+    <string name="now_in_theatres">Сейчас в кино</string>
     <string name="most_popular_movies">Популярные фильмы</string>
     <string name="most_popular_series">Популярные сериалы</string>
     <string name="coming_soon">Скоро в кино</string>

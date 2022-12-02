@@ -20,7 +20,8 @@ class App : Application() {
                     actorInfoScreen,
                     searchResultScreen,
                     top250Screen,
-                    savedMovieListScreen
+                    savedMovieListScreen,
+                    nowInTheatreScreen
                 )
             )
         }

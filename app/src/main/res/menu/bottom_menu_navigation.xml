@@ -3,8 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/movieListFragment"
-        android:icon="@drawable/home"
+        android:icon="@drawable/ic_home"
         android:title="@string/home"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/theatreFragment"
+        android:icon="@drawable/ic_in_theatre"
+        android:title="@string/now_in_theatres"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/top250Fragment"
+        android:icon="@drawable/ic_top250"
+        android:title="@string/top250"
         app:showAsAction="always" />
 
     <item
@@ -17,11 +29,5 @@
         android:id="@+id/savedMovieListFragment"
         android:icon="@drawable/ic_my_list"
         android:title="@string/favourite"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/top250Fragment"
-        android:icon="@drawable/ic_top250"
-        android:title="@string/top250"
         app:showAsAction="always" />
 </menu>
