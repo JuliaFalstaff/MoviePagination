@@ -148,9 +148,9 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
     private fun setFavButton(isFav: Boolean) {
         isFavourite = isFav
         if (isFav) {
-            binding.saveToMyListImageButton.setImageResource(R.drawable.ic_my_list_enabled)
+            binding.saveToMyListImageButton.setImageResource(R.drawable.ic_added_to_my_list)
         } else {
-            binding.saveToMyListImageButton.setImageResource(R.drawable.ic_my_list)
+            binding.saveToMyListImageButton.setImageResource(R.drawable.ic_add_to_list)
         }
     }
 

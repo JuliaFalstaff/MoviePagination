@@ -29,7 +29,7 @@ class MovieInfoMapper {
             runtimeStr = movieInfoDto.runtimeStr ?: "no data",
             plot = movieInfoDto.plot ?: "no data",
             contentRating = movieInfoDto.contentRating ?: "no data",
-            imDbRating = movieInfoDto.imDbRating ?: "no data",
+            imDbRating = movieInfoDto.imDbRating ?: "0.0",
             metacriticRating = movieInfoDto.metacriticRating ?: "no data",
             genres = movieInfoDto.genres ?: "no data",
             genreList = movieInfoDto.genreList,
