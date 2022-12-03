@@ -16,8 +16,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/actorFotoImageView"
-            android:layout_width="100dp"
-            android:layout_height="140dp"
+            android:layout_width="@dimen/item_actors_pic_width"
+            android:layout_height="@dimen/item_actors_pic_height"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
             android:minLines="2"
             android:padding="@dimen/padding_4dp"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="@dimen/item_actors_name_text_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
