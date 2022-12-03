@@ -1,16 +1,15 @@
 package com.example.moviepagination.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.moviepagination.App
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentActorInfoBinding
 import com.example.moviepagination.domain.AppState
@@ -38,21 +37,31 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentActorInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setRecyclerViews()
+        actorBundle = args.actorId.toString()
+        setObserver()
+        setRVListeners()
+    }
+
+    private fun setObserver() {
+        viewModel.actorLiveData.observe(viewLifecycleOwner) {
+            renderData(it)
+        }
+        viewModel.loadActorInfoById(actorBundle)
+    }
+
+    private fun setRecyclerViews() {
         adapterCast = CastMoviesListAdapter()
         adapterKnownFor = KnownForMoviesListAdapter()
         binding.actorCastMovieRecyclerView.adapter = adapterCast
         binding.actorKnownForRecyclerView.adapter = adapterKnownFor
-        actorBundle = args.actorId.toString()
-        viewModel.getActorInfoLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
-        viewModel.loadActorInfoById(actorBundle)
-        setRVListeners()
     }
 
     private fun setRVListeners() {
@@ -74,7 +83,7 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.SuccessActorInfo -> {
-                setData(appState.actorInfo)
+                setActorInfoData(appState.actorInfo)
                 adapterCast?.submitList(appState.actorInfo.castMovies)
                 adapterKnownFor?.submitList(appState.actorInfo.knownFor)
                 binding.actorInfoProgressBar.visibility = View.INVISIBLE
@@ -92,7 +101,7 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
         }
     }
 
-    private fun setData(actor: ActorInfo) {
+    private fun setActorInfoData(actor: ActorInfo) {
         with(binding) {
             actorNameTextView.text = actor.name
             actorProfessionTextView.text = actor.role
@@ -100,6 +109,7 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
             actorBirthDatTextView.text = actor.birthDate
             actorBioTextView.text = actor.summary
             actorsAwardsTextView.text = actor.awards
+            Log.d("Actor TAG", "${actor.awards}")
             Glide.with(requireContext())
                 .load(actor.image)
                 .error(R.drawable.ic_load_error_vector)

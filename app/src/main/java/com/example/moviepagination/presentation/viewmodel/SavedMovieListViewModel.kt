@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moviepagination.domain.AppState
-import com.example.moviepagination.domain.entities.info.MovieInfo
-import com.example.moviepagination.domain.usecases.*
+import com.example.moviepagination.domain.usecases.GetAllSavedMoviesUseCase
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers

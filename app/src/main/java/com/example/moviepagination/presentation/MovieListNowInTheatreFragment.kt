@@ -53,11 +53,11 @@ class MovieListNowInTheatreFragment : Fragment(), KoinScopeComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setRecyclerViewAdapters()
+        setRecyclerViewAdapter()
         initViewModels()
     }
 
-    private fun setRecyclerViewAdapters() {
+    private fun setRecyclerViewAdapter() {
         nowInTheatreAdapter = NowInTheatreMovieListAdapter(onItemClickListener)
         binding.nowInTheatreMovieListRecyclerView.adapter = nowInTheatreAdapter
     }

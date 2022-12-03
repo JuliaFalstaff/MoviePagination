@@ -21,7 +21,11 @@ object ApiFactory {
 
     private fun createOkHttpClient(): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
-        httpClient.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        httpClient.addInterceptor(
+            HttpLoggingInterceptor().setLevel(
+                HttpLoggingInterceptor.Level.BODY
+            )
+        )
         return httpClient.build()
     }
 }

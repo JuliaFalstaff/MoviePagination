@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentTop250Binding
 import com.example.moviepagination.domain.AppState
@@ -32,14 +31,6 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
     private val onListItemClickListener: IOnListItemClickListener<Item> =
         object : IOnListItemClickListener<Item> {
             override fun onItemClick(item: Item) {
-//                activity?.supportFragmentManager?.apply {
-//                    beginTransaction()
-//                        .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-//                            putString(MovieInfoFragment.MOVIE_INFO, item.id)
-//                        }))
-//                        .addToBackStack("")
-//                        .commitAllowingStateLoss()
-//                }
                 findNavController().navigate(
                     Top250FragmentDirections.actionTop250FragmentToMovieInfoFragment(
                         item.id
@@ -59,25 +50,27 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setRV()
+        initViewModels()
+    }
+
+    private fun setRV() {
         top250MoviesAdapter = Top250MoviesAdapter(onListItemClickListener)
         top250TvSeriesAdapter = Top250TvSeriesAdapter(onListItemClickListener)
         binding.top250MoviesRecyclerView.adapter = top250MoviesAdapter
         binding.top250TvSeriesRecyclerView.adapter = top250TvSeriesAdapter
-        initViewModels()
     }
 
     private fun initViewModels() {
-        viewModel.getTop250MoviesLiveData().observe(viewLifecycleOwner, Observer {
+        viewModel.top250MoviesLiveData.observe(viewLifecycleOwner) {
             Log.d("MOVIE", it.toString())
             renderDataTop250Movies(it)
-        })
-        viewModel.loadTop250Movies()
+        }
 
-        viewModel.getTopTVShowMoviesLiveData().observe(viewLifecycleOwner, Observer {
+        viewModel.top250TVShowLiveData.observe(viewLifecycleOwner) {
             Log.d("MOVIE", it.toString())
             renderDataTop250TVs(it)
-        })
-        viewModel.loadTop250TVs()
+        }
     }
 
     private fun renderDataTop250Movies(appState: AppState) {
@@ -85,6 +78,7 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
             is AppState.Success -> {
                 val movies = appState.dataMovie.items
                 top250MoviesAdapter?.submitList(movies)
+                binding.top250ProgressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
                 Toast.makeText(
@@ -92,6 +86,10 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
                     "Error: ${appState.error.message}",
                     Toast.LENGTH_SHORT
                 ).show()
+                binding.top250ProgressBar.visibility = View.VISIBLE
+            }
+            is AppState.Loading -> {
+                binding.top250ProgressBar.visibility = View.VISIBLE
             }
         }
     }
@@ -101,6 +99,7 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
             is AppState.Success -> {
                 val series = appState.dataMovie.items
                 top250TvSeriesAdapter?.submitList(series)
+                binding.top250ProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
                 Toast.makeText(
@@ -108,6 +107,10 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
                     "Error: ${appState.error.message}",
                     Toast.LENGTH_SHORT
                 ).show()
+                binding.top250ProgressBar.visibility = View.VISIBLE
+            }
+            is AppState.Loading -> {
+                binding.top250ProgressBar.visibility = View.VISIBLE
             }
         }
     }

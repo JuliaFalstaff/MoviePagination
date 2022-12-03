@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -39,7 +38,7 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMovieInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,20 +48,24 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
         adapter = ActorsListAdapter()
         binding.recyclerViewActors.adapter = adapter
         movieBundle = args.itemId.toString()
-        vm.getDetailedLiveData().observe(viewLifecycleOwner, Observer {
+        setObservers()
+        setRVListeners()
+    }
+
+    private fun setObservers() {
+        vm.loadMovieLiveData.observe(viewLifecycleOwner) {
             renderData(it)
             Log.d("MOVIE-INFO", it.toString())
-        })
-        vm.getLiveDataIsFav().observe(viewLifecycleOwner, Observer {
+        }
+        vm.liveDataIsFav.observe(viewLifecycleOwner) {
             isFavourite = it
             setFavButton(it)
             Log.d("MOVIE-INFO IMAGE", it.toString())
-        })
+        }
         vm.loadMovieById(movieBundle)
         vm.checkIsFavourite(movieBundle)
-        vm.getTrailerLiveData().observe(viewLifecycleOwner, Observer { setTrailer(it) })
+        vm.loadTrailerLiveData.observe(viewLifecycleOwner) { setTrailer(it) }
         vm.loadMovieTrailer(movieBundle)
-        setRVListeners()
     }
 
     private fun setRVListeners() {
@@ -78,6 +81,7 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
             is AppState.SuccessMovieInfo -> {
                 setData(appState.dataMovie)
                 appState.dataMovie.actorList?.let { adapter?.submitList(it) }
+                binding.movieInfoProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
                 Toast.makeText(
@@ -85,6 +89,10 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
                     "Error Trailer: ${appState.error.message}",
                     Toast.LENGTH_SHORT
                 ).show()
+                binding.movieInfoProgressBar.visibility = View.INVISIBLE
+            }
+            is AppState.Loading -> {
+                binding.movieInfoProgressBar.visibility = View.VISIBLE
             }
         }
     }

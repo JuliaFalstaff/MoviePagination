@@ -19,22 +19,23 @@ class MovieInfoViewModel(
     private val getSavedMovieByIdUseCase: GetSavedMovieByIdUseCase
 ) : ViewModel() {
 
-    private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
-    private val liveDataTrailerToObserve: MutableLiveData<String> = MutableLiveData()
+    private val _loadMovieLiveData: MutableLiveData<AppState> = MutableLiveData()
+    private val _loadTrailerLiveData: MutableLiveData<String> = MutableLiveData()
     private val _liveDataIsFav: MutableLiveData<Boolean> = MutableLiveData()
-    fun getLiveDataIsFav(): LiveData<Boolean> = _liveDataIsFav
-    fun getDetailedLiveData(): LiveData<AppState> = liveDataToObserve
-    fun getTrailerLiveData(): LiveData<String> = liveDataTrailerToObserve
+    val liveDataIsFav: LiveData<Boolean> get() = _liveDataIsFav
+    val loadMovieLiveData: LiveData<AppState> get() = _loadMovieLiveData
+    val loadTrailerLiveData: LiveData<String> get() = _loadTrailerLiveData
     private val compositeDisposable = CompositeDisposable()
 
     fun loadMovieById(movieId: String) {
+        _loadMovieLiveData.postValue(AppState.Loading)
         val disposable = getMovieByIdUseCase(movieId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                liveDataToObserve.postValue(AppState.SuccessMovieInfo(it))
+                _loadMovieLiveData.postValue(AppState.SuccessMovieInfo(it))
             }, {
-                liveDataToObserve.postValue(AppState.Error(it))
+                _loadMovieLiveData.postValue(AppState.Error(it))
             })
         compositeDisposable.add(disposable)
     }
@@ -44,9 +45,9 @@ class MovieInfoViewModel(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                liveDataTrailerToObserve.postValue(it.videoId ?: "")
+                _loadTrailerLiveData.postValue(it.videoId ?: "")
             }, {
-                liveDataTrailerToObserve.postValue(it.localizedMessage)
+                _loadTrailerLiveData.postValue(it.localizedMessage)
             })
         compositeDisposable.add(disposable)
     }
@@ -75,7 +76,7 @@ class MovieInfoViewModel(
                 {
                     _liveDataIsFav.postValue(it.isFavourite)
 
-                },{
+                }, {
                     Log.d("TAG checkIsFav", "${it.localizedMessage}")
                 }
             )
@@ -86,14 +87,14 @@ class MovieInfoViewModel(
         val disposable = deleteMovieFromMyList(movie.id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe (
+            .subscribe(
                 {
-                Log.d("TAG Delete", "Deleted: ${movie.title}")
+                    Log.d("TAG Delete", "Deleted: ${movie.title}")
                 },
                 {
                     Log.d("TAG Delete", "Deleted ERROR: ${movie.title} ${it.localizedMessage}")
                 }
-                    )
+            )
         compositeDisposable.add(disposable)
 
     }

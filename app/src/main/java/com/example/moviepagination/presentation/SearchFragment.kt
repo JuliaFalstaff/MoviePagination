@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentSearchBinding
 import com.example.moviepagination.domain.AppState
@@ -39,23 +38,17 @@ class SearchFragment : Fragment(), KoinScopeComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = SearchResultListAdapter()
-        binding.searchResultRecyclerView.adapter = adapter
-        setRVListener()
-        viewModel.getSearchResultLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
+        setRV()
+        viewModel.searchMovieLiveData.observe(viewLifecycleOwner) {
+            renderData(it)
+        }
         initSearch()
     }
 
-    private fun setRVListener() {
+    private fun setRV() {
+        adapter = SearchResultListAdapter()
+        binding.searchResultRecyclerView.adapter = adapter
         adapter?.listener = { item ->
-//            activity?.supportFragmentManager?.apply {
-//                beginTransaction()
-//                    .replace(R.id.container, MovieInfoFragment.newInstance(Bundle().apply {
-//                        putString(MovieInfoFragment.MOVIE_INFO, item.id)
-//                    }))
-//                    .addToBackStack("")
-//                    .commitAllowingStateLoss()
-//            }
             findNavController().navigate(
                 SearchFragmentDirections.actionSearchFragmentToMovieInfoFragment(
                     item.id

@@ -49,10 +49,10 @@ class SavedMovieListFragment : Fragment(), KoinScopeComponent {
         super.onViewCreated(view, savedInstanceState)
         movieListAdapter = SavedMovieListAdapter(onItemClickListener)
         binding.savedMovieListRecyclerView.adapter = movieListAdapter
-        initViewModels()
+        initViewModel()
     }
 
-    private fun initViewModels() {
+    private fun initViewModel() {
         viewModel.savedMoviesLiveData.observe(viewLifecycleOwner) {
             Log.d("MOVIE", it.toString())
             renderData(it)
