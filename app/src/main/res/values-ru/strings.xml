@@ -9,10 +9,10 @@
     <string name="awards">Награды: %s</string>
     <string name="height">Рост:</string>
     <string name="known_for_movies">Известные фильмы</string>
-    <string name="home">Home</string>
-    <string name="menu_search">Search</string>
-    <string name="favourite">Favourite</string>
-    <string name="top250">Top 250</string>
+    <string name="home">Главная</string>
+    <string name="menu_search">Поиск</string>
+    <string name="favourite">Избранное</string>
+    <string name="top250">Топ 250</string>
     <string name="top_250_movies">Топ-250 Фильмы</string>
     <string name="top_250_tv_series">Tоп-250 Сериалы</string>
     <string name="released_date">Дата Релиза:</string>
