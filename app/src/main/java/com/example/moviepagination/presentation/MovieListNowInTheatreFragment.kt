@@ -2,31 +2,27 @@ package com.example.moviepagination.presentation
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentNowInTheatreMoviesRecyclerViewBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.Item
 import com.example.moviepagination.presentation.adapters.IOnListItemClickListener
 import com.example.moviepagination.presentation.adapters.NowInTheatreMovieListAdapter
+import com.example.moviepagination.presentation.core.BaseFragment
 import com.example.moviepagination.presentation.viewmodel.MovieListNowInTheatreViewModel
 import org.koin.androidx.scope.createScope
-import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
 import org.koin.core.scope.Scope
 
-class MovieListNowInTheatreFragment : Fragment(), KoinScopeComponent {
+class MovieListNowInTheatreFragment : BaseFragment<FragmentNowInTheatreMoviesRecyclerViewBinding>(
+    FragmentNowInTheatreMoviesRecyclerViewBinding::inflate
+) {
 
     override val scope: Scope by lazy { createScope(this) }
-    private var _binding: FragmentNowInTheatreMoviesRecyclerViewBinding? = null
-    private val binding get() = _binding!!
     private val viewModel: MovieListNowInTheatreViewModel by inject()
     private var nowInTheatreAdapter: NowInTheatreMovieListAdapter? = null
-
     private val onItemClickListener = object : IOnListItemClickListener<Item> {
         override fun onItemClick(item: Item) {
             findNavController().navigate(
@@ -36,19 +32,6 @@ class MovieListNowInTheatreFragment : Fragment(), KoinScopeComponent {
                     )
             )
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentNowInTheatreMoviesRecyclerViewBinding.inflate(
-            inflater,
-            container,
-            false
-        )
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,10 +70,5 @@ class MovieListNowInTheatreFragment : Fragment(), KoinScopeComponent {
                 ).show()
             }
         }
-    }
-
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
     }
 }

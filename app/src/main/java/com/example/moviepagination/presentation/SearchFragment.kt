@@ -7,34 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentSearchBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.presentation.adapters.SearchResultListAdapter
+import com.example.moviepagination.presentation.core.BaseFragment
 import com.example.moviepagination.presentation.viewmodel.SearchViewModel
 import org.koin.androidx.scope.createScope
-import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
 import org.koin.core.scope.Scope
 
-class SearchFragment : Fragment(), KoinScopeComponent {
+class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
     override val scope: Scope by lazy { createScope(this) }
-    private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
     val viewModel: SearchViewModel by inject()
     private var searchQuery = ""
     private var adapter: SearchResultListAdapter? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -2,11 +2,8 @@ package com.example.moviepagination.presentation
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -15,33 +12,23 @@ import com.example.moviepagination.databinding.FragmentMovieInfoBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.presentation.adapters.ActorsListAdapter
+import com.example.moviepagination.presentation.core.BaseFragment
 import com.example.moviepagination.presentation.viewmodel.MovieInfoViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import org.koin.androidx.scope.createScope
-import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
 import org.koin.core.scope.Scope
 
-class MovieInfoFragment : Fragment(), KoinScopeComponent {
+class MovieInfoFragment :
+    BaseFragment<FragmentMovieInfoBinding>(FragmentMovieInfoBinding::inflate) {
 
     override val scope: Scope by lazy { createScope(this) }
-    private var _binding: FragmentMovieInfoBinding? = null
-    private val binding get() = _binding!!
     private var isFavourite = false
-    val vm: MovieInfoViewModel by inject()
+    val viewModel: MovieInfoViewModel by inject()
     private val args by navArgs<MovieInfoFragmentArgs>()
     private lateinit var movieBundle: String
     private var adapter: ActorsListAdapter? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMovieInfoBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,19 +40,19 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
     }
 
     private fun setObservers() {
-        vm.loadMovieLiveData.observe(viewLifecycleOwner) {
+        viewModel.loadMovieLiveData.observe(viewLifecycleOwner) {
             renderData(it)
             Log.d("MOVIE-INFO", it.toString())
         }
-        vm.liveDataIsFav.observe(viewLifecycleOwner) {
+        viewModel.liveDataIsFav.observe(viewLifecycleOwner) {
             isFavourite = it
             setFavButton(it)
             Log.d("MOVIE-INFO IMAGE", it.toString())
         }
-        vm.loadMovieById(movieBundle)
-        vm.checkIsFavourite(movieBundle)
-        vm.loadTrailerLiveData.observe(viewLifecycleOwner) { setTrailer(it) }
-        vm.loadMovieTrailer(movieBundle)
+        viewModel.loadMovieById(movieBundle)
+        viewModel.checkIsFavourite(movieBundle)
+        viewModel.loadTrailerLiveData.observe(viewLifecycleOwner) { setTrailer(it) }
+        viewModel.loadMovieTrailer(movieBundle)
     }
 
     private fun setRVListeners() {
@@ -109,14 +96,14 @@ class MovieInfoFragment : Fragment(), KoinScopeComponent {
             setFavButton(isFavourite)
             saveToMyListImageButton.setOnClickListener {
                 if (!isFavourite) {
-                    vm.saveMovieToMyList(movie.copy(isFavourite = !movie.isFavourite))
+                    viewModel.saveMovieToMyList(movie.copy(isFavourite = !movie.isFavourite))
                     Toast.makeText(
                         requireActivity(),
                         getString(R.string.success_saved),
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
-                    vm.deleteMovieFromMyList(movie)
+                    viewModel.deleteMovieFromMyList(movie)
                     Toast.makeText(
                         requireActivity(),
                         getString(R.string.success_deleted),

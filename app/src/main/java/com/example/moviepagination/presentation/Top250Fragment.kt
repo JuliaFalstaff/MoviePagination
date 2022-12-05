@@ -2,11 +2,8 @@ package com.example.moviepagination.presentation
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentTop250Binding
 import com.example.moviepagination.domain.AppState
@@ -14,17 +11,15 @@ import com.example.moviepagination.domain.entities.Item
 import com.example.moviepagination.presentation.adapters.IOnListItemClickListener
 import com.example.moviepagination.presentation.adapters.Top250MoviesAdapter
 import com.example.moviepagination.presentation.adapters.Top250TvSeriesAdapter
+import com.example.moviepagination.presentation.core.BaseFragment
 import com.example.moviepagination.presentation.viewmodel.Top250ViewModel
 import org.koin.androidx.scope.createScope
-import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
 import org.koin.core.scope.Scope
 
-class Top250Fragment : Fragment(), KoinScopeComponent {
+class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding::inflate) {
 
     override val scope: Scope by lazy { createScope(this) }
-    private var _binding: FragmentTop250Binding? = null
-    private val binding get() = _binding!!
     private val viewModel: Top250ViewModel by inject()
     private var top250MoviesAdapter: Top250MoviesAdapter? = null
     private var top250TvSeriesAdapter: Top250TvSeriesAdapter? = null
@@ -38,15 +33,6 @@ class Top250Fragment : Fragment(), KoinScopeComponent {
                 )
             }
         }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        _binding = FragmentTop250Binding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

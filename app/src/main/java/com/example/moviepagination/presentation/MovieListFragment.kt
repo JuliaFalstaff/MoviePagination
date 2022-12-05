@@ -2,28 +2,24 @@ package com.example.moviepagination.presentation
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentMainMoviesRvBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.Item
 import com.example.moviepagination.presentation.adapters.IOnListItemClickListener
 import com.example.moviepagination.presentation.adapters.MovieListAdapter
+import com.example.moviepagination.presentation.core.BaseFragment
 import com.example.moviepagination.presentation.viewmodel.MovieListViewModel
 import org.koin.androidx.scope.createScope
-import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
 import org.koin.core.scope.Scope
 
-class MovieListFragment : Fragment(), KoinScopeComponent {
+class MovieListFragment :
+    BaseFragment<FragmentMainMoviesRvBinding>(FragmentMainMoviesRvBinding::inflate) {
 
     override val scope: Scope by lazy { createScope(this) }
-    private var _binding: FragmentMainMoviesRvBinding? = null
-    private val binding get() = _binding!!
     private val viewModel: MovieListViewModel by inject()
     private var mostPopularMoviesAdapter: MovieListAdapter? = null
     private var mostPopularTVsAdapter: MovieListAdapter? = null
@@ -34,15 +30,6 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
                 MovieListFragmentDirections.actionMovieListFragmentToMovieInfoFragment(item.id)
             )
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentMainMoviesRvBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -138,10 +125,5 @@ class MovieListFragment : Fragment(), KoinScopeComponent {
                 ).show()
             }
         }
-    }
-
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
     }
 }

@@ -2,31 +2,28 @@ package com.example.moviepagination.presentation
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentSavedMoviesRecyclerViewBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.presentation.adapters.IOnListItemClickListener
 import com.example.moviepagination.presentation.adapters.SavedMovieListAdapter
+import com.example.moviepagination.presentation.core.BaseFragment
 import com.example.moviepagination.presentation.viewmodel.SavedMovieListViewModel
 import org.koin.androidx.scope.createScope
-import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
 import org.koin.core.scope.Scope
 
-class SavedMovieListFragment : Fragment(), KoinScopeComponent {
+class SavedMovieListFragment :
+    BaseFragment<FragmentSavedMoviesRecyclerViewBinding>(
+        FragmentSavedMoviesRecyclerViewBinding::inflate
+    ) {
 
     override val scope: Scope by lazy { createScope(this) }
-    private var _binding: FragmentSavedMoviesRecyclerViewBinding? = null
-    private val binding get() = _binding!!
     private val viewModel: SavedMovieListViewModel by inject()
     private var movieListAdapter: SavedMovieListAdapter? = null
-
     private val onItemClickListener = object : IOnListItemClickListener<MovieInfo> {
         override fun onItemClick(item: MovieInfo) {
             findNavController().navigate(
@@ -34,15 +31,6 @@ class SavedMovieListFragment : Fragment(), KoinScopeComponent {
                     .actionSavedMovieListFragmentToMovieInfoFragment(item.id)
             )
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSavedMoviesRecyclerViewBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,10 +66,5 @@ class SavedMovieListFragment : Fragment(), KoinScopeComponent {
                 Log.d("TAG saved list", "${state.error.stackTrace.toString()}")
             }
         }
-    }
-
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
     }
 }

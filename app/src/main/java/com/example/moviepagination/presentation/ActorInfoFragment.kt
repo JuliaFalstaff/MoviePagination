@@ -2,11 +2,8 @@ package com.example.moviepagination.presentation
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -16,31 +13,21 @@ import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.castInfo.ActorInfo
 import com.example.moviepagination.presentation.adapters.CastMoviesListAdapter
 import com.example.moviepagination.presentation.adapters.KnownForMoviesListAdapter
+import com.example.moviepagination.presentation.core.BaseFragment
 import com.example.moviepagination.presentation.viewmodel.ActorInfoViewModel
 import org.koin.androidx.scope.createScope
-import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
 import org.koin.core.scope.Scope
 
-class ActorInfoFragment : Fragment(), KoinScopeComponent {
+class ActorInfoFragment :
+    BaseFragment<FragmentActorInfoBinding>(FragmentActorInfoBinding::inflate) {
 
-    override val scope: Scope by lazy { createScope(this) }
-    private var _binding: FragmentActorInfoBinding? = null
-    private val binding get() = _binding!!
+    override val scope: Scope get() = createScope(this)
     val viewModel: ActorInfoViewModel by inject()
     private val args by navArgs<ActorInfoFragmentArgs>()
     private lateinit var actorBundle: String
     private var adapterCast: CastMoviesListAdapter? = null
     private var adapterKnownFor: KnownForMoviesListAdapter? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentActorInfoBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -116,4 +103,6 @@ class ActorInfoFragment : Fragment(), KoinScopeComponent {
                 .into(actorPhotoImageView)
         }
     }
+
+
 }
