@@ -8,10 +8,11 @@ import com.bumptech.glide.Glide
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemSearchResultRecyclerViewBinding
 import com.example.moviepagination.domain.entities.search.Result
+import com.example.moviepagination.presentation.core.BaseItemCallback
 
 
 class SearchResultListAdapter(
-) : ListAdapter<Result, SearchResultListAdapter.ResultsViewHolder>(SearchResultItemDiffUtilCallback) {
+) : ListAdapter<Result, SearchResultListAdapter.ResultsViewHolder>(BaseItemCallback<Result>()) {
 
     var listener: ((Result) -> Unit)? = null
 

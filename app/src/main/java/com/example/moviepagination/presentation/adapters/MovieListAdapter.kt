@@ -8,9 +8,10 @@ import com.bumptech.glide.Glide
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemMovieRecyclerViewBinding
 import com.example.moviepagination.domain.entities.Item
+import com.example.moviepagination.presentation.core.BaseItemCallback
 
 class MovieListAdapter(private var onListItemListener: IOnListItemClickListener<Item>) :
-    ListAdapter<Item, MovieListAdapter.MovieViewHolder>(MovieItemDiffUtilCallback) {
+    ListAdapter<Item, MovieListAdapter.MovieViewHolder>(BaseItemCallback<Item>()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(

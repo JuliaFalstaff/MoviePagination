@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviepagination.R
-import com.example.moviepagination.databinding.ItemMovieRecyclerViewBinding
 import com.example.moviepagination.databinding.ItemNowInTheatreRecyclerViewBinding
 import com.example.moviepagination.domain.entities.Item
+import com.example.moviepagination.presentation.core.BaseItemCallback
 
 class NowInTheatreMovieListAdapter(private var onListItemListener: IOnListItemClickListener<Item>) :
-    ListAdapter<Item, NowInTheatreMovieListAdapter.MovieViewHolder>(MovieItemDiffUtilCallback) {
+    ListAdapter<Item, NowInTheatreMovieListAdapter.MovieViewHolder>(BaseItemCallback<Item>()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(

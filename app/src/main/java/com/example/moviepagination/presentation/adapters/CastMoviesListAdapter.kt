@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviepagination.databinding.ItemActorCastMovieRecyclerViewBinding
 import com.example.moviepagination.domain.entities.castInfo.CastMovie
+import com.example.moviepagination.presentation.core.BaseItemCallback
 
 class CastMoviesListAdapter :
-    ListAdapter<CastMovie, CastMoviesListAdapter.CastMoviesViewHolder>(CastItemDiffUtilCallback) {
+    ListAdapter<CastMovie, CastMoviesListAdapter.CastMoviesViewHolder>(BaseItemCallback<CastMovie>()) {
 
     var onItemCastClickListener: ((CastMovie) -> Unit)? = null
 

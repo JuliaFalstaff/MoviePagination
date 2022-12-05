@@ -8,9 +8,10 @@ import com.bumptech.glide.Glide
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemActorsRecyclerViewBinding
 import com.example.moviepagination.domain.entities.info.Actor
+import com.example.moviepagination.presentation.core.BaseItemCallback
 
 class ActorsListAdapter :
-    ListAdapter<Actor, ActorsListAdapter.ActorsViewHolder>(ActorItemDiffUtilCallback) {
+    ListAdapter<Actor, ActorsListAdapter.ActorsViewHolder>(BaseItemCallback<Actor>()) {
 
     var onItemClickListener: ((Actor) -> Unit)? = null
 

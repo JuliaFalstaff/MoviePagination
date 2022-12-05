@@ -8,10 +8,11 @@ import com.bumptech.glide.Glide
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemActorKnownForRecyclerViewBinding
 import com.example.moviepagination.domain.entities.castInfo.KnownFor
+import com.example.moviepagination.presentation.core.BaseItemCallback
 
 class KnownForMoviesListAdapter :
     ListAdapter<KnownFor, KnownForMoviesListAdapter.KnownForViewHolder>(
-        KnownForItemDiffUtilCallback
+        BaseItemCallback<KnownFor>()
     ) {
 
     var onItemKnownForClickListener: ((KnownFor) -> Unit)? = null
