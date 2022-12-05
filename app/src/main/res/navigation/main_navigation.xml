@@ -10,7 +10,11 @@
         android:label="ActorInfoFragment" >
         <action
             android:id="@+id/action_actorInfoFragment_to_movieInfoFragment"
-            app:destination="@id/movieInfoFragment" />
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <argument
             android:name="actorId"
             app:argType="string"
@@ -22,7 +26,11 @@
         android:label="MovieInfoFragment" >
         <action
             android:id="@+id/action_movieInfoFragment_to_actorInfoFragment"
-            app:destination="@id/actorInfoFragment" />
+            app:destination="@id/actorInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <argument
             android:name="itemId"
             app:argType="string"
@@ -34,7 +42,11 @@
         android:label="MovieListFragment" >
         <action
             android:id="@+id/action_movieListFragment_to_movieInfoFragment"
-            app:destination="@id/movieInfoFragment" />
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/savedMovieListFragment"
@@ -42,7 +54,11 @@
         android:label="SavedMovieListFragment" >
         <action
             android:id="@+id/action_savedMovieListFragment_to_movieInfoFragment"
-            app:destination="@id/movieInfoFragment" />
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -50,7 +66,11 @@
         android:label="SearchFragment" >
         <action
             android:id="@+id/action_searchFragment_to_movieInfoFragment"
-            app:destination="@id/movieInfoFragment" />
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
     </fragment>
     <fragment
         android:id="@+id/top250Fragment"
@@ -58,7 +78,11 @@
         android:label="Top250Fragment" >
         <action
             android:id="@+id/action_top250Fragment_to_movieInfoFragment"
-            app:destination="@id/movieInfoFragment" />
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
     </fragment>
     <fragment
         android:id="@+id/theatreFragment"
@@ -66,6 +90,10 @@
         android:label="NowInTheatreFragment" >
         <action
             android:id="@+id/action_movieListNowInTheatreFragment_to_movieInfoFragment"
-            app:destination="@id/movieInfoFragment" />
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
     </fragment>
 </navigation>
