@@ -19,6 +19,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/moviePosterImageView"
             style="@style/MoviePoster140x200Style"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/killing_eve_example" />
@@ -26,9 +27,8 @@
         <TextView
             android:id="@+id/titleMovieTextView"
             style="@style/MovieItemStyleTitle"
-            android:padding="@dimen/padding_4dp"
-            android:textSize="@dimen/item_saved_title_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/moviePosterImageView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/moviePosterImageView"
             tools:text="Killing Eve" />
