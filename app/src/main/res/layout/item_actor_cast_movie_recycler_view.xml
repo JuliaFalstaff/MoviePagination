@@ -9,11 +9,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/castMovieTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_4dp"
-        android:textColor="@color/white"
-        android:textSize="@dimen/cast_item_text_size"
+        style="@style/ActorCastItemStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,11 +17,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/castMovieYearTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_4dp"
-        android:textColor="@color/white"
-        android:textSize="@dimen/cast_item_text_size"
+        style="@style/ActorCastItemStyle"
         app:layout_constraintBottom_toBottomOf="@+id/castMovieTitleTextView"
         app:layout_constraintStart_toEndOf="@+id/castMovieTitleTextView"
         app:layout_constraintTop_toTopOf="@+id/castMovieTitleTextView"
@@ -33,26 +25,19 @@
 
     <TextView
         android:id="@+id/slash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_4dp"
+        style="@style/ActorCastItemStyle"
         android:text="@string/slash"
-        android:textColor="@color/white"
-        android:textSize="@dimen/cast_item_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/castMovieYearTextView"
         app:layout_constraintStart_toEndOf="@id/castMovieYearTextView"
         app:layout_constraintTop_toTopOf="@+id/castMovieTitleTextView" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/castMovieRoleTextView"
+        style="@style/ActorCastItemStyle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_4dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/cast_item_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/castMovieYearTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/slash"

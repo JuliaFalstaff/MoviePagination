@@ -12,10 +12,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/actorPhotoImageView"
-            android:layout_width="@dimen/actor_pic_width"
-            android:layout_height="@dimen/actor_pic_height"
+            style="@style/MoviePoster140x200Style"
             android:layout_margin="@dimen/margin_4dp"
-            android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -88,10 +86,7 @@
 
         <View
             android:id="@+id/viewAfterBio"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/view_height_1dp"
-            android:layout_margin="@dimen/margin_4dp"
-            android:background="@color/bottom_nav_color"
+            style="@style/ViewDividerStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/actorBioTextView" />
 
@@ -121,10 +116,7 @@
 
         <View
             android:id="@+id/view"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/view_height_1dp"
-            android:layout_margin="@dimen/margin_4dp"
-            android:background="@color/bottom_nav_color"
+            style="@style/ViewDividerStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/actorKnownForRecyclerView" />
 

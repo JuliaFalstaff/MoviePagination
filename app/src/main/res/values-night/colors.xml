@@ -11,4 +11,5 @@
     <color name="background_dark">#171414</color>
     <color name="red_surface">#E50914</color>
     <color name="bottom_nav_color">#0F000000</color>
+    <color name="bottom_nav_ripple">#A1F6F4F4</color>
 </resources>

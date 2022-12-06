@@ -16,9 +16,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/moviePosterImageView"
-            android:layout_width="@dimen/item_in_theatre_pic_width"
-            android:layout_height="@dimen/item_in_theatre_pic_height"
-            android:adjustViewBounds="true"
+            style="@style/MoviePoster140x200Style"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -26,11 +24,7 @@
 
         <TextView
             android:id="@+id/movieTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_title"
-            android:textStyle="bold"
+            style="@style/NowInTheatreMovieTitleStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/moviePosterImageView"
@@ -38,9 +32,7 @@
 
         <TextView
             android:id="@+id/movieGenreTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            style="@style/NowInTheatreMovieGenresStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/movieTitleTextView"

@@ -22,12 +22,10 @@
 
         <TextView
             android:id="@+id/mostPopularMovieTitleTextView"
+            style="@style/StyleTextTitleForRecyclerViewGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_8dp"
-            android:padding="@dimen/padding_8dp"
             android:text="@string/most_popular_movies"
-            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,12 +44,10 @@
 
         <TextView
             android:id="@+id/mostPopularSeriesTitleTextView"
+            style="@style/StyleTextTitleForRecyclerViewGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_8dp"
-            android:padding="@dimen/padding_8dp"
             android:text="@string/most_popular_series"
-            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mostPopularMovieRecyclerView" />
@@ -70,12 +66,10 @@
 
         <TextView
             android:id="@+id/comingSoonTextView"
+            style="@style/StyleTextTitleForRecyclerViewGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_8dp"
-            android:padding="@dimen/padding_8dp"
             android:text="@string/coming_soon"
-            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mostPopularSeriesRecyclerView" />

@@ -24,4 +24,5 @@
     <string name="success_saved">Movie saved</string>
     <string name="success_deleted">Deleted from list</string>
     <string name="no_data">no data</string>
+    <string name="query_hint_search_view">Search movie/TV show here</string>
 </resources>

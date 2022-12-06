@@ -9,25 +9,30 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/grey"
-        android:elevation="@dimen/search_view_elevation"
         android:imeOptions="actionSearch"
-        android:textColor="@color/white"
         android:theme="@style/AppTheme.DarkSearchView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:queryHint="Search movie/TV show here" />
+        app:queryHint="@string/query_hint_search_view" />
+
+    <View
+        android:id="@+id/viewAfterSearch"
+        style="@style/ViewDividerStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResultRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:layout_constraintTop_toBottomOf="@+id/viewAfterSearch"
         app:spanCount="2"
         tools:listitem="@layout/item_search_result_recycler_view" />
 

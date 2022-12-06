@@ -15,16 +15,119 @@
         <item name="android:windowBackground">@color/background_dark</item>
     </style>
 
-    <style name="StyleBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+    <style name="StyleBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="backgroundTint">@color/bottom_nav_color</item>
-        <item name="itemTextColor">@color/black</item>
-        <item name="android:windowBackground">@color/background_dark</item>
+        <item name="itemTextColor">@color/white</item>
+        <item name="iconTint">@color/white</item>
+        <item name="itemRippleColor">@color/bottom_nav_ripple</item>
     </style>
 
     <style name="AppTheme.DarkSearchView">
         <item name="colorControlNormal">@color/white</item>
         <item name="hintTextColor">@color/white</item>
-        <item name="android:editTextColor">@android:color/white</item>
-        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:elevation">@dimen/search_view_elevation</item>
+        <item name="android:backgroundTint">@color/grey</item>
+    </style>
+
+    <style name="StyleTextTitleForRecyclerViewGroup">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_margin">@dimen/margin_8dp</item>
+        <item name="android:padding">@dimen/padding_8dp</item>
+    </style>
+
+    <style name="ViewDividerStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/view_height_1dp</item>
+        <item name="android:layout_margin">@dimen/margin_4dp</item>
+        <item name="android:background">@color/bottom_nav_color</item>
+    </style>
+
+    <style name="ActorCastItemStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/margin_4dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/cast_item_text_size</item>
+    </style>
+
+    <style name="ActorItemsTitleStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minLines">2</item>
+        <item name="android:padding">@dimen/padding_4dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/item_actors_name_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ActorItemsPoster100x140Style">
+        <item name="android:layout_width">@dimen/item_actors_pic_width</item>
+        <item name="android:layout_height">@dimen/item_actors_pic_height</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="MoviePoster140x200Style">
+        <item name="android:layout_width">@dimen/item_in_theatre_pic_width</item>
+        <item name="android:layout_height">@dimen/item_in_theatre_pic_height</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+
+    //Movie item
+
+    <style name="MovieItemStyleTitle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minLines">2</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/item_movie_title_text_size</item>
+    </style>
+
+    <style name="MovieItemStyleRating">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/padding_8dp</item>
+        <item name="android:layout_margin">@dimen/margin_8dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/rounded_shape</item>
+        <item name="android:backgroundTint">@color/black</item>
+    </style>
+
+    <style name="MovieItemStyleYear">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/item_movie_date_text_size</item>
+    </style>
+
+    //Now in theatre item
+
+    <style name="NowInTheatreMovieTitleStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NowInTheatreMovieGenresStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    //Search result
+
+    <style name="SearchResultTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

@@ -13,12 +13,10 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleTop250MoviesTextView"
+            style="@style/StyleTextTitleForRecyclerViewGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_8dp"
-            android:padding="@dimen/padding_8dp"
             android:text="@string/top_250_movies"
-            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,12 +34,10 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleTop250TvSeriesTextView"
+            style="@style/StyleTextTitleForRecyclerViewGroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_8dp"
-            android:padding="@dimen/padding_8dp"
             android:text="@string/top_250_tv_series"
-            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/top250TvSeriesRecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

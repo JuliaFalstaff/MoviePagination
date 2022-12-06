@@ -16,10 +16,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/actorFotoImageView"
-            android:layout_width="@dimen/item_actors_pic_width"
-            android:layout_height="@dimen/item_actors_pic_height"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            style="@style/ActorItemsPoster100x140Style"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,13 +24,7 @@
 
         <TextView
             android:id="@+id/actorNameTexView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:minLines="2"
-            android:padding="@dimen/padding_4dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/item_actors_name_text_size"
-            android:textStyle="bold"
+            style="@style/ActorItemsTitleStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/actorFotoImageView"
