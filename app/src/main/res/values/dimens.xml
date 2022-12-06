@@ -43,4 +43,5 @@
     <dimen name="item_saved_pic_width">140dp</dimen>
     <dimen name="item_saved_pic_height">200dp</dimen>
     <dimen name="item_movie_year_text_size">12sp</dimen>
+    <dimen name="item_movie_description_text_size">12sp</dimen>
 </resources>
