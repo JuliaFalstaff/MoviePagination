@@ -28,6 +28,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         super.onViewCreated(view, savedInstanceState)
         setRV()
         viewModel.searchMovieLiveData.observe(viewLifecycleOwner) {
+            binding.searchProgressBar.visibility = View.INVISIBLE
             renderData(it)
         }
         initSearch()

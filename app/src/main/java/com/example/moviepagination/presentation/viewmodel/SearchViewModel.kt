@@ -18,6 +18,7 @@ class SearchViewModel(
     private val compositeDisposable = CompositeDisposable()
 
     fun loadSearchResultFromApi(expression: String) {
+        _searchMovieLiveData.postValue(AppState.Loading)
         val disposable = getSearchListUseCase(expression)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
