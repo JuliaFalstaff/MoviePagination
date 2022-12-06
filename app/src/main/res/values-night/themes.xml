@@ -16,6 +16,8 @@
     </style>
 
     <style name="StyleBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?actionBarSize</item>
         <item name="backgroundTint">@color/bottom_nav_color</item>
         <item name="itemTextColor">@color/white</item>
         <item name="iconTint">@color/white</item>
