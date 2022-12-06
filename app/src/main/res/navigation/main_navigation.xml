@@ -46,7 +46,9 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/movieListFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/savedMovieListFragment"
@@ -58,7 +60,9 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left"/>
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/savedMovieListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -70,7 +74,9 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left"/>
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/searchFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/top250Fragment"
@@ -82,7 +88,9 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left"/>
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/top250Fragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/theatreFragment"
@@ -94,6 +102,8 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left"/>
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/theatreFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
