@@ -64,7 +64,7 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
             is AppState.Success -> {
                 val movies = appState.dataMovie.items
                 top250MoviesAdapter?.submitList(movies)
-                binding.top250ProgressBar.visibility = View.VISIBLE
+                binding.top250ProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
                 Toast.makeText(
@@ -72,7 +72,7 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
                     "Error: ${appState.error.message}",
                     Toast.LENGTH_SHORT
                 ).show()
-                binding.top250ProgressBar.visibility = View.VISIBLE
+                binding.top250ProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
                 binding.top250ProgressBar.visibility = View.VISIBLE
