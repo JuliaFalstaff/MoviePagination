@@ -8,5 +8,5 @@ import com.example.moviepagination.domain.repository.IRemoteRepo
 
 class SaveMovieToMyListUseCase(private val repository: ILocalRepo) {
 
-    operator fun invoke(movie: MovieInfo) = repository.saveMovie(movie)
+    suspend operator fun invoke(movie: MovieInfo) = repository.saveMovie(movie)
 }

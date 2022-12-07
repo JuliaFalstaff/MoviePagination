@@ -11,61 +11,61 @@ import retrofit2.http.Path
 
 interface ApiService {
     @GET("/API/InTheaters/{apiKey}")
-    fun getActiveMoviesInTheatres(
+    suspend fun getActiveMoviesInTheatres(
         @Path("apiKey") apiKey: String,
-    ): Single<MovieItemListDto>
+    ): MovieItemListDto
 
     @GET("/{lang}/API/Title/{apiKey}/{id}/Trailer")
-    fun getMovieById(
+    suspend fun getMovieById(
         @Path("lang") lang: String,
         @Path("id") id: String,
         @Path("apiKey") apiKey: String,
-    ): Single<MovieInfoDto>
+    ): MovieInfoDto
 
     @GET("/{lang}/API/ComingSoon/{apiKey}")
-    fun getComingSoonMovies(
+    suspend fun getComingSoonMovies(
         @Path("lang") lang: String,
         @Path("apiKey") apiKey: String,
-    ): Single<MovieItemListDto>
+    ): MovieItemListDto
 
     @GET("/API/Top250Movies/{apiKey}")
-    fun getTOP250Movies(
+    suspend fun getTOP250Movies(
         @Path("apiKey") apiKey: String,
-    ): Single<MovieItemListDto>
+    ): MovieItemListDto
 
     @GET("/API/Top250TVs/{apiKey}")
-    fun getTOP250TVs(
+    suspend fun getTOP250TVs(
         @Path("apiKey") apiKey: String,
-    ): Single<MovieItemListDto>
+    ): MovieItemListDto
 
     @GET("/{lang}/API/MostPopularMovies/{apiKey}")
-    fun getMostPopularMovies(
+    suspend fun getMostPopularMovies(
         @Path("lang") lang: String,
         @Path("apiKey") apiKey: String,
-    ): Single<MovieItemListDto>
+    ): MovieItemListDto
 
     @GET("/{lang}/API/MostPopularTVs/{apiKey}")
-    fun getMostPopularTVs(
+    suspend fun getMostPopularTVs(
         @Path("lang") lang: String,
         @Path("apiKey") apiKey: String,
-    ): Single<MovieItemListDto>
+    ): MovieItemListDto
 
     @GET("/{lang}/API/Name/{apiKey}/{id}")
-    fun getActorInfoById(
+    suspend fun getActorInfoById(
         @Path("lang") lang: String,
         @Path("apiKey") apiKey: String,
         @Path("id") id: String,
-    ): Single<ActorInfoDto>
+    ): ActorInfoDto
 
     @GET("/API/Search/{apiKey}/{expression}")
-    fun getSearchList(
+    suspend fun getSearchList(
         @Path("apiKey") apiKey: String,
         @Path("expression") expression: String,
-    ): Single<SearchResultDto>
+    ): SearchResultDto
 
     @GET("/API/YouTubeTrailer/{apiKey}/{id}")
-    fun getMovieTrailerById(
+    suspend fun getMovieTrailerById(
         @Path("id") id: String,
         @Path("apiKey") apiKey: String,
-    ): Single<YouTubeTrailerDto>
+    ): YouTubeTrailerDto
 }

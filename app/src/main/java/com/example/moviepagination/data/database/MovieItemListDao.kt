@@ -12,17 +12,17 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 interface MovieItemListDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllMovieList(list: MovieItemListDbModel): Completable
+    suspend fun insertAllMovieList(list: MovieItemListDbModel)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertMovieToMyList(movie: MovieInfoDbModel): Completable
+    suspend fun insertMovieToMyList(movie: MovieInfoDbModel)
 
     @Query("SELECT * FROM movie_info")
-    fun getMovieList(): Single<List<MovieInfoDbModel>>
+    suspend fun getMovieList(): List<MovieInfoDbModel>
 
     @Query("SELECT * FROM movie_info WHERE id=:movieId LIMIT 1")
-    fun getSavedMovieInfo(movieId: String?): Single<MovieInfoDbModel>
+    suspend fun getSavedMovieInfo(movieId: String?): MovieInfoDbModel
 
     @Query("DELETE FROM movie_info WHERE id=:id")
-    fun deleteMovieFromMyList(id: String?): Completable
+    suspend fun deleteMovieFromMyList(id: String?)
 }

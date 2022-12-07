@@ -9,7 +9,6 @@ import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.entities.info.YouTubeTrailer
 import com.example.moviepagination.domain.entities.search.SearchResult
 import com.example.moviepagination.domain.repository.IRemoteRepo
-import io.reactivex.rxjava3.core.Single
 
 class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
 
@@ -19,64 +18,54 @@ class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
     private val youtubeTrailerMapper = YoutubeTrailerMapper()
     private val searchResultMapper = SearchResultMapper()
 
-    override fun getMovieNowInTheatre(): Single<MovieItemList> {
-        return apiService.getActiveMoviesInTheatres(MOVIE_API_KEY).map {
-            movieItemListMapper.mapMovieItemListDtoToEntity(it)
-        }
+    override suspend fun getMovieNowInTheatre(): MovieItemList {
+        val list = apiService.getActiveMoviesInTheatres(MOVIE_API_KEY)
+        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
     }
 
-    override fun getMovieByIdFromServer(movieId: String): Single<MovieInfo> {
-        return apiService.getMovieById(EN_LANG, movieId, MOVIE_API_KEY).map {
-            movieInfoMapper.mapMovieInfoDtoToEntity(it)
-        }
+    override suspend fun getMovieByIdFromServer(movieId: String): MovieInfo {
+        val movie = apiService.getMovieById(EN_LANG, movieId, MOVIE_API_KEY)
+        return movieInfoMapper.mapMovieInfoDtoToEntity(movie)
     }
 
-    override fun getComingSoonMoviesFromServer(): Single<MovieItemList> {
-        return apiService.getComingSoonMovies(EN_LANG, MOVIE_API_KEY).map {
-            movieItemListMapper.mapMovieItemListDtoToEntity(it)
-        }
+    override suspend fun getComingSoonMoviesFromServer(): MovieItemList {
+        val list = apiService.getComingSoonMovies(EN_LANG, MOVIE_API_KEY)
+        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
     }
 
-    override fun getTOP250Movies(): Single<MovieItemList> {
-        return apiService.getTOP250Movies(MOVIE_API_KEY).map {
-            movieItemListMapper.mapMovieItemListDtoToEntity(it)
-        }
+    override suspend fun getTOP250Movies(): MovieItemList {
+        val list = apiService.getTOP250Movies(MOVIE_API_KEY)
+        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
     }
 
-    override fun getMostPopularMovies(): Single<MovieItemList> {
-        return apiService.getMostPopularMovies(EN_LANG, MOVIE_API_KEY).map {
-            movieItemListMapper.mapMovieItemListDtoToEntity(it)
-        }
+    override suspend fun getMostPopularMovies(): MovieItemList {
+        val list = apiService.getMostPopularMovies(EN_LANG, MOVIE_API_KEY)
+        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
     }
 
-    override fun getMostPopularTVs(): Single<MovieItemList> {
-        return apiService.getMostPopularTVs(EN_LANG, MOVIE_API_KEY).map {
-            movieItemListMapper.mapMovieItemListDtoToEntity(it)
-        }
+    override suspend fun getMostPopularTVs(): MovieItemList {
+        val list = apiService.getMostPopularTVs(EN_LANG, MOVIE_API_KEY)
+        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
     }
 
-    override fun getActorInfoById(actorId: String): Single<ActorInfo> {
-        return apiService.getActorInfoById(EN_LANG, MOVIE_API_KEY, actorId).map {
-            actorMapper.mapActorInfoDtoToEntity(it)
-        }
+    override suspend fun getActorInfoById(actorId: String): ActorInfo {
+        val actor = apiService.getActorInfoById(EN_LANG, MOVIE_API_KEY, actorId)
+        return actorMapper.mapActorInfoDtoToEntity(actor)
     }
 
-    override fun getSearchList(expression: String): Single<SearchResult> {
-        return apiService.getSearchList(MOVIE_API_KEY, expression).map {
-            searchResultMapper.mapSearchResultDtoToEntity(it)
-        }
+    override suspend fun getSearchList(expression: String): SearchResult {
+        val search = apiService.getSearchList(MOVIE_API_KEY, expression)
+        return searchResultMapper.mapSearchResultDtoToEntity(search)
     }
 
-    override fun getTOP250TVs(): Single<MovieItemList> {
-        return apiService.getTOP250TVs(MOVIE_API_KEY).map {
-            movieItemListMapper.mapMovieItemListDtoToEntity(it)
-        }
+    override suspend fun getTOP250TVs(): MovieItemList {
+        val list = apiService.getTOP250TVs(MOVIE_API_KEY)
+        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
     }
 
-    override fun getMovieTrailerById(movieId: String): Single<YouTubeTrailer> {
-        return apiService.getMovieTrailerById(movieId, MOVIE_API_KEY).map {
-            youtubeTrailerMapper.mapYoutubeTrailerDtoToEntity(it)
-        }
+    override suspend fun getMovieTrailerById(movieId: String): YouTubeTrailer {
+        val trailer = apiService.getMovieTrailerById(movieId, MOVIE_API_KEY)
+        return youtubeTrailerMapper.mapYoutubeTrailerDtoToEntity(trailer)
     }
 
     companion object {

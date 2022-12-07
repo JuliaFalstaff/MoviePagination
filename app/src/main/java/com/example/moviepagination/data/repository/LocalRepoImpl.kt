@@ -6,20 +6,22 @@ import com.example.moviepagination.data.mapper.MovieItemListMapper
 import com.example.moviepagination.domain.entities.MovieItemList
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.repository.ILocalRepo
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Single
 
 class LocalRepoImpl(private val movieItemListDao: MovieItemListDao) : ILocalRepo {
 
     private val movieItemListMapper = MovieItemListMapper()
     private val movieInfoMapper = MovieInfoMapper()
 
-    override fun saveMovieList(list: MovieItemList): Completable {
+    override suspend fun saveMovieList(list: MovieItemList) {
         return movieItemListDao.insertAllMovieList(movieItemListMapper.mapListEntityToDbModel(list))
     }
 
-    override fun saveMovie(movie: MovieInfo): Completable {
-        return movieItemListDao.insertMovieToMyList(movieInfoMapper.mapMovieInfoEntityToDbModel(movie))
+    override suspend fun saveMovie(movie: MovieInfo) {
+        return movieItemListDao.insertMovieToMyList(
+            movieInfoMapper.mapMovieInfoEntityToDbModel(
+                movie
+            )
+        )
     }
 //
 //    override fun getAllSavedMovieList(): LiveData<MovieItemList> {
@@ -34,19 +36,17 @@ class LocalRepoImpl(private val movieItemListDao: MovieItemListDao) : ILocalRepo
 //        }
 //    }
 
-    override fun getAllSavedMovieList(): Single<List<MovieInfo>> {
-        return movieItemListDao.getMovieList().map {
-            movieInfoMapper.mapMovieInfoListDbModelToListEntity(it)
-        }
+    override suspend fun getAllSavedMovieList(): List<MovieInfo> {
+        val list = movieItemListDao.getMovieList()
+        return movieInfoMapper.mapMovieInfoListDbModelToListEntity(list)
     }
 
-    override fun getSavedMovieInfo(movieId: String?): Single<MovieInfo> {
-        return movieItemListDao.getSavedMovieInfo(movieId).map {
-            movieInfoMapper.mapMovieInfoDbModelToEntity(it)
-        }
+    override suspend fun getSavedMovieInfo(movieId: String?): MovieInfo {
+        val movie = movieItemListDao.getSavedMovieInfo(movieId)
+        return movieInfoMapper.mapMovieInfoDbModelToEntity(movie)
     }
 
-    override fun deleteMovieFromMyList(id: String?): Completable {
+    override suspend fun deleteMovieFromMyList(id: String?) {
         return movieItemListDao.deleteMovieFromMyList(id)
     }
 }

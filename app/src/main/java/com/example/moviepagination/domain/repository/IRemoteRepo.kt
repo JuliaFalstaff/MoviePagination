@@ -8,14 +8,14 @@ import com.example.moviepagination.domain.entities.search.SearchResult
 import io.reactivex.rxjava3.core.Single
 
 interface IRemoteRepo {
-    fun getMovieNowInTheatre(): Single<MovieItemList>
-    fun getMovieByIdFromServer(movieId: String): Single<MovieInfo>
-    fun getComingSoonMoviesFromServer(): Single<MovieItemList>
-    fun getTOP250Movies(): Single<MovieItemList>
-    fun getMostPopularMovies(): Single<MovieItemList>
-    fun getMostPopularTVs(): Single<MovieItemList>
-    fun getActorInfoById(actorId: String): Single<ActorInfo>
-    fun getSearchList(expression: String): Single<SearchResult>
-    fun getTOP250TVs(): Single<MovieItemList>
-    fun getMovieTrailerById(movieId: String): Single<YouTubeTrailer>
+    suspend fun getMovieNowInTheatre(): MovieItemList
+    suspend fun getMovieByIdFromServer(movieId: String): MovieInfo
+    suspend fun getComingSoonMoviesFromServer(): MovieItemList
+    suspend fun getTOP250Movies(): MovieItemList
+    suspend fun getMostPopularMovies(): MovieItemList
+    suspend fun getMostPopularTVs(): MovieItemList
+    suspend fun getActorInfoById(actorId: String): ActorInfo
+    suspend fun getSearchList(expression: String): SearchResult
+    suspend fun getTOP250TVs(): MovieItemList
+    suspend fun getMovieTrailerById(movieId: String): YouTubeTrailer
 }

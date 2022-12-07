@@ -1,6 +1,7 @@
 package com.example.moviepagination.data.network
 
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,7 +14,6 @@ object ApiFactory {
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .client(createOkHttpClient())
         .build()
 
