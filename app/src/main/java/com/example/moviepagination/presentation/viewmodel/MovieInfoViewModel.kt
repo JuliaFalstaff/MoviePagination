@@ -3,12 +3,11 @@ package com.example.moviepagination.presentation.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.usecases.*
+import com.example.moviepagination.presentation.core.BaseViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MovieInfoViewModel(
@@ -17,7 +16,7 @@ class MovieInfoViewModel(
     private val saveMovieToMyListUseCase: SaveMovieToMyListUseCase,
     private val deleteMovieFromMyList: DeleteMovieFromMyList,
     private val getSavedMovieByIdUseCase: GetSavedMovieByIdUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _loadMovieLiveData: MutableLiveData<AppState> = MutableLiveData()
     private val _loadTrailerLiveData: MutableLiveData<String> = MutableLiveData()
@@ -25,7 +24,6 @@ class MovieInfoViewModel(
     val liveDataIsFav: LiveData<Boolean> get() = _liveDataIsFav
     val loadMovieLiveData: LiveData<AppState> get() = _loadMovieLiveData
     val loadTrailerLiveData: LiveData<String> get() = _loadTrailerLiveData
-    private val compositeDisposable = CompositeDisposable()
 
     fun loadMovieById(movieId: String) {
         _loadMovieLiveData.postValue(AppState.Loading)
@@ -97,10 +95,5 @@ class MovieInfoViewModel(
             )
         compositeDisposable.add(disposable)
 
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.dispose()
     }
 }
