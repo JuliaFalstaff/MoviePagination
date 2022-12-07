@@ -1,13 +1,12 @@
 package com.example.moviepagination.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.usecases.GetAllSavedMoviesUseCase
 import com.example.moviepagination.presentation.core.BaseViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.launch
 
 class SavedMovieListViewModel(
     private val getAllSavedMoviesUseCase: GetAllSavedMoviesUseCase
@@ -22,15 +21,9 @@ class SavedMovieListViewModel(
 
     private fun loadSaveMovies() {
         _savedMovieLiveDataToObserve.postValue(AppState.Loading)
-        val disposable = getAllSavedMoviesUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _savedMovieLiveDataToObserve.postValue(AppState.SuccessMovieInfoList(it))
-            }, {
-                _savedMovieLiveDataToObserve.postValue(AppState.Error(it))
-                Log.d("Tag Save VM", "${it.localizedMessage}")
-            })
-        compositeDisposable.add(disposable)
+        viewModelScope.launch {
+            val movies = getAllSavedMoviesUseCase()
+            _savedMovieLiveDataToObserve.value = AppState.SuccessMovieInfoList(movies)
+        }
     }
 }

@@ -13,7 +13,7 @@ import com.example.moviepagination.data.converters.StarConverter
 data class MovieInfoDbModel(
     @PrimaryKey(autoGenerate = true)
     var primaryId: Int,
-    val id: String?,
+    val id: String? = "",
     val title: String?,
     val fullTitle: String?,
     val year: String?,

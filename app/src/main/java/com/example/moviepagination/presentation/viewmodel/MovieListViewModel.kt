@@ -2,13 +2,13 @@ package com.example.moviepagination.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.usecases.GetComingSoonMovieUseCase
 import com.example.moviepagination.domain.usecases.GetMostPopularMoviesUseCase
 import com.example.moviepagination.domain.usecases.GetMostPopularTVsUseCase
 import com.example.moviepagination.presentation.core.BaseViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.launch
 
 class MovieListViewModel(
     private val getComingSoonUseCase: GetComingSoonMovieUseCase,
@@ -31,43 +31,25 @@ class MovieListViewModel(
 
     private fun loadComingSoonMovies() {
         _comingSoonLiveData.postValue(AppState.Loading)
-        val disposable = getComingSoonUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _comingSoonLiveData.postValue(AppState.Success(it))
-            }, {
-                _comingSoonLiveData.postValue(AppState.Error(it))
-
-            })
-        compositeDisposable.add(disposable)
+        viewModelScope.launch {
+            val movies = getComingSoonUseCase()
+            _comingSoonLiveData.value = AppState.Success(movies)
+        }
     }
 
     private fun loadMostPopularMovies() {
         _popularMoviesLiveData.postValue(AppState.Loading)
-        val disposable = getPopularMoviesUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _popularMoviesLiveData.postValue(AppState.Success(it))
-            }, {
-                _popularMoviesLiveData.postValue(AppState.Error(it))
-
-            })
-        compositeDisposable.add(disposable)
+        viewModelScope.launch {
+            val movies = getPopularMoviesUseCase()
+            _popularMoviesLiveData.postValue(AppState.Success(movies))
+        }
     }
 
     private fun loadMostPopularTVs() {
         _popularTVsLiveData.postValue(AppState.Loading)
-        val disposable = getMostPopularTVsUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _popularTVsLiveData.postValue(AppState.Success(it))
-            }, {
-                _popularTVsLiveData.postValue(AppState.Error(it))
-
-            })
-        compositeDisposable.add(disposable)
+        viewModelScope.launch {
+            val series = getMostPopularTVsUseCase()
+            _popularTVsLiveData.value = AppState.Success(series)
+        }
     }
 }

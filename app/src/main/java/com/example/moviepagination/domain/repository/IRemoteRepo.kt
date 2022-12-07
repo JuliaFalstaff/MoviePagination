@@ -5,7 +5,6 @@ import com.example.moviepagination.domain.entities.castInfo.ActorInfo
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.entities.info.YouTubeTrailer
 import com.example.moviepagination.domain.entities.search.SearchResult
-import io.reactivex.rxjava3.core.Single
 
 interface IRemoteRepo {
     suspend fun getMovieNowInTheatre(): MovieItemList

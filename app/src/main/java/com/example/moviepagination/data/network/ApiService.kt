@@ -5,7 +5,6 @@ import com.example.moviepagination.data.network.dto.castinfodb.ActorInfoDto
 import com.example.moviepagination.data.network.dto.infodb.MovieInfoDto
 import com.example.moviepagination.data.network.dto.infodb.YouTubeTrailerDto
 import com.example.moviepagination.data.network.dto.searchdb.SearchResultDto
-import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 

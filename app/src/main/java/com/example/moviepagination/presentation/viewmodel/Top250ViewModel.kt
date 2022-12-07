@@ -2,12 +2,12 @@ package com.example.moviepagination.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.usecases.GetTop250MoviesUseCase
 import com.example.moviepagination.domain.usecases.GetTop250TvsUseCase
 import com.example.moviepagination.presentation.core.BaseViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.launch
 
 class Top250ViewModel(
     private val getTop250MoviesUseCase: GetTop250MoviesUseCase,
@@ -26,27 +26,17 @@ class Top250ViewModel(
 
     private fun loadTop250Movies() {
         _top250MoviesLiveData.postValue(AppState.Loading)
-        val disposable = getTop250MoviesUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _top250MoviesLiveData.postValue(AppState.Success(it))
-            }, {
-                _top250MoviesLiveData.postValue(AppState.Error(it))
-            })
-        compositeDisposable.add(disposable)
+        viewModelScope.launch {
+            val movies = getTop250MoviesUseCase()
+            _top250MoviesLiveData.value = AppState.Success(movies)
+        }
     }
 
     private fun loadTop250TVs() {
         _top250TVShowLiveData.postValue(AppState.Loading)
-        val disposable = getTop250TvsUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _top250TVShowLiveData.postValue(AppState.Success(it))
-            }, {
-                _top250TVShowLiveData.postValue(AppState.Error(it))
-            })
-        compositeDisposable.add(disposable)
+        viewModelScope.launch {
+            val series = getTop250TvsUseCase()
+            _top250TVShowLiveData.value = AppState.Success(series)
+        }
     }
 }

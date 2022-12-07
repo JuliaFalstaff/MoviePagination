@@ -1,7 +1,5 @@
 package com.example.moviepagination.data.mapper
 
-import com.example.moviepagination.data.database.model.DirectorDbModel
-import com.example.moviepagination.data.database.model.StarDbModel
 import com.example.moviepagination.data.database.model.*
 import com.example.moviepagination.data.network.dto.DirectorDto
 import com.example.moviepagination.data.network.dto.StarDto
@@ -20,52 +18,51 @@ class MovieInfoMapper {
     fun mapMovieInfoDtoToEntity(movieInfoDto: MovieInfoDto): MovieInfo {
         return MovieInfo(
             id = movieInfoDto.id,
-            title = movieInfoDto.title ?: "no data",
-            fullTitle = movieInfoDto.fullTitle ?: "no data",
-            year = movieInfoDto.year ?: "no data",
-            releaseDate = movieInfoDto.releaseDate ?: "no data",
-            image = movieInfoDto.image ?: "no data",
-            runtimeMins = movieInfoDto.runtimeMins ?: "no data",
-            runtimeStr = movieInfoDto.runtimeStr ?: "no data",
-            plot = movieInfoDto.plot ?: "no data",
-            contentRating = movieInfoDto.contentRating ?: "no data",
-            imDbRating = movieInfoDto.imDbRating ?: "0.0",
-            metacriticRating = movieInfoDto.metacriticRating ?: "no data",
-            genres = movieInfoDto.genres ?: "no data",
+            title = movieInfoDto.title ?: NO_DATA_STRING,
+            fullTitle = movieInfoDto.fullTitle ?: NO_DATA_STRING,
+            year = movieInfoDto.year ?: NO_DATA_STRING,
+            releaseDate = movieInfoDto.releaseDate ?: NO_DATA_STRING,
+            image = movieInfoDto.image ?: NO_DATA_STRING,
+            runtimeMins = movieInfoDto.runtimeMins ?: NO_DATA_STRING,
+            runtimeStr = movieInfoDto.runtimeStr ?: NO_DATA_STRING,
+            plot = movieInfoDto.plot ?: NO_DATA_STRING,
+            contentRating = movieInfoDto.contentRating ?: NO_DATA_STRING,
+            imDbRating = movieInfoDto.imDbRating ?: NO_RATING_STRING,
+            metacriticRating = movieInfoDto.metacriticRating ?: NO_DATA_STRING,
+            genres = movieInfoDto.genres ?: NO_DATA_STRING,
             genreList = movieInfoDto.genreList,
-            directors = movieInfoDto.directors ?: "no data",
+            directors = movieInfoDto.directors ?: NO_DATA_STRING,
             directorList = convertDirectorListDtoToDirectorListEntity(movieInfoDto.directorList),
-            stars = movieInfoDto.stars ?: "no data",
+            stars = movieInfoDto.stars ?: NO_DATA_STRING,
             starList = convertStarListDtoToStarEntity(movieInfoDto.starList),
             actorList = convertActorListDtoToEntity(movieInfoDto.actorList),
             trailer = convertTrailerDtoToEntity(movieInfoDto.trailer)
         )
     }
 
-    fun mapMovieInfoDbModelToEntity(movieInfoDbModel: MovieInfoDbModel): MovieInfo {
+    fun mapMovieInfoDbModelToEntity(movieInfoDbModel: MovieInfoDbModel?): MovieInfo {
         return MovieInfo(
-            id = movieInfoDbModel.id,
-            title = movieInfoDbModel.title,
-            fullTitle = movieInfoDbModel.fullTitle,
-            year = movieInfoDbModel.year,
-            releaseDate = movieInfoDbModel.releaseDate,
-            image = movieInfoDbModel.image,
-            runtimeMins = movieInfoDbModel.runtimeMins,
-            runtimeStr = movieInfoDbModel.runtimeStr,
-            plot = movieInfoDbModel.plot,
-            contentRating = movieInfoDbModel.contentRating,
-            imDbRating = movieInfoDbModel.imDbRating,
-            metacriticRating = movieInfoDbModel.metacriticRating,
-            genres = movieInfoDbModel.genres,
-            genreList = convertGenreListDbModelToEntity(movieInfoDbModel.genreList),
-            directors = movieInfoDbModel.directors,
-            directorList = convertDirectorListDbModelToDirectorListEntity(movieInfoDbModel.directorList),
-            stars = movieInfoDbModel.stars,
-            starList = convertStarListDbModelToStarEntity(movieInfoDbModel.starList),
-            actorList = convertActorListDbModelToEntity(movieInfoDbModel.actorList),
-            trailer = convertTrailerDbModelToEntity(movieInfoDbModel.trailer),
-            isFavourite = movieInfoDbModel.isFavourite
-
+            id = movieInfoDbModel?.id ?: EMPTY_STRING,
+            title = movieInfoDbModel?.title,
+            fullTitle = movieInfoDbModel?.fullTitle,
+            year = movieInfoDbModel?.year,
+            releaseDate = movieInfoDbModel?.releaseDate,
+            image = movieInfoDbModel?.image,
+            runtimeMins = movieInfoDbModel?.runtimeMins,
+            runtimeStr = movieInfoDbModel?.runtimeStr,
+            plot = movieInfoDbModel?.plot,
+            contentRating = movieInfoDbModel?.contentRating,
+            imDbRating = movieInfoDbModel?.imDbRating,
+            metacriticRating = movieInfoDbModel?.metacriticRating,
+            genres = movieInfoDbModel?.genres,
+            genreList = convertGenreListDbModelToEntity(movieInfoDbModel?.genreList),
+            directors = movieInfoDbModel?.directors,
+            directorList = convertDirectorListDbModelToDirectorListEntity(movieInfoDbModel?.directorList),
+            stars = movieInfoDbModel?.stars,
+            starList = convertStarListDbModelToStarEntity(movieInfoDbModel?.starList),
+            actorList = convertActorListDbModelToEntity(movieInfoDbModel?.actorList),
+            trailer = convertTrailerDbModelToEntity(movieInfoDbModel?.trailer),
+            isFavourite = movieInfoDbModel?.isFavourite == true
         )
     }
 
@@ -119,7 +116,7 @@ class MovieInfoMapper {
         )
     }
 
-    private fun convertTrailerEntityToDbModel(trailer: Trailer): TrailerDbModel? {
+    private fun convertTrailerEntityToDbModel(trailer: Trailer): TrailerDbModel {
         return TrailerDbModel(
             imDbId = trailer.imDbId,
             titleTrailer = trailer.title,
@@ -286,5 +283,11 @@ class MovieInfoMapper {
                 name = it.name
             )
         }
+    }
+
+    companion object {
+        private const val EMPTY_STRING = ""
+        private const val NO_DATA_STRING = "no data"
+        private const val NO_RATING_STRING = "0.0"
     }
 }
