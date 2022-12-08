@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/saveToMyListImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/background_dark"
+            android:src="@drawable/ic_add_to_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/smallMoviePosterImageView"
+            android:layout_width="@dimen/movie_info_poster_width"
+            android:layout_height="@dimen/movie_info_poster_height"
+            android:layout_margin="@dimen/margin_8dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineVertical30"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/killing_eve_example" />
+
+        <TextView
+            android:id="@+id/movieRatingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:background="@drawable/rounded_shape"
+            android:padding="@dimen/padding_4dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/smallMoviePosterImageView"
+            app:layout_constraintStart_toStartOf="@+id/movieRunTimeLabelTextView"
+            app:layout_constraintTop_toBottomOf="@id/movieRunTimeLabelTextView"
+            tools:backgroundTint="@color/black"
+            tools:text="4.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.20" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineVertical30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.30" />
+
+        <TextView
+            android:id="@+id/titleInfoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_title_info"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guidelineVertical30"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Killing Eve: Second Season" />
+
+        <TextView
+            android:id="@+id/dateOfReleaseInfoLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:text="@string/released_date"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/guidelineVertical30"
+            app:layout_constraintTop_toBottomOf="@+id/titleInfoTextView" />
+
+        <TextView
+            android:id="@+id/dateOfReleaseInfoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/dateOfReleaseInfoLabelTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dateOfReleaseInfoLabelTextView"
+            app:layout_constraintTop_toTopOf="@+id/dateOfReleaseInfoLabelTextView"
+            tools:text="7 April 2019" />
+
+        <TextView
+            android:id="@+id/movieGenresLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:text="@string/genres"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/guidelineVertical30"
+            app:layout_constraintTop_toBottomOf="@+id/dateOfReleaseInfoLabelTextView" />
+
+        <TextView
+            android:id="@+id/movieGenresTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/movieGenresLabelTextView"
+            app:layout_constraintTop_toBottomOf="@+id/dateOfReleaseInfoLabelTextView"
+            tools:text="Criminal, Detective, Exciting, So British" />
+
+        <TextView
+            android:id="@+id/movieDirectorLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:text="@string/director"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/guidelineVertical30"
+            app:layout_constraintTop_toBottomOf="@+id/movieGenresTextView" />
+
+        <TextView
+            android:id="@+id/movieDirectorTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/movieDirectorLabelTextView"
+            app:layout_constraintTop_toBottomOf="@+id/movieGenresTextView"
+            tools:text="Phoebe Waller Bridge" />
+
+        <TextView
+            android:id="@+id/movieRunTimeLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:text="@string/runtime"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/guidelineVertical30"
+            app:layout_constraintTop_toBottomOf="@+id/movieDirectorTextView" />
+
+        <TextView
+            android:id="@+id/movieRunTimeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/movieRunTimeLabelTextView"
+            app:layout_constraintTop_toBottomOf="@+id/movieDirectorTextView"
+            tools:text="97 min." />
+
+        <TextView
+            android:id="@+id/movieOverviewTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:padding="@dimen/margin_side_overvie"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/smallMoviePosterImageView"
+            tools:text="Eve's life as a spy is not adding up to what she had hoped it would be when she started.
+        She is a bored, very smart, MI5 security officer who is very desk-bound. Villanelle is a very talented killer,
+        mercurial in mood, who clings to the luxuries of her job. Eve and Villanelle go head to head in a fierce game
+        of cat and mouse, each woman equally obsessed with the other as Eve is tasked with hunting down the psychopathic assassin." />
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtubeVideoTrailer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8dp"
+            app:autoPlay="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieOverviewTextView" />
+
+        <TextView
+            android:id="@+id/castTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:padding="@dimen/margin_8dp"
+            android:text="@string/cast_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_title_info"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/youtubeVideoTrailer" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewActors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewAfterCast"
+            tools:listitem="@layout/item_actors_recycler_view" />
+
+        <View
+            android:id="@+id/viewAfterCast"
+            style="@style/ViewDividerStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/castTitleTextView" />
+
+        <ProgressBar
+            android:id="@+id/movieInfoProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

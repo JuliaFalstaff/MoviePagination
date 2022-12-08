@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/actorPhotoImageView"
+            style="@style/MoviePoster140x200Style"
+            android:layout_margin="@dimen/margin_4dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:layout_marginBottom="@dimen/margin_8dp"
+            android:text="@string/date_of_birth"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
+            app:layout_constraintTop_toTopOf="@+id/actorPhotoImageView"
+            tools:text="@tools:sample/full_names" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorProfessionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
+            app:layout_constraintTop_toBottomOf="@+id/actorNameTextView"
+            tools:text="@tools:sample/full_names" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorBirthDatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:text="@string/date_of_birth"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
+            app:layout_constraintTop_toBottomOf="@+id/actorProfessionTextView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorsAwardsTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:text="@string/awards"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
+            app:layout_constraintTop_toBottomOf="@+id/actorBirthDatTextView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorHeightTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:text="@string/height"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
+            app:layout_constraintTop_toBottomOf="@+id/actorsAwardsTextView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorBioTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:padding="@dimen/padding_8dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actorPhotoImageView"
+            tools:text="@tools:sample/lorem" />
+
+        <View
+            android:id="@+id/viewAfterBio"
+            style="@style/ViewDividerStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actorBioTextView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorKnownForMoviesTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:padding="@dimen/padding_8dp"
+            android:text="@string/known_for_movies"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewAfterBio" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/actorKnownForRecyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actorKnownForMoviesTitleTextView"
+            tools:listitem="@layout/item_actor_known_for_recycler_view" />
+
+        <View
+            android:id="@+id/view"
+            style="@style/ViewDividerStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actorKnownForRecyclerView" />
+
+        <TextView
+            android:id="@+id/actorAllRolesTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:padding="@dimen/padding_8dp"
+            android:text="@string/all_films_title"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/actorCastMovieRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actorAllRolesTitleTextView"
+            tools:listitem="@layout/item_actor_cast_movie_recycler_view" />
+
+        <ProgressBar
+            android:id="@+id/actorInfoProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

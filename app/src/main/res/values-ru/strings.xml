@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cast_title">Актеры</string>
+    <string name="now_in_theatres">Сейчас в кино</string>
+    <string name="most_popular_movies">Популярные фильмы</string>
+    <string name="most_popular_series">Популярные сериалы</string>
+    <string name="coming_soon">Скоро в кино</string>
+    <string name="date_of_birth">Дата рождения: %s</string>
+    <string name="awards">Награды: %s</string>
+    <string name="height">Рост:</string>
+    <string name="known_for_movies">Известные фильмы</string>
+    <string name="home">Главная</string>
+    <string name="menu_search">Поиск</string>
+    <string name="favourite">Избранное</string>
+    <string name="top250">Топ 250</string>
+    <string name="top_250_movies">Топ-250 Фильмы</string>
+    <string name="top_250_tv_series">Tоп-250 Сериалы</string>
+    <string name="released_date">Дата Релиза:</string>
+    <string name="genres">Жанры:</string>
+    <string name="director">Режиссер:</string>
+    <string name="runtime">Хронометраж:</string>
+    <string name="slash">/</string>
+    <string name="all_films_title">Фильмография:</string>
+    <string name="my_saved_movies">Мой список</string>
+    <string name="success_saved">Фильм сохранен</string>
+    <string name="success_deleted">Фильм удален</string>
+    <string name="no_data">no data</string>
+    <string name="query_hint_search_view">Поиск фильма / Сериала</string>
+</resources>

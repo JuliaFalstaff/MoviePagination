@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/item_know_for_width"
+    android:layout_height="@dimen/item_know_for_height"
+    android:layout_marginStart="@dimen/cardview_start"
+    android:layout_marginTop="@dimen/card_view_margin_top"
+    android:layout_marginEnd="@dimen/cardview_end_actor"
+    android:backgroundTint="@color/background_dark"
+    android:elevation="@dimen/cardview_elevation"
+    app:cardCornerRadius="@dimen/cardview_corner_radius"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/knownForImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/knownForTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            tools:text="@tools:sample/lorem" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/knownForYearTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/knownForRoleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            tools:text="@tools:sample/lorem" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

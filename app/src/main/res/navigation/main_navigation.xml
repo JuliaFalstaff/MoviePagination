@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/movieListFragment">
+
+    <fragment
+        android:id="@+id/actorInfoFragment"
+        android:name="com.example.moviepagination.presentation.ActorInfoFragment"
+        android:label="ActorInfoFragment" >
+        <action
+            android:id="@+id/action_actorInfoFragment_to_movieInfoFragment"
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+        <argument
+            android:name="actorId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieInfoFragment"
+        android:name="com.example.moviepagination.presentation.MovieInfoFragment"
+        android:label="MovieInfoFragment" >
+        <action
+            android:id="@+id/action_movieInfoFragment_to_actorInfoFragment"
+            app:destination="@id/actorInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+        <argument
+            android:name="itemId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieListFragment"
+        android:name="com.example.moviepagination.presentation.MovieListFragment"
+        android:label="MovieListFragment" >
+        <action
+            android:id="@+id/action_movieListFragment_to_movieInfoFragment"
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/movieListFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedMovieListFragment"
+        android:name="com.example.moviepagination.presentation.SavedMovieListFragment"
+        android:label="SavedMovieListFragment" >
+        <action
+            android:id="@+id/action_savedMovieListFragment_to_movieInfoFragment"
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/savedMovieListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.moviepagination.presentation.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_movieInfoFragment"
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/searchFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/top250Fragment"
+        android:name="com.example.moviepagination.presentation.Top250Fragment"
+        android:label="Top250Fragment" >
+        <action
+            android:id="@+id/action_top250Fragment_to_movieInfoFragment"
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/top250Fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/theatreFragment"
+        android:name="com.example.moviepagination.presentation.MovieListNowInTheatreFragment"
+        android:label="NowInTheatreFragment" >
+        <action
+            android:id="@+id/action_movieListNowInTheatreFragment_to_movieInfoFragment"
+            app:destination="@id/movieInfoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/theatreFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
