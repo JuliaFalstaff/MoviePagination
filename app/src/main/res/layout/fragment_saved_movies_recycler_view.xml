@@ -29,6 +29,19 @@
         app:spanCount="3"
         tools:listitem="@layout/item_saved_movie" />
 
+    <TextView
+        android:id="@+id/warningNoDataTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        android:text="@string/no_favourite_movies_or_tv_shows"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"

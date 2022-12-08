@@ -26,4 +26,5 @@
     <string name="success_deleted">Deleted from list</string>
     <string name="no_data">no data</string>
     <string name="query_hint_search_view">Search movie/TV show here</string>
+    <string name="no_favourite_movies_or_tv_shows">No favourite movies or TV shows.</string>
 </resources>
