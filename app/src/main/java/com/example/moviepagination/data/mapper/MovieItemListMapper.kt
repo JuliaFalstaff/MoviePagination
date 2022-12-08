@@ -14,7 +14,7 @@ class MovieItemListMapper {
             id = movieItemListDto.id,
             items = movieItemListDto.items.map { itemDto ->
                 ItemDbModel(
-                    primaryId = 0,
+                    primaryId = UNDEFINED_ID,
                     id = itemDto.id ,
                     title = itemDto.title ,
                     fullTitle = itemDto.fullTitle,
@@ -44,8 +44,8 @@ class MovieItemListMapper {
             id = 0,
             items = movieItemList.items.map { itemDto ->
                 ItemDbModel(
-                    primaryId = 0,
-                    id = itemDto.id ?: "",
+                    primaryId = UNDEFINED_ID,
+                    id = itemDto.id ?: EMPTY_STRING,
                     title = itemDto.title,
                     fullTitle = itemDto.fullTitle,
                     year = itemDto.year,
@@ -71,8 +71,8 @@ class MovieItemListMapper {
 
     fun mapItemEntityToDbModel(item: Item): ItemDbModel {
         return ItemDbModel(
-            primaryId = 0,
-            id = item.id ?: "",
+            primaryId = UNDEFINED_ID,
+            id = item.id ?: EMPTY_STRING,
             title = item.title,
             fullTitle = item.fullTitle,
             year = item.year,
@@ -127,7 +127,7 @@ class MovieItemListMapper {
         return MovieItemList(
             items = movieItemListDto.items.map { itemDto ->
                 Item (
-                    id = itemDto.id ?: "",
+                    id = itemDto.id ?: EMPTY_STRING,
                     title = itemDto.title,
                     fullTitle = itemDto.fullTitle,
                     year = itemDto.year,
@@ -137,7 +137,7 @@ class MovieItemListMapper {
                     runtimeStr = itemDto.runtimeStr,
                     plot = itemDto.plot,
                     contentRating = itemDto.contentRating,
-                    imDbRating = itemDto.imDbRating,
+                    imDbRating = itemDto.imDbRating ?: EMPTY_RATING,
                     imDbRatingCount = itemDto.imDbRatingCount,
                     metacriticRating = itemDto.metacriticRating,
                     genres = itemDto.genres,
@@ -260,5 +260,9 @@ class MovieItemListMapper {
         }
     }
 
-
+    companion object {
+        private const val UNDEFINED_ID = 0
+        private const val EMPTY_STRING = ""
+        private const val EMPTY_RATING = "0.0"
+    }
 }
