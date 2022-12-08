@@ -21,27 +21,28 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/actorNameTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_4dp"
-            android:layout_marginBottom="@dimen/margin_8dp"
             android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
             app:layout_constraintTop_toTopOf="@+id/actorPhotoImageView"
             tools:text="@tools:sample/full_names" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/actorProfessionTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_4dp"
             android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
             app:layout_constraintTop_toBottomOf="@+id/actorNameTextView"
             tools:text="@tools:sample/full_names" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/actorBirthDatTextView"
+            android:id="@+id/actorBirthDateLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_4dp"
@@ -51,25 +52,45 @@
             app:layout_constraintTop_toBottomOf="@+id/actorProfessionTextView" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorBirthDatTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/actorBirthDateLabelTextView"
+            app:layout_constraintTop_toBottomOf="@+id/actorProfessionTextView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/actorsAwardsTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_4dp"
-            android:text="@string/awards"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
-            app:layout_constraintTop_toBottomOf="@+id/actorBirthDatTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/actorHeightLabelTextView"
+            tools:text="Awards: win Oscar and Emmy"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/actorHeightTextView"
+            android:id="@+id/actorHeightLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_4dp"
             android:text="@string/height"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/actorPhotoImageView"
-            app:layout_constraintTop_toBottomOf="@+id/actorsAwardsTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/actorBirthDatTextView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actorHeightTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_4dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/actorHeightLabelTextView"
+            app:layout_constraintTop_toBottomOf="@+id/actorBirthDatTextView" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/actorBioTextView"

@@ -5,8 +5,8 @@
     <string name="most_popular_movies">Популярные фильмы</string>
     <string name="most_popular_series">Популярные сериалы</string>
     <string name="coming_soon">Скоро в кино</string>
-    <string name="date_of_birth">Дата рождения: %s</string>
-    <string name="awards">Награды: %s</string>
+    <string name="date_of_birth">Дата рождения:</string>
+    <string name="awards">Награды:</string>
     <string name="height">Рост:</string>
     <string name="known_for_movies">Известные фильмы</string>
     <string name="home">Главная</string>
