@@ -2,7 +2,6 @@ package com.example.moviepagination.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.usecases.*
@@ -26,34 +25,38 @@ class MovieInfoViewModel(
 
     fun loadMovieById(movieId: String) {
         _loadMovieLiveData.postValue(AppState.Loading)
-        viewModelScope.launch {
-            val movie = getMovieByIdUseCase(movieId)
-            _loadMovieLiveData.value = AppState.SuccessMovieInfo(movie)
+        viewModelCustomScope.launch {
+            try {
+                val movie = getMovieByIdUseCase(movieId)
+                _loadMovieLiveData.value = AppState.SuccessMovieInfo(movie)
+            } catch (error: Throwable) {
+                _loadMovieLiveData.postValue(AppState.Error(error))
+            }
         }
     }
 
     fun loadMovieTrailer(movieId: String) {
-        viewModelScope.launch {
+        viewModelCustomScope.launch {
             val trailer = getMoviesTrailerUseCase(movieId)
             _loadTrailerLiveData.value = trailer.videoId ?: ""
         }
     }
 
     fun saveMovieToMyList(movie: MovieInfo) {
-        viewModelScope.launch {
+        viewModelCustomScope.launch {
             saveMovieToMyListUseCase(movie)
         }
     }
 
     fun checkIsFavourite(movieId: String) {
-        viewModelScope.launch {
+        viewModelCustomScope.launch {
             val movie = getSavedMovieByIdUseCase(movieId)
             _liveDataIsFav.value = movie.isFavourite
         }
     }
 
     fun deleteMovieFromMyList(movie: MovieInfo) {
-        viewModelScope.launch {
+        viewModelCustomScope.launch {
             deleteMovieFromMyList(movie.id)
         }
     }

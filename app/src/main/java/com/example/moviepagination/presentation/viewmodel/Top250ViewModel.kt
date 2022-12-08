@@ -1,5 +1,6 @@
 package com.example.moviepagination.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -27,16 +28,28 @@ class Top250ViewModel(
     private fun loadTop250Movies() {
         _top250MoviesLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
-            val movies = getTop250MoviesUseCase()
-            _top250MoviesLiveData.value = AppState.Success(movies)
+            try {
+                val movies = getTop250MoviesUseCase()
+                _top250MoviesLiveData.value = AppState.Success(movies)
+            } catch (error: Throwable) {
+                _top250MoviesLiveData.postValue(AppState.Error(error))
+                Log.d("TAG VM 250 Movie", "${error.message.toString()}")
+            }
+
         }
     }
 
     private fun loadTop250TVs() {
         _top250TVShowLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
-            val series = getTop250TvsUseCase()
-            _top250TVShowLiveData.value = AppState.Success(series)
+            try {
+                val series = getTop250TvsUseCase()
+                _top250TVShowLiveData.value = AppState.Success(series)
+            } catch (error: Throwable) {
+                _top250TVShowLiveData.postValue(AppState.Error(error))
+                Log.d("TAG VM 250 TV", "${error.message.toString()}")
+            }
+
         }
     }
 }

@@ -25,31 +25,44 @@ class MovieListViewModel(
 
     init {
         loadComingSoonMovies()
-//        loadMostPopularMovies()
-//        loadMostPopularTVs()
+        loadMostPopularMovies()
+        loadMostPopularTVs()
     }
 
     private fun loadComingSoonMovies() {
         _comingSoonLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
-            val movies = getComingSoonUseCase()
-            _comingSoonLiveData.value = AppState.Success(movies)
+            try {
+                val movies = getComingSoonUseCase()
+                _comingSoonLiveData.value = AppState.Success(movies)
+            } catch (error: Throwable) {
+                _comingSoonLiveData.postValue(AppState.Error(error))
+            }
+
         }
     }
 
     private fun loadMostPopularMovies() {
         _popularMoviesLiveData.postValue(AppState.Loading)
-        viewModelScope.launch {
-            val movies = getPopularMoviesUseCase()
-            _popularMoviesLiveData.postValue(AppState.Success(movies))
+        viewModelScope.launch() {
+            try {
+                val movies = getPopularMoviesUseCase()
+                _popularMoviesLiveData.postValue(AppState.Success(movies))
+            } catch (error: Throwable) {
+                _popularMoviesLiveData.postValue(AppState.Error(error))
+            }
         }
     }
 
     private fun loadMostPopularTVs() {
         _popularTVsLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
-            val series = getMostPopularTVsUseCase()
-            _popularTVsLiveData.value = AppState.Success(series)
+            try {
+                val series = getMostPopularTVsUseCase()
+                _popularTVsLiveData.value = AppState.Success(series)
+            } catch (error: Throwable) {
+                _popularTVsLiveData.postValue(AppState.Error(error))
+            }
         }
     }
 }

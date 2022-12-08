@@ -2,7 +2,6 @@ package com.example.moviepagination.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.usecases.GetActorInfoByIdUseCase
 import com.example.moviepagination.presentation.core.BaseViewModel
@@ -17,9 +16,13 @@ class ActorInfoViewModel(
 
     fun loadActorInfoById(actorId: String) {
         _actorLiveData.postValue(AppState.Loading)
-        viewModelScope.launch {
-            val actor = getActorInfoByIdUseCase(actorId)
-            _actorLiveData.value = AppState.SuccessActorInfo(actor)
+        viewModelCustomScope.launch {
+            try {
+                val actor = getActorInfoByIdUseCase(actorId)
+                _actorLiveData.value = AppState.SuccessActorInfo(actor)
+            } catch (error: Throwable) {
+                _actorLiveData.postValue(AppState.Error(error))
+            }
         }
     }
 }

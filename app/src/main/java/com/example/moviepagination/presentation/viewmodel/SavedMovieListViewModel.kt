@@ -22,8 +22,12 @@ class SavedMovieListViewModel(
     private fun loadSaveMovies() {
         _savedMovieLiveDataToObserve.postValue(AppState.Loading)
         viewModelScope.launch {
-            val movies = getAllSavedMoviesUseCase()
-            _savedMovieLiveDataToObserve.value = AppState.SuccessMovieInfoList(movies)
+            try {
+                val movies = getAllSavedMoviesUseCase()
+                _savedMovieLiveDataToObserve.value = AppState.SuccessMovieInfoList(movies)
+            } catch (error: Throwable) {
+                _savedMovieLiveDataToObserve.postValue(AppState.Error(error))
+            }
         }
     }
 }

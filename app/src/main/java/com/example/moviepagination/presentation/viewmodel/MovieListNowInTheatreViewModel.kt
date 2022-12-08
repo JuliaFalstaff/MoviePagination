@@ -1,5 +1,6 @@
 package com.example.moviepagination.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -23,8 +24,14 @@ class MovieListNowInTheatreViewModel(
     private fun loadMoviesNowInTheatre() {
         _nowInTheatre.postValue(AppState.Loading)
         viewModelScope.launch {
-            val movies = getNowInTheatreUseCase()
-            _nowInTheatre.value = AppState.Success(movies)
+            try {
+                val movies = getNowInTheatreUseCase()
+                _nowInTheatre.value = AppState.Success(movies)
+            } catch (error: Throwable) {
+                _nowInTheatre.postValue(AppState.Error(error))
+                Log.d("TAG VM theatre", "${error.message.toString()}")
+            }
+
         }
     }
 }
