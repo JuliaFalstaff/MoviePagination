@@ -26,11 +26,7 @@
         android:label="MovieInfoFragment" >
         <action
             android:id="@+id/action_movieInfoFragment_to_actorInfoFragment"
-            app:destination="@id/actorInfoFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:destination="@id/actorInfoFragment" />
         <argument
             android:name="itemId"
             app:argType="string"
