@@ -88,14 +88,16 @@ class ActorInfoFragment :
         }
     }
 
+
     private fun setActorInfoData(actor: ActorInfo) {
         with(binding) {
             actorNameTextView.text = actor.name
             actorProfessionTextView.text = actor.role
-            actorHeightTextView.text = actor.height
-            actorBirthDatTextView.text = actor.birthDate
+            actorHeightTextView.text = String.format(getString(R.string.height), actor.height)
+            actorBirthDatTextView.text =
+                String.format(getString(R.string.date_of_birth), actor.birthDate)
             actorBioTextView.text = actor.summary
-            actorsAwardsTextView.text = actor.awards
+            actorsAwardsTextView.text = String.format(getString(R.string.awards), actor.awards)
             Log.d("Actor TAG", "${actor.awards}")
             Glide.with(requireContext())
                 .load(actor.image)

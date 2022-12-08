@@ -7,7 +7,7 @@
     <string name="coming_soon">Coming Soon</string>
     <string name="date_of_birth">Date Of Birth: %s</string>
     <string name="awards">Awards: %s</string>
-    <string name="height">Height:</string>
+    <string name="height">Height: %s</string>
     <string name="known_for_movies">Famous Movies</string>
     <string name="home">Home</string>
     <string name="menu_search">Search</string>
