@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">MoviePagination</string>
+    <string name="app_name" translatable="false">Watch out</string>
     <string name="cast_title">Cast</string>
     <string name="now_in_theatres">In theatres</string>
     <string name="most_popular_movies">Most Popular Movies</string>
