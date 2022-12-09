@@ -4,12 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemNowInTheatreRecyclerViewBinding
 import com.example.moviepagination.domain.entities.Item
 import com.example.moviepagination.presentation.core.BaseItemCallback
-import com.example.moviepagination.presentation.core.GlideFactory
+import com.example.moviepagination.presentation.glide.GlideFactory
 
 class NowInTheatreMovieListAdapter(private var onListItemListener: IOnListItemClickListener<Item>) :
     ListAdapter<Item, NowInTheatreMovieListAdapter.MovieViewHolder>(BaseItemCallback<Item>()) {

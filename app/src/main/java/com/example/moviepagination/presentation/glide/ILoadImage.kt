@@ -1,7 +1,6 @@
-package com.example.moviepagination.presentation.core
+package com.example.moviepagination.presentation.glide
 
 
-import android.content.Context
 import android.view.View
 import android.widget.ImageView
 

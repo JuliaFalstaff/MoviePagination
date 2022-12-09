@@ -24,8 +24,8 @@ class MovieListViewModel(
     val popularTVsLiveData: LiveData<AppState> get() = _popularTVsLiveData
 
     init {
-//        loadComingSoonMovies()
-//        loadMostPopularMovies()
+        loadComingSoonMovies()
+        loadMostPopularMovies()
         loadMostPopularTVs()
     }
 

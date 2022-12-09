@@ -4,12 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemActorsRecyclerViewBinding
 import com.example.moviepagination.domain.entities.info.Actor
 import com.example.moviepagination.presentation.core.BaseItemCallback
-import com.example.moviepagination.presentation.core.GlideFactory
+import com.example.moviepagination.presentation.glide.GlideFactory
 
 class ActorsListAdapter :
     ListAdapter<Actor, ActorsListAdapter.ActorsViewHolder>(BaseItemCallback<Actor>()) {
