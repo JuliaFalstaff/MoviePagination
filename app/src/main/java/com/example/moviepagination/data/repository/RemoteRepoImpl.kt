@@ -71,6 +71,5 @@ class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
     companion object {
         private const val MOVIE_API_KEY = BuildConfig.IMDb_API_KEY
         private const val EN_LANG = "en"
-        private const val RU_LANG = "ru"
     }
 }

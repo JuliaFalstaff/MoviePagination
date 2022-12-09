@@ -51,8 +51,23 @@ class MovieInfoFragment :
         }
         viewModel.loadMovieById(movieBundle)
         viewModel.checkIsFavourite(movieBundle)
-        viewModel.loadTrailerLiveData.observe(viewLifecycleOwner) { setTrailer(it) }
+        viewModel.loadTrailerLiveData.observe(viewLifecycleOwner) { renderTrailerData(it) }
         viewModel.loadMovieTrailer(movieBundle)
+    }
+
+    private fun renderTrailerData(appState: AppState?) {
+        when(appState) {
+            is AppState.SuccessTrailer -> {
+                setTrailer(appState.trailerMovie)
+            }
+            is AppState.Error -> {
+                Toast.makeText(
+                    requireContext(),
+                    "Error Trailer: ${appState.error.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun setRVListeners() {
@@ -68,20 +83,40 @@ class MovieInfoFragment :
             is AppState.SuccessMovieInfo -> {
                 setData(appState.dataMovie)
                 appState.dataMovie.actorList?.let { adapter?.submitList(it) }
+                showVisibilityOfMovieInfo()
                 binding.movieInfoProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
                 Toast.makeText(
                     requireContext(),
-                    "Error Trailer: ${appState.error.message}",
+                    "Error: ${appState.error.message}",
                     Toast.LENGTH_SHORT
                 ).show()
-                binding.movieInfoProgressBar.visibility = View.INVISIBLE
+                hideVisibilityOfMovieInfo()
             }
             is AppState.Loading -> {
                 binding.movieInfoProgressBar.visibility = View.VISIBLE
+                hideVisibilityOfMovieInfo()
             }
         }
+    }
+
+    private fun hideVisibilityOfMovieInfo() = with(binding) {
+        dateOfReleaseInfoLabelTextView.visibility = View.INVISIBLE
+        movieGenresLabelTextView.visibility = View.INVISIBLE
+        movieDirectorLabelTextView.visibility = View.INVISIBLE
+        movieRunTimeLabelTextView.visibility = View.INVISIBLE
+        youtubeVideoTrailer.visibility = View.INVISIBLE
+        movieRatingTextView.visibility = View.INVISIBLE
+    }
+
+    private fun showVisibilityOfMovieInfo() = with(binding) {
+        dateOfReleaseInfoLabelTextView.visibility = View.VISIBLE
+        movieGenresLabelTextView.visibility = View.VISIBLE
+        movieDirectorLabelTextView.visibility = View.VISIBLE
+        movieRunTimeLabelTextView.visibility = View.VISIBLE
+        youtubeVideoTrailer.visibility = View.VISIBLE
+        movieRatingTextView.visibility = View.VISIBLE
     }
 
     private fun setData(movie: MovieInfo) {

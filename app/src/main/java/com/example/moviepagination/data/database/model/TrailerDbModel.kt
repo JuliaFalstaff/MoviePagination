@@ -1,17 +1,15 @@
 package com.example.moviepagination.data.database.model
 
-import android.os.Parcelable
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
 @Entity
-data class TrailerDbModel (
+data class TrailerDbModel(
     @SerializedName("imDbId")
     var imDbId: String? = null,
 
     @SerializedName("title")
-  var titleTrailer: String? = null,
+    var titleTrailer: String? = null,
 
     @SerializedName("fullTitle")
     var fullTitleTrailer: String? = null,

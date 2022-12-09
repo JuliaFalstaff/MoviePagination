@@ -17,11 +17,11 @@ class MovieInfoViewModel(
 ) : BaseViewModel() {
 
     private val _loadMovieLiveData: MutableLiveData<AppState> = MutableLiveData()
-    private val _loadTrailerLiveData: MutableLiveData<String> = MutableLiveData()
+    private val _loadTrailerLiveData: MutableLiveData<AppState> = MutableLiveData()
     private val _liveDataIsFav: MutableLiveData<Boolean> = MutableLiveData()
     val liveDataIsFav: LiveData<Boolean> get() = _liveDataIsFav
     val loadMovieLiveData: LiveData<AppState> get() = _loadMovieLiveData
-    val loadTrailerLiveData: MutableLiveData<String> get() = _loadTrailerLiveData
+    val loadTrailerLiveData: MutableLiveData<AppState> get() = _loadTrailerLiveData
 
     fun loadMovieById(movieId: String) {
         _loadMovieLiveData.postValue(AppState.Loading)
@@ -37,8 +37,12 @@ class MovieInfoViewModel(
 
     fun loadMovieTrailer(movieId: String) {
         viewModelCustomScope.launch {
-            val trailer = getMoviesTrailerUseCase(movieId)
-            _loadTrailerLiveData.value = trailer.videoId ?: ""
+            try {
+                val trailer = getMoviesTrailerUseCase(movieId)
+                _loadTrailerLiveData.value = AppState.SuccessTrailer(trailer.videoId)
+            } catch (error: Throwable) {
+                _loadTrailerLiveData.postValue(AppState.Error(error))
+            }
         }
     }
 

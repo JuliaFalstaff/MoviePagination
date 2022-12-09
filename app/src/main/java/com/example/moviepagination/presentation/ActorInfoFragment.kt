@@ -73,7 +73,7 @@ class ActorInfoFragment :
                 setActorInfoData(appState.actorInfo)
                 adapterCast?.submitList(appState.actorInfo.castMovies)
                 adapterKnownFor?.submitList(appState.actorInfo.knownFor)
-                binding.actorInfoProgressBar.visibility = View.INVISIBLE
+                showVisibilityOfActorInfo()
             }
             is AppState.Error -> {
                 Toast.makeText(
@@ -81,13 +81,25 @@ class ActorInfoFragment :
                     "Error: ${appState.error.message}",
                     Toast.LENGTH_SHORT
                 ).show()
+                binding.actorInfoProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
-                binding.actorInfoProgressBar.visibility = View.VISIBLE
+                hideVisibilityOfActorInfo()
             }
         }
     }
 
+    private fun showVisibilityOfActorInfo() = with(binding) {
+        actorBirthDateLabelTextView.visibility = View.VISIBLE
+        actorHeightLabelTextView.visibility = View.VISIBLE
+        binding.actorInfoProgressBar.visibility = View.INVISIBLE
+    }
+
+    private fun hideVisibilityOfActorInfo() = with(binding) {
+        actorBirthDateLabelTextView.visibility = View.INVISIBLE
+        actorHeightLabelTextView.visibility = View.INVISIBLE
+        binding.actorInfoProgressBar.visibility = View.VISIBLE
+    }
 
     private fun setActorInfoData(actor: ActorInfo) {
         with(binding) {

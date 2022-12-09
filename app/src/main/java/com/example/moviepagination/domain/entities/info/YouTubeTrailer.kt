@@ -17,7 +17,7 @@ data class YouTubeTrailer(
     @SerializedName("year")
     var year: String?,
     @SerializedName("videoId")
-    var videoId: String?,
+    var videoId: String,
     @SerializedName("videoUrl")
     var videoUrl: String?,
     @SerializedName("errorMessage")
