@@ -1,6 +1,7 @@
 package com.example.moviepagination.data.repository
 
 import com.example.moviepagination.BuildConfig
+import com.example.moviepagination.data.database.MovieItemListDao
 import com.example.moviepagination.data.mapper.*
 import com.example.moviepagination.data.network.ApiService
 import com.example.moviepagination.domain.entities.MovieItemList
@@ -8,9 +9,12 @@ import com.example.moviepagination.domain.entities.castInfo.ActorInfo
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.entities.info.YouTubeTrailer
 import com.example.moviepagination.domain.entities.search.SearchResult
-import com.example.moviepagination.domain.repository.IRemoteRepo
+import com.example.moviepagination.domain.repository.IRepository
 
-class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
+class RepositoryImpl(
+    private val apiService: ApiService,
+    private val movieItemListDao: MovieItemListDao
+) : IRepository {
 
     private val movieItemListMapper = MovieItemListMapper()
     private val movieInfoMapper = MovieInfoMapper()
@@ -66,6 +70,32 @@ class RemoteRepoImpl(private val apiService: ApiService) : IRemoteRepo {
     override suspend fun getMovieTrailerById(movieId: String): YouTubeTrailer {
         val trailer = apiService.getMovieTrailerById(movieId, MOVIE_API_KEY)
         return youtubeTrailerMapper.mapYoutubeTrailerDtoToEntity(trailer)
+    }
+
+    override suspend fun saveMovieList(list: MovieItemList) {
+        return movieItemListDao.insertAllMovieList(movieItemListMapper.mapListEntityToDbModel(list))
+    }
+
+    override suspend fun saveMovie(movie: MovieInfo) {
+        return movieItemListDao.insertMovieToMyList(
+            movieInfoMapper.mapMovieInfoEntityToDbModel(
+                movie
+            )
+        )
+    }
+
+    override suspend fun getAllSavedMovieList(): List<MovieInfo> {
+        val list = movieItemListDao.getMovieList()
+        return movieInfoMapper.mapMovieInfoListDbModelToListEntity(list)
+    }
+
+    override suspend fun getSavedMovieInfo(movieId: String?): MovieInfo {
+        val movie = movieItemListDao.getSavedMovieInfo(movieId)
+        return movieInfoMapper.mapMovieInfoDbModelToEntity(movie)
+    }
+
+    override suspend fun deleteMovieFromMyList(id: String?) {
+        return movieItemListDao.deleteMovieFromMyList(id)
     }
 
     companion object {

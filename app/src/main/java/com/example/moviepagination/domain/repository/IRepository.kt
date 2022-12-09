@@ -6,7 +6,7 @@ import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.entities.info.YouTubeTrailer
 import com.example.moviepagination.domain.entities.search.SearchResult
 
-interface IRemoteRepo {
+interface IRepository {
     suspend fun getMovieNowInTheatre(): MovieItemList
     suspend fun getMovieByIdFromServer(movieId: String): MovieInfo
     suspend fun getComingSoonMoviesFromServer(): MovieItemList
@@ -17,4 +17,9 @@ interface IRemoteRepo {
     suspend fun getSearchList(expression: String): SearchResult
     suspend fun getTOP250TVs(): MovieItemList
     suspend fun getMovieTrailerById(movieId: String): YouTubeTrailer
+    suspend fun saveMovieList(list: MovieItemList)
+    suspend fun saveMovie(movie: MovieInfo)
+    suspend fun getAllSavedMovieList(): List<MovieInfo>
+    suspend fun getSavedMovieInfo(movieId: String?): MovieInfo
+    suspend fun deleteMovieFromMyList(id: String?)
 }
