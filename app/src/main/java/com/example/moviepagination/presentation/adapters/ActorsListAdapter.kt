@@ -9,6 +9,7 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemActorsRecyclerViewBinding
 import com.example.moviepagination.domain.entities.info.Actor
 import com.example.moviepagination.presentation.core.BaseItemCallback
+import com.example.moviepagination.presentation.core.GlideFactory
 
 class ActorsListAdapter :
     ListAdapter<Actor, ActorsListAdapter.ActorsViewHolder>(BaseItemCallback<Actor>()) {
@@ -34,10 +35,7 @@ class ActorsListAdapter :
 
         fun bind(actor: Actor) = with(binding) {
             binding.actorNameTexView.text = actor.name
-            Glide.with(itemView)
-                .load(actor.image)
-                .error(R.drawable.ic_load_error_vector)
-                .into(actorFotoImageView)
+            GlideFactory.loadPicture(itemView, actor.image, actorFotoImageView)
             itemView.setOnClickListener {
                 onItemClickListener?.invoke(actor)
             }

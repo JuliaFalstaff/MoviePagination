@@ -9,6 +9,7 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemMovieRecyclerViewBinding
 import com.example.moviepagination.domain.entities.Item
 import com.example.moviepagination.presentation.core.BaseItemCallback
+import com.example.moviepagination.presentation.core.GlideFactory
 
 class Top250MoviesAdapter(
     private var onListItemListener: IOnListItemClickListener<Item>
@@ -35,10 +36,7 @@ class Top250MoviesAdapter(
             titleMovieTextView.text = movie.title
             dateOfReleaseTextView.text = movie.year
             movieRatingTextView.text = movie.imDbRating
-            Glide.with(itemView)
-                .load(movie.image)
-                .error(R.drawable.ic_load_error_vector)
-                .into(moviePosterImageView)
+            GlideFactory.loadPicture(itemView, movie.image, moviePosterImageView)
             itemView.setOnClickListener {
                 onListItemListener.onItemClick(movie)
             }

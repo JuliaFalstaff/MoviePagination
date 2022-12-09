@@ -9,6 +9,7 @@ import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemSavedMovieBinding
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.presentation.core.BaseItemCallback
+import com.example.moviepagination.presentation.core.GlideFactory
 
 class SavedMovieListAdapter(
     private var onListItemListener: IOnListItemClickListener<MovieInfo>
@@ -34,10 +35,7 @@ class SavedMovieListAdapter(
         fun bind(movie: MovieInfo) = with(binding) {
             titleMovieTextView.text = movie.title
             movieRatingTextView.text = movie.imDbRating
-            Glide.with(itemView)
-                .load(movie.image)
-                .error(R.drawable.ic_load_error_vector)
-                .into(moviePosterImageView)
+            GlideFactory.loadPicture(itemView, movie.image, moviePosterImageView)
             itemView.setOnClickListener {
                 onListItemListener.onItemClick(movie)
             }
