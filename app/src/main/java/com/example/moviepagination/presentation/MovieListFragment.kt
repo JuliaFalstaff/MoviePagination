@@ -75,11 +75,7 @@ class MovieListFragment :
                 binding.progressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error PopularMovies: ${state.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(state.error)
                 Log.d("TAG Popular movies", "${state.error.stackTrace}")
             }
         }
@@ -96,11 +92,7 @@ class MovieListFragment :
                 binding.progressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error Coming: ${state.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(state.error)
                 Log.d("TAG Error coming", "${state.error.localizedMessage}")
                 Log.d("TAG Error coming", "${state.error.stackTrace.toString()}")
             }
@@ -118,11 +110,7 @@ class MovieListFragment :
                 binding.progressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error Popular TV: ${state.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(state.error)
             }
         }
     }

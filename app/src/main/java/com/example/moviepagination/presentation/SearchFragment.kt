@@ -78,11 +78,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             }
             is AppState.Error -> {
                 binding.searchProgressBar.visibility = View.INVISIBLE
-                Toast.makeText(
-                    requireContext(),
-                    "Error: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(appState.error)
             }
             is AppState.Loading -> {
                 binding.searchProgressBar.visibility = View.VISIBLE

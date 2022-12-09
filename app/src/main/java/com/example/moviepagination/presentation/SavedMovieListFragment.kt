@@ -59,11 +59,7 @@ class SavedMovieListFragment :
                 binding.progressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error SavedList: ${state.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(state.error)
                 Log.d("TAG saved list", "${state.error.stackTrace.toString()}")
             }
         }

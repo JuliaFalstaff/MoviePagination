@@ -67,11 +67,12 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
                 binding.top250ProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(appState.error)
+//                Toast.makeText(
+//                    requireContext(),
+//                    "Error: ${appState.error.message}",
+//                    Toast.LENGTH_SHORT
+//                ).show()
                 binding.top250ProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
@@ -88,11 +89,7 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
                 binding.top250ProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(appState.error)
                 binding.top250ProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {

@@ -63,11 +63,7 @@ class MovieListNowInTheatreFragment : BaseFragment<FragmentNowInTheatreMoviesRec
                 binding.progressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error InTheatre: ${state.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(state.error)
             }
         }
     }

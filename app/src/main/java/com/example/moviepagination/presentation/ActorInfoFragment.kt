@@ -76,11 +76,7 @@ class ActorInfoFragment :
                 showVisibilityOfActorInfo()
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(appState.error)
                 binding.actorInfoProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {

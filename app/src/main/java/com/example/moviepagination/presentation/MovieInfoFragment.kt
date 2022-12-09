@@ -13,6 +13,7 @@ import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.presentation.adapters.ActorsListAdapter
 import com.example.moviepagination.presentation.core.BaseFragment
+import com.example.moviepagination.presentation.glide.GlideFactory
 import com.example.moviepagination.presentation.viewmodel.MovieInfoViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -56,16 +57,17 @@ class MovieInfoFragment :
     }
 
     private fun renderTrailerData(appState: AppState?) {
-        when(appState) {
+        when (appState) {
             is AppState.SuccessTrailer -> {
                 setTrailer(appState.trailerMovie)
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error Trailer: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(appState.error)
+//                Toast.makeText(
+//                    requireContext(),
+//                    "Error Trailer: ${appState.error.message}",
+//                    Toast.LENGTH_SHORT
+//                ).show()
             }
         }
     }
@@ -87,12 +89,9 @@ class MovieInfoFragment :
                 binding.movieInfoProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(appState.error)
                 hideVisibilityOfMovieInfo()
+                binding.movieInfoProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
                 binding.movieInfoProgressBar.visibility = View.VISIBLE
@@ -147,11 +146,7 @@ class MovieInfoFragment :
                 }
                 setFavButton(!isFavourite)
             }
-
-            Glide.with(requireContext())
-                .load(movie.image)
-                .error(R.drawable.ic_load_error_vector)
-                .into(smallMoviePosterImageView)
+            GlideFactory.loadPicture(requireView(), movie.image, smallMoviePosterImageView)
         }
     }
 
