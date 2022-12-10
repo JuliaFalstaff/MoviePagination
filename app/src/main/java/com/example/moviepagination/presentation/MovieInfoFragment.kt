@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentMovieInfoBinding
 import com.example.moviepagination.domain.AppState
@@ -41,17 +40,17 @@ class MovieInfoFragment :
     }
 
     private fun setObservers() {
-        viewModel.loadMovieLiveData.observe(viewLifecycleOwner) {
-            renderData(it)
-            Log.d("MOVIE-INFO", it.toString())
-        }
+        viewModel.checkIsFavouriteAndLoad(movieBundle)
         viewModel.liveDataIsFav.observe(viewLifecycleOwner) {
             isFavourite = it
             setFavButton(it)
             Log.d("MOVIE-INFO IMAGE", it.toString())
         }
-        viewModel.loadMovieById(movieBundle)
-        viewModel.checkIsFavourite(movieBundle)
+
+        viewModel.loadMovieLiveData.observe(viewLifecycleOwner) {
+            renderData(it)
+            Log.d("MOVIE-INFO", it.toString())
+        }
         viewModel.loadTrailerLiveData.observe(viewLifecycleOwner) { renderTrailerData(it) }
         viewModel.loadMovieTrailer(movieBundle)
     }
@@ -63,11 +62,6 @@ class MovieInfoFragment :
             }
             is AppState.Error -> {
                 showError(appState.error)
-//                Toast.makeText(
-//                    requireContext(),
-//                    "Error Trailer: ${appState.error.message}",
-//                    Toast.LENGTH_SHORT
-//                ).show()
             }
         }
     }
@@ -151,7 +145,6 @@ class MovieInfoFragment :
     }
 
     private fun setFavButton(isFav: Boolean) {
-        isFavourite = isFav
         if (isFav) {
             binding.saveToMyListImageButton.setImageResource(R.drawable.ic_added_to_my_list)
         } else {

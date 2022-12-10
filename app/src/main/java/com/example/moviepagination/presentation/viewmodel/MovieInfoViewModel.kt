@@ -1,5 +1,6 @@
 package com.example.moviepagination.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.moviepagination.domain.AppState
@@ -23,12 +24,13 @@ class MovieInfoViewModel(
     val loadMovieLiveData: LiveData<AppState> get() = _loadMovieLiveData
     val loadTrailerLiveData: MutableLiveData<AppState> get() = _loadTrailerLiveData
 
-    fun loadMovieById(movieId: String) {
+   private fun loadMovieByIdFromServer(movieId: String) {
         _loadMovieLiveData.postValue(AppState.Loading)
         viewModelCustomScope.launch {
             try {
-                val movie = getMovieByIdUseCase(movieId)
+                  val movie =  getMovieByIdUseCase(movieId)
                 _loadMovieLiveData.value = AppState.SuccessMovieInfo(movie)
+                Log.d("TAG load", "from server")
             } catch (error: Throwable) {
                 _loadMovieLiveData.postValue(AppState.Error(error))
             }
@@ -52,10 +54,17 @@ class MovieInfoViewModel(
         }
     }
 
-    fun checkIsFavourite(movieId: String) {
+    fun checkIsFavouriteAndLoad(movieId: String) {
+        _loadMovieLiveData.postValue(AppState.Loading)
         viewModelCustomScope.launch {
             val movie = getSavedMovieByIdUseCase(movieId)
             _liveDataIsFav.value = movie.isFavourite
+            if (movie.isFavourite) {
+                Log.d("TAG load", "from db Room")
+                _loadMovieLiveData.value = AppState.SuccessMovieInfo(movie)
+            } else {
+                loadMovieByIdFromServer(movieId)
+            }
         }
     }
 
