@@ -50,6 +50,7 @@ class MovieListNowInTheatreFragment : BaseFragment<FragmentNowInTheatreMoviesRec
             Log.d("MOVIE", it.toString())
             renderDataInTheatre(it)
         }
+        viewModel.loadMoviesNowInTheatre()
     }
 
     private fun renderDataInTheatre(state: AppState) {
@@ -58,6 +59,7 @@ class MovieListNowInTheatreFragment : BaseFragment<FragmentNowInTheatreMoviesRec
                 val movieList = state.dataMovie.items
                 nowInTheatreAdapter?.submitList(movieList)
                 binding.progressBar.visibility = View.INVISIBLE
+                binding.retryButton.visibility = View.GONE
             }
             is AppState.Loading -> {
                 binding.progressBar.visibility = View.VISIBLE
@@ -65,6 +67,18 @@ class MovieListNowInTheatreFragment : BaseFragment<FragmentNowInTheatreMoviesRec
             is AppState.Error -> {
                 showError(state.error)
             }
+        }
+    }
+
+    override fun showErrorConnection() = with(binding) {
+        if (!isNetworkAvailable) {
+            retryButton.visibility = View.VISIBLE
+            retryButton.setOnClickListener {
+                initViewModels()
+                Log.d("retry", "click")
+            }
+        } else {
+            retryButton.visibility = View.GONE
         }
     }
 }

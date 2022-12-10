@@ -59,9 +59,14 @@ class MovieInfoFragment :
         when (appState) {
             is AppState.SuccessTrailer -> {
                 setTrailer(appState.trailerMovie)
+                binding.retryButton.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
                 showError(appState.error)
+            }
+            is AppState.Loading -> {
+                binding.retryButton.visibility = View.INVISIBLE
+                binding.movieInfoProgressBar.visibility = View.VISIBLE
             }
         }
     }
@@ -161,5 +166,18 @@ class MovieInfoFragment :
                 Log.d("TAG", "Success: $videoId")
             }
         })
+    }
+
+    override fun showErrorConnection() = with(binding) {
+        if (!isNetworkAvailable) {
+            retryButton.visibility = View.VISIBLE
+            retryButton.setOnClickListener {
+                viewModel.checkIsFavouriteAndLoad(movieBundle)
+                viewModel.loadMovieTrailer(movieBundle)
+                Log.d("retry", "click")
+            }
+        } else {
+            retryButton.visibility = View.GONE
+        }
     }
 }

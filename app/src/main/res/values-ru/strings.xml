@@ -27,5 +27,7 @@
     <string name="no_data">no data</string>
     <string name="query_hint_search_view">Поиск фильма / Сериала</string>
     <string name="no_favourite_movies_or_tv_shows">Нет добавленных фильмов/сериалов в Избранное</string>
-    <string name="error">Error:</string>
+    <string name="error">Ошибка:</string>
+    <string name="retry">Перезагрузить</string>
+    <string name="no_internet_error">Проверьте Интернет соединение</string>
 </resources>

@@ -162,6 +162,16 @@
             app:layout_constraintTop_toBottomOf="@+id/actorAllRolesTitleTextView"
             tools:listitem="@layout/item_actor_cast_movie_recycler_view" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/retryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actorInfoProgressBar" />
+
         <ProgressBar
             android:id="@+id/actorInfoProgressBar"
             android:layout_width="wrap_content"

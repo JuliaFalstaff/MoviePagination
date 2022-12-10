@@ -74,6 +74,7 @@ class ActorInfoFragment :
                 adapterCast?.submitList(appState.actorInfo.castMovies)
                 adapterKnownFor?.submitList(appState.actorInfo.knownFor)
                 showVisibilityOfActorInfo()
+                binding.retryButton.visibility = View.GONE
             }
             is AppState.Error -> {
                 showError(appState.error)
@@ -110,6 +111,18 @@ class ActorInfoFragment :
                 .load(actor.image)
                 .error(R.drawable.ic_load_error_vector)
                 .into(actorPhotoImageView)
+        }
+    }
+
+    override fun showErrorConnection() = with(binding) {
+        if (!isNetworkAvailable) {
+            retryButton.visibility = View.VISIBLE
+            retryButton.setOnClickListener {
+                viewModel.loadActorInfoById(actorBundle)
+                Log.d("retry", "click")
+            }
+        } else {
+            retryButton.visibility = View.GONE
         }
     }
 }

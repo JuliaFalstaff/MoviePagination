@@ -62,6 +62,9 @@ class MovieListFragment :
             Log.d("MOVIE", it.toString())
             renderDataPopularTvs(it)
         }
+        viewModel.loadMostPopularMovies()
+        viewModel.loadMostPopularTVs()
+        viewModel.loadComingSoonMovies()
     }
 
     private fun renderDataPopularMovies(state: AppState) {
@@ -70,6 +73,7 @@ class MovieListFragment :
                 val movieList = state.dataMovie.items
                 mostPopularMoviesAdapter?.submitList(movieList)
                 binding.progressBar.visibility = View.INVISIBLE
+                binding.retryButton.visibility = View.GONE
             }
             is AppState.Loading -> {
                 binding.progressBar.visibility = View.VISIBLE
@@ -87,6 +91,7 @@ class MovieListFragment :
                 val movieList = state.dataMovie.items
                 comingSoonAdapter?.submitList(movieList)
                 binding.progressBar.visibility = View.INVISIBLE
+                binding.retryButton.visibility = View.GONE
             }
             is AppState.Loading -> {
                 binding.progressBar.visibility = View.VISIBLE
@@ -105,6 +110,7 @@ class MovieListFragment :
                 val movieList = state.dataMovie.items
                 mostPopularTVsAdapter?.submitList(movieList)
                 binding.progressBar.visibility = View.INVISIBLE
+                binding.retryButton.visibility = View.GONE
             }
             is AppState.Loading -> {
                 binding.progressBar.visibility = View.VISIBLE
@@ -112,6 +118,18 @@ class MovieListFragment :
             is AppState.Error -> {
                 showError(state.error)
             }
+        }
+    }
+
+    override fun showErrorConnection() = with(binding) {
+        if (!isNetworkAvailable) {
+            retryButton.visibility = View.VISIBLE
+            retryButton.setOnClickListener {
+                initViewModels()
+                Log.d("retry", "click")
+            }
+        } else {
+            retryButton.visibility = View.GONE
         }
     }
 }

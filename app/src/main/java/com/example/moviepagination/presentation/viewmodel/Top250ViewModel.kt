@@ -20,12 +20,7 @@ class Top250ViewModel(
     val top250MoviesLiveData: LiveData<AppState> get() = _top250MoviesLiveData
     val top250TVShowLiveData: LiveData<AppState> get() = _top250TVShowLiveData
 
-    init {
-        loadTop250Movies()
-        loadTop250TVs()
-    }
-
-    private fun loadTop250Movies() {
+   fun loadTop250Movies() {
         _top250MoviesLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
             try {
@@ -33,13 +28,12 @@ class Top250ViewModel(
                 _top250MoviesLiveData.value = AppState.Success(movies)
             } catch (error: Throwable) {
                 _top250MoviesLiveData.postValue(AppState.Error(error))
-                Log.d("TAG VM 250 Movie", "${error.message.toString()}")
+                Log.d("TAG VM 250 Movie", error.message.toString())
             }
-
         }
     }
 
-    private fun loadTop250TVs() {
+    fun loadTop250TVs() {
         _top250TVShowLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
             try {
@@ -47,9 +41,8 @@ class Top250ViewModel(
                 _top250TVShowLiveData.value = AppState.Success(series)
             } catch (error: Throwable) {
                 _top250TVShowLiveData.postValue(AppState.Error(error))
-                Log.d("TAG VM 250 TV", "${error.message.toString()}")
+                Log.d("TAG VM 250 TV", error.message.toString())
             }
-
         }
     }
 }
