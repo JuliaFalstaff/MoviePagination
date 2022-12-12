@@ -17,7 +17,6 @@ interface IRepository {
     suspend fun getSearchList(expression: String): SearchResult
     suspend fun getTOP250TVs(): MovieItemList
     suspend fun getMovieTrailerById(movieId: String): YouTubeTrailer
-    suspend fun saveMovieList(list: MovieItemList)
     suspend fun saveMovie(movie: MovieInfo)
     suspend fun getAllSavedMovieList(): List<MovieInfo>
     suspend fun getSavedMovieInfo(movieId: String?): MovieInfo

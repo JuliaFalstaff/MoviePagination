@@ -256,34 +256,6 @@ class MovieInfoMapper {
         }
     }
 
-    private fun convertActorListDtoToDbModel(actorListDto: List<ActorDto>?): List<ActorDbModel>? {
-        return actorListDto?.map {
-            ActorDbModel(
-                id = it.id,
-                name = it.name,
-                image = it.image,
-                asCharacter = it.asCharacter
-            )
-        }
-    }
-
-    private fun convertDirectorListDtoToDbModel(directorList: List<DirectorDto>?): List<DirectorDbModel>? {
-        return directorList?.map {
-            DirectorDbModel(
-                id = it.id,
-                name = it.name
-            )
-        }
-    }
-
-    private fun convertStarListDtoToDbModel(starList: List<StarDto>?): List<StarDbModel>? {
-        return starList?.map {
-            StarDbModel(
-                id = it.id,
-                name = it.name
-            )
-        }
-    }
 
     companion object {
         private const val EMPTY_STRING = ""

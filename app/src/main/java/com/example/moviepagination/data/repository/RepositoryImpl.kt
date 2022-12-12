@@ -72,10 +72,6 @@ class RepositoryImpl(
         return youtubeTrailerMapper.mapYoutubeTrailerDtoToEntity(trailer)
     }
 
-    override suspend fun saveMovieList(list: MovieItemList) {
-        return movieItemListDao.insertAllMovieList(movieItemListMapper.mapListEntityToDbModel(list))
-    }
-
     override suspend fun saveMovie(movie: MovieInfo) {
         return movieItemListDao.insertMovieToMyList(
             movieInfoMapper.mapMovieInfoEntityToDbModel(

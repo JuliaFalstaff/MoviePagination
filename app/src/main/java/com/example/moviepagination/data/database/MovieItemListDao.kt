@@ -5,15 +5,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.moviepagination.data.database.model.MovieInfoDbModel
-import com.example.moviepagination.data.database.model.MovieItemListDbModel
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Single
 
 @Dao
 interface MovieItemListDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllMovieList(list: MovieItemListDbModel)
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMovieToMyList(movie: MovieInfoDbModel)
 
