@@ -2,7 +2,6 @@ package com.example.moviepagination
 
 import android.app.Application
 import com.example.moviepagination.di.*
-import com.facebook.stetho.Stetho
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -25,6 +24,5 @@ class App : Application() {
                 )
             )
         }
-        Stetho.initializeWithDefaults(this)
     }
 }
