@@ -1,5 +1,6 @@
 package com.example.moviepagination.di
 
+import androidx.room.Room
 import com.example.moviepagination.data.database.MovieDataBase
 import com.example.moviepagination.data.network.ApiFactory
 import com.example.moviepagination.data.repository.RepositoryImpl
@@ -12,8 +13,10 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val application = module {
-//    single { Room.databaseBuilder(androidContext(), MovieDataBase::class.java, "movie.db").fallbackToDestructiveMigration().build() }
-    single { MovieDataBase.getInstance(androidContext()).movieItemListDao }
+    single {
+        Room.databaseBuilder(androidContext(), MovieDataBase::class.java, DATABASE_NAME).build()
+    }
+    single{ get<MovieDataBase>().movieItemListDao() }
     single { ApiFactory.api }
     single<IRepository> { RepositoryImpl(apiService = get(), movieItemListDao = get()) }
     single { GetComingSoonMovieUseCase(repository = get()) }
