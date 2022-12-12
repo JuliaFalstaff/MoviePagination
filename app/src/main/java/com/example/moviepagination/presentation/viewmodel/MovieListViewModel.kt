@@ -23,13 +23,7 @@ class MovieListViewModel(
     val popularMoviesLiveData: LiveData<AppState> get() = _popularMoviesLiveData
     val popularTVsLiveData: LiveData<AppState> get() = _popularTVsLiveData
 
-    init {
-        loadComingSoonMovies()
-        loadMostPopularMovies()
-        loadMostPopularTVs()
-    }
-
-    private fun loadComingSoonMovies() {
+    fun loadComingSoonMovies() {
         _comingSoonLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
             try {
@@ -38,11 +32,10 @@ class MovieListViewModel(
             } catch (error: Throwable) {
                 _comingSoonLiveData.postValue(AppState.Error(error))
             }
-
         }
     }
 
-    private fun loadMostPopularMovies() {
+    fun loadMostPopularMovies() {
         _popularMoviesLiveData.postValue(AppState.Loading)
         viewModelScope.launch() {
             try {
@@ -54,7 +47,7 @@ class MovieListViewModel(
         }
     }
 
-    private fun loadMostPopularTVs() {
+    fun loadMostPopularTVs() {
         _popularTVsLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
             try {

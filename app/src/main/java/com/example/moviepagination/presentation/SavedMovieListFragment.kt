@@ -53,18 +53,19 @@ class SavedMovieListFragment :
                 val movieList = state.dataMovie
                 movieListAdapter?.submitList(movieList)
                 binding.progressBar.visibility = View.INVISIBLE
+                if (movieList.isEmpty()) showEmptyDataWarning()
             }
             is AppState.Loading -> {
                 binding.progressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error SavedList: ${state.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(state.error)
                 Log.d("TAG saved list", "${state.error.stackTrace.toString()}")
             }
         }
+    }
+
+    private fun showEmptyDataWarning() {
+        binding.warningNoDataTextView.visibility = View.VISIBLE
     }
 }

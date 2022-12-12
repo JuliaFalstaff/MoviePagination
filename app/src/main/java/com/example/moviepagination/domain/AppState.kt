@@ -10,7 +10,7 @@ sealed class AppState {
     data class Success(val dataMovie: MovieItemList): AppState()
     data class SuccessMovieInfo(val dataMovie: MovieInfo): AppState()
     data class SuccessMovieInfoList(val dataMovie: List<MovieInfo>): AppState()
-    data class SuccessTrailer(val trailerMovie: YouTubeTrailer): AppState()
+    data class SuccessTrailer(val trailerMovie: String): AppState()
     data class SuccessActorInfo(val actorInfo: ActorInfo) : AppState()
     data class SuccessSearchResult(val searchResult: SearchResult) : AppState()
     data class Error(val error: Throwable): AppState()

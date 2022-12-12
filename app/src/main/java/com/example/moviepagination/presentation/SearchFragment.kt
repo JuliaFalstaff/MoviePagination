@@ -2,10 +2,7 @@ package com.example.moviepagination.presentation
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentSearchBinding
@@ -27,11 +24,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRV()
+        initViewModel()
+        initSearch()
+    }
+
+    private fun initViewModel() {
         viewModel.searchMovieLiveData.observe(viewLifecycleOwner) {
             binding.searchProgressBar.visibility = View.INVISIBLE
             renderData(it)
         }
-        initSearch()
     }
 
     private fun setRV() {
@@ -75,18 +76,27 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
                 adapter?.submitList(data)
                 binding.searchProgressBar.visibility = View.INVISIBLE
                 Log.d("TAG SUCCESS", "${appState.searchResult}")
+                binding.retryButton.visibility = View.GONE
             }
             is AppState.Error -> {
                 binding.searchProgressBar.visibility = View.INVISIBLE
-                Toast.makeText(
-                    requireContext(),
-                    "Error: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(appState.error)
             }
             is AppState.Loading -> {
                 binding.searchProgressBar.visibility = View.VISIBLE
             }
+        }
+    }
+
+    override fun showErrorConnection() = with(binding) {
+        if (!isNetworkAvailable) {
+            retryButton.visibility = View.VISIBLE
+            retryButton.setOnClickListener {
+                initSearch()
+                Log.d("retry", "click")
+            }
+        } else {
+            retryButton.visibility = View.GONE
         }
     }
 }

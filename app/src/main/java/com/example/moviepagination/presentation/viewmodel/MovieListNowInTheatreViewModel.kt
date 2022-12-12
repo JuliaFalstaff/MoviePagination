@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.moviepagination.App
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.usecases.GetMovieNowInTheatreUseCase
 import com.example.moviepagination.presentation.core.BaseViewModel
@@ -17,11 +16,7 @@ class MovieListNowInTheatreViewModel(
     private val _nowInTheatre: MutableLiveData<AppState> = MutableLiveData()
     val nowInTheatre: LiveData<AppState> get() = _nowInTheatre
 
-    init {
-        loadMoviesNowInTheatre()
-    }
-
-    private fun loadMoviesNowInTheatre() {
+    fun loadMoviesNowInTheatre() {
         _nowInTheatre.postValue(AppState.Loading)
         viewModelScope.launch {
             try {
@@ -29,9 +24,8 @@ class MovieListNowInTheatreViewModel(
                 _nowInTheatre.value = AppState.Success(movies)
             } catch (error: Throwable) {
                 _nowInTheatre.postValue(AppState.Error(error))
-                Log.d("TAG VM theatre", "${error.message.toString()}")
+                Log.d("TAG VM theatre", error.message.toString())
             }
-
         }
     }
 }

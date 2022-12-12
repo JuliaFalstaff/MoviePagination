@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemNowInTheatreRecyclerViewBinding
 import com.example.moviepagination.domain.entities.Item
 import com.example.moviepagination.presentation.core.BaseItemCallback
+import com.example.moviepagination.presentation.glide.GlideFactory
 
 class NowInTheatreMovieListAdapter(private var onListItemListener: IOnListItemClickListener<Item>) :
     ListAdapter<Item, NowInTheatreMovieListAdapter.MovieViewHolder>(BaseItemCallback<Item>()) {
@@ -33,10 +32,7 @@ class NowInTheatreMovieListAdapter(private var onListItemListener: IOnListItemCl
         fun bind(movie: Item) = with(binding) {
             movieTitleTextView.text = movie.title
             movieGenreTextView.text = movie.genres
-            Glide.with(itemView)
-                .load(movie.image)
-                .error(R.drawable.ic_load_error_vector)
-                .into(moviePosterImageView)
+            GlideFactory.loadPicture(itemView, movie.image, moviePosterImageView)
             itemView.setOnClickListener {
                 onListItemListener.onItemClick(movie)
             }

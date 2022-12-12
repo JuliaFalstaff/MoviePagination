@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemActorKnownForRecyclerViewBinding
 import com.example.moviepagination.domain.entities.castInfo.KnownFor
 import com.example.moviepagination.presentation.core.BaseItemCallback
+import com.example.moviepagination.presentation.glide.GlideFactory
 
 class KnownForMoviesListAdapter :
     ListAdapter<KnownFor, KnownForMoviesListAdapter.KnownForViewHolder>(
@@ -38,10 +37,7 @@ class KnownForMoviesListAdapter :
             knownForTitleTextView.text = movie.title
             knownForRoleTextView.text = movie.role
             knownForYearTextView.text = movie.year
-            Glide.with(itemView)
-                .load(movie.image)
-                .error(R.drawable.ic_load_error_vector)
-                .into(knownForImageView)
+            GlideFactory.loadPicture(itemView, movie.image, knownForImageView)
             itemView.setOnClickListener {
                 onItemKnownForClickListener?.invoke(movie)
             }

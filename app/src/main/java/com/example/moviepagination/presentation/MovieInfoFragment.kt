@@ -6,13 +6,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentMovieInfoBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.presentation.adapters.ActorsListAdapter
 import com.example.moviepagination.presentation.core.BaseFragment
+import com.example.moviepagination.presentation.glide.GlideFactory
 import com.example.moviepagination.presentation.viewmodel.MovieInfoViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -40,19 +40,35 @@ class MovieInfoFragment :
     }
 
     private fun setObservers() {
-        viewModel.loadMovieLiveData.observe(viewLifecycleOwner) {
-            renderData(it)
-            Log.d("MOVIE-INFO", it.toString())
-        }
+        viewModel.checkIsFavouriteAndLoad(movieBundle)
         viewModel.liveDataIsFav.observe(viewLifecycleOwner) {
             isFavourite = it
             setFavButton(it)
             Log.d("MOVIE-INFO IMAGE", it.toString())
         }
-        viewModel.loadMovieById(movieBundle)
-        viewModel.checkIsFavourite(movieBundle)
-        viewModel.loadTrailerLiveData.observe(viewLifecycleOwner) { setTrailer(it) }
+
+        viewModel.loadMovieLiveData.observe(viewLifecycleOwner) {
+            renderData(it)
+            Log.d("MOVIE-INFO", it.toString())
+        }
+        viewModel.loadTrailerLiveData.observe(viewLifecycleOwner) { renderTrailerData(it) }
         viewModel.loadMovieTrailer(movieBundle)
+    }
+
+    private fun renderTrailerData(appState: AppState?) {
+        when (appState) {
+            is AppState.SuccessTrailer -> {
+                setTrailer(appState.trailerMovie)
+                binding.retryButton.visibility = View.INVISIBLE
+            }
+            is AppState.Error -> {
+                showError(appState.error)
+            }
+            is AppState.Loading -> {
+                binding.retryButton.visibility = View.INVISIBLE
+                binding.movieInfoProgressBar.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun setRVListeners() {
@@ -68,20 +84,37 @@ class MovieInfoFragment :
             is AppState.SuccessMovieInfo -> {
                 setData(appState.dataMovie)
                 appState.dataMovie.actorList?.let { adapter?.submitList(it) }
+                showVisibilityOfMovieInfo()
                 binding.movieInfoProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error Trailer: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(appState.error)
+                hideVisibilityOfMovieInfo()
                 binding.movieInfoProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
                 binding.movieInfoProgressBar.visibility = View.VISIBLE
+                hideVisibilityOfMovieInfo()
             }
         }
+    }
+
+    private fun hideVisibilityOfMovieInfo() = with(binding) {
+        dateOfReleaseInfoLabelTextView.visibility = View.INVISIBLE
+        movieGenresLabelTextView.visibility = View.INVISIBLE
+        movieDirectorLabelTextView.visibility = View.INVISIBLE
+        movieRunTimeLabelTextView.visibility = View.INVISIBLE
+        youtubeVideoTrailer.visibility = View.INVISIBLE
+        movieRatingTextView.visibility = View.INVISIBLE
+    }
+
+    private fun showVisibilityOfMovieInfo() = with(binding) {
+        dateOfReleaseInfoLabelTextView.visibility = View.VISIBLE
+        movieGenresLabelTextView.visibility = View.VISIBLE
+        movieDirectorLabelTextView.visibility = View.VISIBLE
+        movieRunTimeLabelTextView.visibility = View.VISIBLE
+        youtubeVideoTrailer.visibility = View.VISIBLE
+        movieRatingTextView.visibility = View.VISIBLE
     }
 
     private fun setData(movie: MovieInfo) {
@@ -112,16 +145,11 @@ class MovieInfoFragment :
                 }
                 setFavButton(!isFavourite)
             }
-
-            Glide.with(requireContext())
-                .load(movie.image)
-                .error(R.drawable.ic_load_error_vector)
-                .into(smallMoviePosterImageView)
+            GlideFactory.loadPicture(requireView(), movie.image, smallMoviePosterImageView)
         }
     }
 
     private fun setFavButton(isFav: Boolean) {
-        isFavourite = isFav
         if (isFav) {
             binding.saveToMyListImageButton.setImageResource(R.drawable.ic_added_to_my_list)
         } else {
@@ -138,5 +166,18 @@ class MovieInfoFragment :
                 Log.d("TAG", "Success: $videoId")
             }
         })
+    }
+
+    override fun showErrorConnection() = with(binding) {
+        if (!isNetworkAvailable) {
+            retryButton.visibility = View.VISIBLE
+            retryButton.setOnClickListener {
+                viewModel.checkIsFavouriteAndLoad(movieBundle)
+                viewModel.loadMovieTrailer(movieBundle)
+                Log.d("retry", "click")
+            }
+        } else {
+            retryButton.visibility = View.GONE
+        }
     }
 }

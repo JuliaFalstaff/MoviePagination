@@ -73,19 +73,29 @@ class ActorInfoFragment :
                 setActorInfoData(appState.actorInfo)
                 adapterCast?.submitList(appState.actorInfo.castMovies)
                 adapterKnownFor?.submitList(appState.actorInfo.knownFor)
-                binding.actorInfoProgressBar.visibility = View.INVISIBLE
+                showVisibilityOfActorInfo()
+                binding.retryButton.visibility = View.GONE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(appState.error)
+                binding.actorInfoProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
-                binding.actorInfoProgressBar.visibility = View.VISIBLE
+                hideVisibilityOfActorInfo()
             }
         }
+    }
+
+    private fun showVisibilityOfActorInfo() = with(binding) {
+        actorBirthDateLabelTextView.visibility = View.VISIBLE
+        actorHeightLabelTextView.visibility = View.VISIBLE
+        binding.actorInfoProgressBar.visibility = View.INVISIBLE
+    }
+
+    private fun hideVisibilityOfActorInfo() = with(binding) {
+        actorBirthDateLabelTextView.visibility = View.INVISIBLE
+        actorHeightLabelTextView.visibility = View.INVISIBLE
+        binding.actorInfoProgressBar.visibility = View.VISIBLE
     }
 
     private fun setActorInfoData(actor: ActorInfo) {
@@ -101,6 +111,18 @@ class ActorInfoFragment :
                 .load(actor.image)
                 .error(R.drawable.ic_load_error_vector)
                 .into(actorPhotoImageView)
+        }
+    }
+
+    override fun showErrorConnection() = with(binding) {
+        if (!isNetworkAvailable) {
+            retryButton.visibility = View.VISIBLE
+            retryButton.setOnClickListener {
+                viewModel.loadActorInfoById(actorBundle)
+                Log.d("retry", "click")
+            }
+        } else {
+            retryButton.visibility = View.GONE
         }
     }
 }

@@ -1,11 +1,10 @@
 package com.example.moviepagination.di
 
+import androidx.room.Room
 import com.example.moviepagination.data.database.MovieDataBase
 import com.example.moviepagination.data.network.ApiFactory
-import com.example.moviepagination.data.repository.LocalRepoImpl
-import com.example.moviepagination.data.repository.RemoteRepoImpl
-import com.example.moviepagination.domain.repository.ILocalRepo
-import com.example.moviepagination.domain.repository.IRemoteRepo
+import com.example.moviepagination.data.repository.RepositoryImpl
+import com.example.moviepagination.domain.repository.IRepository
 import com.example.moviepagination.domain.usecases.*
 import com.example.moviepagination.presentation.*
 import com.example.moviepagination.presentation.viewmodel.*
@@ -14,11 +13,12 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val application = module {
-//    single { Room.databaseBuilder(androidContext(), MovieDataBase::class.java, "movie.db").fallbackToDestructiveMigration().build() }
-    single { MovieDataBase.getInstance(androidContext()).movieItemListDao }
+    single {
+        Room.databaseBuilder(androidContext(), MovieDataBase::class.java, DATABASE_NAME).build()
+    }
+    single{ get<MovieDataBase>().movieItemListDao() }
     single { ApiFactory.api }
-    single<ILocalRepo> { LocalRepoImpl(movieItemListDao = get()) }
-    single<IRemoteRepo> { RemoteRepoImpl(apiService = get()) }
+    single<IRepository> { RepositoryImpl(apiService = get(), movieItemListDao = get()) }
     single { GetComingSoonMovieUseCase(repository = get()) }
     single { GetMovieNowInTheatreUseCase(repository = get()) }
     single { GetMostPopularTVsUseCase(repository = get()) }

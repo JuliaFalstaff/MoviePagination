@@ -1,5 +1,6 @@
 package com.example.moviepagination.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.moviepagination.domain.AppState
@@ -17,18 +18,19 @@ class MovieInfoViewModel(
 ) : BaseViewModel() {
 
     private val _loadMovieLiveData: MutableLiveData<AppState> = MutableLiveData()
-    private val _loadTrailerLiveData: MutableLiveData<String> = MutableLiveData()
+    private val _loadTrailerLiveData: MutableLiveData<AppState> = MutableLiveData()
     private val _liveDataIsFav: MutableLiveData<Boolean> = MutableLiveData()
     val liveDataIsFav: LiveData<Boolean> get() = _liveDataIsFav
     val loadMovieLiveData: LiveData<AppState> get() = _loadMovieLiveData
-    val loadTrailerLiveData: MutableLiveData<String> get() = _loadTrailerLiveData
+    val loadTrailerLiveData: MutableLiveData<AppState> get() = _loadTrailerLiveData
 
-    fun loadMovieById(movieId: String) {
+   private fun loadMovieByIdFromServer(movieId: String) {
         _loadMovieLiveData.postValue(AppState.Loading)
         viewModelCustomScope.launch {
             try {
-                val movie = getMovieByIdUseCase(movieId)
+                  val movie =  getMovieByIdUseCase(movieId)
                 _loadMovieLiveData.value = AppState.SuccessMovieInfo(movie)
+                Log.d("TAG load", "from server")
             } catch (error: Throwable) {
                 _loadMovieLiveData.postValue(AppState.Error(error))
             }
@@ -37,8 +39,12 @@ class MovieInfoViewModel(
 
     fun loadMovieTrailer(movieId: String) {
         viewModelCustomScope.launch {
-            val trailer = getMoviesTrailerUseCase(movieId)
-            _loadTrailerLiveData.value = trailer.videoId ?: ""
+            try {
+                val trailer = getMoviesTrailerUseCase(movieId)
+                _loadTrailerLiveData.value = AppState.SuccessTrailer(trailer.videoId)
+            } catch (error: Throwable) {
+                _loadTrailerLiveData.postValue(AppState.Error(error))
+            }
         }
     }
 
@@ -48,10 +54,17 @@ class MovieInfoViewModel(
         }
     }
 
-    fun checkIsFavourite(movieId: String) {
+    fun checkIsFavouriteAndLoad(movieId: String) {
+        _loadMovieLiveData.postValue(AppState.Loading)
         viewModelCustomScope.launch {
             val movie = getSavedMovieByIdUseCase(movieId)
             _liveDataIsFav.value = movie.isFavourite
+            if (movie.isFavourite) {
+                Log.d("TAG load", "from db Room")
+                _loadMovieLiveData.value = AppState.SuccessMovieInfo(movie)
+            } else {
+                loadMovieByIdFromServer(movieId)
+            }
         }
     }
 

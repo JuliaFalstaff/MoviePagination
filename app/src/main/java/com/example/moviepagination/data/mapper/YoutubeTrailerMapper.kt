@@ -11,9 +11,13 @@ class YoutubeTrailerMapper {
             fullTitle = trailerDto.fullTitle,
             type = trailerDto.type,
             year = trailerDto.year,
-            videoId = trailerDto.videoId,
+            videoId = trailerDto.videoId ?: EMPTY_STRING_ID,
             errorMessage = trailerDto.errorMessage,
             videoUrl = trailerDto.videoUrl
         )
+    }
+
+    companion object {
+        private const val EMPTY_STRING_ID = ""
     }
 }

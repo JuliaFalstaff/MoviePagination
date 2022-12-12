@@ -1,5 +1,6 @@
 package com.example.moviepagination.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -18,8 +19,13 @@ class SearchViewModel(
     fun loadSearchResultFromApi(expression: String) {
         _searchMovieLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
-            val search = getSearchListUseCase(expression)
-            _searchMovieLiveData.postValue(AppState.SuccessSearchResult(search))
+            try {
+                val search = getSearchListUseCase(expression)
+                _searchMovieLiveData.postValue(AppState.SuccessSearchResult(search))
+            } catch (error: Throwable) {
+                _searchMovieLiveData.postValue(AppState.Error(error))
+                Log.d("Error Search", error.stackTraceToString())
+            }
         }
     }
 }

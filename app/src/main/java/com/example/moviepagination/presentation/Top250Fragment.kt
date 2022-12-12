@@ -37,6 +37,7 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRV()
+        showErrorConnection()
         initViewModels()
     }
 
@@ -57,6 +58,8 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
             Log.d("MOVIE", it.toString())
             renderDataTop250TVs(it)
         }
+        viewModel.loadTop250TVs()
+        viewModel.loadTop250Movies()
     }
 
     private fun renderDataTop250Movies(appState: AppState) {
@@ -65,13 +68,10 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
                 val movies = appState.dataMovie.items
                 top250MoviesAdapter?.submitList(movies)
                 binding.top250ProgressBar.visibility = View.INVISIBLE
+                binding.retryButton.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(appState.error)
                 binding.top250ProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
@@ -85,19 +85,27 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
             is AppState.Success -> {
                 val series = appState.dataMovie.items
                 top250TvSeriesAdapter?.submitList(series)
-                binding.top250ProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Error: ${appState.error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError(appState.error)
                 binding.top250ProgressBar.visibility = View.INVISIBLE
             }
             is AppState.Loading -> {
                 binding.top250ProgressBar.visibility = View.VISIBLE
             }
+        }
+    }
+
+    override fun showErrorConnection() = with(binding) {
+        if (!isNetworkAvailable) {
+            retryButton.visibility = View.VISIBLE
+            retryButton.setOnClickListener {
+                viewModel.loadTop250TVs()
+                viewModel.loadTop250Movies()
+                Log.d("retry", "click")
+            }
+        } else {
+            retryButton.visibility = View.GONE
         }
     }
 }

@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.moviepagination.R
 import com.example.moviepagination.databinding.ItemSearchResultRecyclerViewBinding
 import com.example.moviepagination.domain.entities.search.Result
 import com.example.moviepagination.presentation.core.BaseItemCallback
+import com.example.moviepagination.presentation.glide.GlideFactory
 
 
 class SearchResultListAdapter(
@@ -36,10 +35,7 @@ class SearchResultListAdapter(
         fun bind(searchResult: Result) = with(binding) {
             resultTitleTextView.text = searchResult.title
             resultDescriptionTextView.text = searchResult.description
-            Glide.with(itemView)
-                .load(searchResult.image)
-                .error(R.drawable.ic_load_error_vector)
-                .into(resultPosterImageView)
+            GlideFactory.loadPicture(itemView, searchResult.image, resultPosterImageView)
             itemView.setOnClickListener {
                 listener?.invoke(searchResult)
             }
