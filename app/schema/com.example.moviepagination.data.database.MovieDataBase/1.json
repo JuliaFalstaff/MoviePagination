@@ -1,0 +1,386 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "00536fab31c0b14c771b822d6bf3da08",
+    "entities": [
+      {
+        "tableName": "movie_list",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `items` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "items",
+            "columnName": "items",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ItemDbModel",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`primaryId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` TEXT, `title` TEXT, `fullTitle` TEXT, `year` TEXT, `releaseState` TEXT, `image` TEXT, `runtimeMins` TEXT, `runtimeStr` TEXT, `plot` TEXT, `contentRating` TEXT, `imDbRating` TEXT, `imDbRatingCount` TEXT, `metacriticRating` TEXT, `genres` TEXT, `genreList` TEXT, `directors` TEXT, `directorList` TEXT, `stars` TEXT, `starList` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "primaryId",
+            "columnName": "primaryId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fullTitle",
+            "columnName": "fullTitle",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "year",
+            "columnName": "year",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "releaseState",
+            "columnName": "releaseState",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "runtimeMins",
+            "columnName": "runtimeMins",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "runtimeStr",
+            "columnName": "runtimeStr",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "plot",
+            "columnName": "plot",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "contentRating",
+            "columnName": "contentRating",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imDbRating",
+            "columnName": "imDbRating",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imDbRatingCount",
+            "columnName": "imDbRatingCount",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "metacriticRating",
+            "columnName": "metacriticRating",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "genres",
+            "columnName": "genres",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "genreList",
+            "columnName": "genreList",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "directors",
+            "columnName": "directors",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "directorList",
+            "columnName": "directorList",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stars",
+            "columnName": "stars",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "starList",
+            "columnName": "starList",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "primaryId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "movie_info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`primaryId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` TEXT, `title` TEXT, `fullTitle` TEXT, `year` TEXT, `releaseDate` TEXT, `image` TEXT, `runtimeMins` TEXT, `runtimeStr` TEXT, `plot` TEXT, `contentRating` TEXT, `imDbRating` TEXT, `metacriticRating` TEXT, `genres` TEXT, `genreList` TEXT, `directors` TEXT, `directorList` TEXT, `stars` TEXT, `starList` TEXT, `actorList` TEXT, `isFavourite` INTEGER NOT NULL, `imDbId` TEXT, `titleTrailer` TEXT, `fullTitleTrailer` TEXT, `type` TEXT, `yearTrailer` TEXT, `videoId` TEXT, `videoTitle` TEXT, `videoDescription` TEXT, `thumbnailUrl` TEXT, `link` TEXT, `linkEmbed` TEXT, `errorMessage` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "primaryId",
+            "columnName": "primaryId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fullTitle",
+            "columnName": "fullTitle",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "year",
+            "columnName": "year",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "releaseDate",
+            "columnName": "releaseDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "runtimeMins",
+            "columnName": "runtimeMins",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "runtimeStr",
+            "columnName": "runtimeStr",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "plot",
+            "columnName": "plot",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "contentRating",
+            "columnName": "contentRating",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imDbRating",
+            "columnName": "imDbRating",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "metacriticRating",
+            "columnName": "metacriticRating",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "genres",
+            "columnName": "genres",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "genreList",
+            "columnName": "genreList",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "directors",
+            "columnName": "directors",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "directorList",
+            "columnName": "directorList",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stars",
+            "columnName": "stars",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "starList",
+            "columnName": "starList",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "actorList",
+            "columnName": "actorList",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isFavourite",
+            "columnName": "isFavourite",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "trailer.imDbId",
+            "columnName": "imDbId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "trailer.titleTrailer",
+            "columnName": "titleTrailer",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "trailer.fullTitleTrailer",
+            "columnName": "fullTitleTrailer",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "trailer.type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "trailer.yearTrailer",
+            "columnName": "yearTrailer",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "trailer.videoId",
+            "columnName": "videoId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "trailer.videoTitle",
+            "columnName": "videoTitle",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "trailer.videoDescription",
+            "columnName": "videoDescription",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "trailer.thumbnailUrl",
+            "columnName": "thumbnailUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "trailer.link",
+            "columnName": "link",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "trailer.linkEmbed",
+            "columnName": "linkEmbed",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "trailer.errorMessage",
+            "columnName": "errorMessage",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "primaryId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '00536fab31c0b14c771b822d6bf3da08')"
+    ]
+  }
+}

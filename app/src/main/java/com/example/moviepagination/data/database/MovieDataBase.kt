@@ -12,8 +12,8 @@ import com.example.moviepagination.data.database.model.MovieItemListDbModel
 
 @Database(
     entities = [MovieItemListDbModel::class, ItemDbModel::class, MovieInfoDbModel::class],
-    version = 6,
-    exportSchema = false
+    version = 1,
+    exportSchema = true
 )
 @TypeConverters(
     ItemConverter::class,
