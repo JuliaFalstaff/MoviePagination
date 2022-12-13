@@ -1,19 +1,16 @@
 package com.example.moviepagination.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
-import com.example.moviepagination.R
 import com.example.moviepagination.databinding.FragmentActorInfoBinding
 import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.castInfo.ActorInfo
 import com.example.moviepagination.presentation.adapters.CastMoviesListAdapter
 import com.example.moviepagination.presentation.adapters.KnownForMoviesListAdapter
 import com.example.moviepagination.presentation.core.BaseFragment
+import com.example.moviepagination.presentation.glide.GlideFactory
 import com.example.moviepagination.presentation.viewmodel.ActorInfoViewModel
 import org.koin.androidx.scope.createScope
 import org.koin.core.component.inject
@@ -106,11 +103,7 @@ class ActorInfoFragment :
             actorBirthDatTextView.text = actor.birthDate
             actorBioTextView.text = actor.summary
             actorsAwardsTextView.text = actor.awards
-            Log.d("Actor TAG", "${actor.awards}")
-            Glide.with(requireContext())
-                .load(actor.image)
-                .error(R.drawable.ic_load_error_vector)
-                .into(actorPhotoImageView)
+            GlideFactory.loadPicture(requireView(), actor.image, actorPhotoImageView)
         }
     }
 
@@ -119,7 +112,6 @@ class ActorInfoFragment :
             retryButton.visibility = View.VISIBLE
             retryButton.setOnClickListener {
                 viewModel.loadActorInfoById(actorBundle)
-                Log.d("retry", "click")
             }
         } else {
             retryButton.visibility = View.GONE

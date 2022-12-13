@@ -6,6 +6,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class MovieItemList(
-        @SerializedName("items")
-        val items: List<Item>
-): Parcelable
+    @SerializedName("items")
+    val items: List<Item>
+) : Parcelable

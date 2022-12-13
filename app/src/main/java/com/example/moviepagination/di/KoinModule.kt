@@ -16,7 +16,7 @@ val application = module {
     single {
         Room.databaseBuilder(androidContext(), MovieDataBase::class.java, DATABASE_NAME).build()
     }
-    single{ get<MovieDataBase>().movieItemListDao() }
+    single { get<MovieDataBase>().movieItemListDao() }
     single { ApiFactory.api }
     single<IRepository> { RepositoryImpl(apiService = get(), movieItemListDao = get()) }
     single { GetComingSoonMovieUseCase(repository = get()) }

@@ -1,9 +1,7 @@
 package com.example.moviepagination.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentTop250Binding
 import com.example.moviepagination.domain.AppState
@@ -50,12 +48,10 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
 
     private fun initViewModels() {
         viewModel.top250MoviesLiveData.observe(viewLifecycleOwner) {
-            Log.d("MOVIE", it.toString())
             renderDataTop250Movies(it)
         }
 
         viewModel.top250TVShowLiveData.observe(viewLifecycleOwner) {
-            Log.d("MOVIE", it.toString())
             renderDataTop250TVs(it)
         }
         viewModel.loadTop250TVs()
@@ -102,7 +98,6 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
             retryButton.setOnClickListener {
                 viewModel.loadTop250TVs()
                 viewModel.loadTop250Movies()
-                Log.d("retry", "click")
             }
         } else {
             retryButton.visibility = View.GONE

@@ -9,43 +9,43 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class MovieInfoDto(
     @SerializedName("id")
-        val id: String? = "",
+    val id: String? = "",
     @SerializedName("title")
-        val title: String? = "",
+    val title: String? = "",
     @SerializedName("fullTitle")
-        val fullTitle: String? = "",
+    val fullTitle: String? = "",
     @SerializedName("year")
-        val year: String? = "",
+    val year: String? = "",
     @SerializedName("releaseDate")
-        val releaseDate: String? = "",
+    val releaseDate: String? = "",
     @SerializedName("image")
-        val image: String? = "",
+    val image: String? = "",
     @SerializedName("runtimeMins")
-        val runtimeMins: String? = "",
+    val runtimeMins: String? = "",
     @SerializedName("runtimeStr")
-        val runtimeStr: String? = "",
+    val runtimeStr: String? = "",
     @SerializedName("plot")
-        val plot: String? = "",
+    val plot: String? = "",
     @SerializedName("contentRating")
-        val contentRating: String? = "",
+    val contentRating: String? = "",
     @SerializedName("imDbRating")
-        val imDbRating: String? = "",
+    val imDbRating: String? = "",
     @SerializedName("metacriticRating")
-        val metacriticRating: String? = "",
+    val metacriticRating: String? = "",
     @SerializedName("genres")
-        val genres: String? = "",
+    val genres: String? = "",
     @SerializedName("genreList")
-        val genreList: List<Genre>? = null,
+    val genreList: List<Genre>? = null,
     @SerializedName("directors")
-        val directors: String? = "",
+    val directors: String? = "",
     @SerializedName("directorList")
-        val directorList: List<DirectorDto>? = null,
+    val directorList: List<DirectorDto>? = null,
     @SerializedName("stars")
-        val stars: String? = "",
+    val stars: String? = "",
     @SerializedName("starList")
-        val starList: List<StarDto>? = null,
+    val starList: List<StarDto>? = null,
     @SerializedName("actorList")
-        val actorList: List<ActorDto>? = null,
+    val actorList: List<ActorDto>? = null,
     @SerializedName("trailer")
-        val trailer: TrailerDto? = null
+    val trailer: TrailerDto? = null
 )

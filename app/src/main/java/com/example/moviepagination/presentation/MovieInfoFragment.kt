@@ -1,7 +1,6 @@
 package com.example.moviepagination.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -44,12 +43,10 @@ class MovieInfoFragment :
         viewModel.liveDataIsFav.observe(viewLifecycleOwner) {
             isFavourite = it
             setFavButton(it)
-            Log.d("MOVIE-INFO IMAGE", it.toString())
         }
 
         viewModel.loadMovieLiveData.observe(viewLifecycleOwner) {
             renderData(it)
-            Log.d("MOVIE-INFO", it.toString())
         }
         viewModel.loadTrailerLiveData.observe(viewLifecycleOwner) { renderTrailerData(it) }
         viewModel.loadMovieTrailer(movieBundle)
@@ -129,24 +126,28 @@ class MovieInfoFragment :
             setFavButton(isFavourite)
             GlideFactory.loadPicture(requireView(), movie.image, smallMoviePosterImageView)
             saveToMyListImageButton.setOnClickListener {
-                if (!isFavourite) {
-                    viewModel.saveMovieToMyList(movie.copy(isFavourite = !movie.isFavourite))
-                    Toast.makeText(
-                        requireActivity(),
-                        getString(R.string.success_saved),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    viewModel.deleteMovieFromMyList(movie)
-                    Toast.makeText(
-                        requireActivity(),
-                        getString(R.string.success_deleted),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                setFavButton(!isFavourite)
+                myListButtonListener(movie)
             }
         }
+    }
+
+    private fun myListButtonListener(movie: MovieInfo) {
+        if (!isFavourite) {
+            viewModel.saveMovieToMyList(movie.copy(isFavourite = !movie.isFavourite))
+            Toast.makeText(
+                requireActivity(),
+                getString(R.string.success_saved),
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            viewModel.deleteMovieFromMyList(movie)
+            Toast.makeText(
+                requireActivity(),
+                getString(R.string.success_deleted),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        setFavButton(!isFavourite)
     }
 
     private fun setFavButton(isFav: Boolean) {
@@ -164,7 +165,6 @@ class MovieInfoFragment :
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 youTubePlayer.loadVideo(videoId, 0f)
                 youTubePlayer.pause()
-                Log.d("TAG", "Success: $videoId")
             }
         })
     }
@@ -175,7 +175,6 @@ class MovieInfoFragment :
             retryButton.setOnClickListener {
                 viewModel.checkIsFavouriteAndLoad(movieBundle)
                 viewModel.loadMovieTrailer(movieBundle)
-                Log.d("retry", "click")
             }
         } else {
             retryButton.visibility = View.GONE

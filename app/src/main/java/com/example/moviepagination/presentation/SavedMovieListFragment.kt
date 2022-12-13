@@ -1,9 +1,7 @@
 package com.example.moviepagination.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentSavedMoviesRecyclerViewBinding
 import com.example.moviepagination.domain.AppState
@@ -42,7 +40,6 @@ class SavedMovieListFragment :
 
     private fun initViewModel() {
         viewModel.savedMoviesLiveData.observe(viewLifecycleOwner) {
-            Log.d("MOVIE", it.toString())
             renderData(it)
         }
     }
@@ -60,7 +57,6 @@ class SavedMovieListFragment :
             }
             is AppState.Error -> {
                 showError(state.error)
-                Log.d("TAG saved list", "${state.error.stackTrace.toString()}")
             }
         }
     }
