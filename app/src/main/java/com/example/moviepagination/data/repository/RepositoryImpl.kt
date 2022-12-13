@@ -10,6 +10,9 @@ import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.entities.info.YouTubeTrailer
 import com.example.moviepagination.domain.entities.search.SearchResult
 import com.example.moviepagination.domain.repository.IRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class RepositoryImpl(
     private val apiService: ApiService,
@@ -22,55 +25,55 @@ class RepositoryImpl(
     private val youtubeTrailerMapper = YoutubeTrailerMapper()
     private val searchResultMapper = SearchResultMapper()
 
-    override suspend fun getMovieNowInTheatre(): MovieItemList {
+    override suspend fun getMovieNowInTheatre() = flow<MovieItemList> {
         val list = apiService.getActiveMoviesInTheatres(MOVIE_API_KEY)
-        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
-    }
+        emit(movieItemListMapper.mapMovieItemListDtoToEntity(list))
+    }.flowOn(Dispatchers.IO)
 
-    override suspend fun getMovieByIdFromServer(movieId: String): MovieInfo {
+    override suspend fun getMovieByIdFromServer(movieId: String) = flow<MovieInfo> {
         val movie = apiService.getMovieById(EN_LANG, movieId, MOVIE_API_KEY)
-        return movieInfoMapper.mapMovieInfoDtoToEntity(movie)
-    }
+        emit(movieInfoMapper.mapMovieInfoDtoToEntity(movie))
+    }.flowOn(Dispatchers.IO)
 
-    override suspend fun getComingSoonMoviesFromServer(): MovieItemList {
+    override suspend fun getComingSoonMoviesFromServer() = flow<MovieItemList> {
         val list = apiService.getComingSoonMovies(EN_LANG, MOVIE_API_KEY)
-        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
-    }
+        emit(movieItemListMapper.mapMovieItemListDtoToEntity(list))
+    }.flowOn(Dispatchers.IO)
 
-    override suspend fun getTOP250Movies(): MovieItemList {
+    override suspend fun getTOP250Movies() = flow<MovieItemList> {
         val list = apiService.getTOP250Movies(MOVIE_API_KEY)
-        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
-    }
+        emit(movieItemListMapper.mapMovieItemListDtoToEntity(list))
+    }.flowOn(Dispatchers.IO)
 
-    override suspend fun getMostPopularMovies(): MovieItemList {
+    override suspend fun getMostPopularMovies() = flow<MovieItemList> {
         val list = apiService.getMostPopularMovies(EN_LANG, MOVIE_API_KEY)
-        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
-    }
+        emit(movieItemListMapper.mapMovieItemListDtoToEntity(list))
+    }.flowOn(Dispatchers.IO)
 
-    override suspend fun getMostPopularTVs(): MovieItemList {
+    override suspend fun getMostPopularTVs() = flow<MovieItemList> {
         val list = apiService.getMostPopularTVs(EN_LANG, MOVIE_API_KEY)
-        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
-    }
+        emit(movieItemListMapper.mapMovieItemListDtoToEntity(list))
+    }.flowOn(Dispatchers.IO)
 
-    override suspend fun getActorInfoById(actorId: String): ActorInfo {
+    override suspend fun getActorInfoById(actorId: String) = flow<ActorInfo> {
         val actor = apiService.getActorInfoById(EN_LANG, MOVIE_API_KEY, actorId)
-        return actorMapper.mapActorInfoDtoToEntity(actor)
-    }
+        emit(actorMapper.mapActorInfoDtoToEntity(actor))
+    }.flowOn(Dispatchers.IO)
 
-    override suspend fun getSearchList(expression: String): SearchResult {
+    override suspend fun getSearchList(expression: String) = flow<SearchResult> {
         val search = apiService.getSearchList(MOVIE_API_KEY, expression)
-        return searchResultMapper.mapSearchResultDtoToEntity(search)
-    }
+        emit(searchResultMapper.mapSearchResultDtoToEntity(search))
+    }.flowOn(Dispatchers.IO)
 
-    override suspend fun getTOP250TVs(): MovieItemList {
+    override suspend fun getTOP250TVs() = flow<MovieItemList> {
         val list = apiService.getTOP250TVs(MOVIE_API_KEY)
-        return movieItemListMapper.mapMovieItemListDtoToEntity(list)
-    }
+        emit(movieItemListMapper.mapMovieItemListDtoToEntity(list))
+    }.flowOn(Dispatchers.IO)
 
-    override suspend fun getMovieTrailerById(movieId: String): YouTubeTrailer {
+    override suspend fun getMovieTrailerById(movieId: String) = flow<YouTubeTrailer> {
         val trailer = apiService.getMovieTrailerById(movieId, MOVIE_API_KEY)
-        return youtubeTrailerMapper.mapYoutubeTrailerDtoToEntity(trailer)
-    }
+        emit(youtubeTrailerMapper.mapYoutubeTrailerDtoToEntity(trailer))
+    }.flowOn(Dispatchers.IO)
 
     override suspend fun saveMovie(movie: MovieInfo) {
         return movieItemListDao.insertMovieToMyList(

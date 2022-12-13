@@ -7,6 +7,7 @@ import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.usecases.*
 import com.example.moviepagination.presentation.core.BaseViewModel
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class MovieInfoViewModel(
@@ -27,24 +28,25 @@ class MovieInfoViewModel(
     private fun loadMovieByIdFromServer(movieId: String) {
         _loadMovieLiveData.postValue(AppState.Loading)
         viewModelCustomScope.launch {
-            try {
-                val movie = getMovieByIdUseCase(movieId)
-                _loadMovieLiveData.value = AppState.SuccessMovieInfo(movie)
-                Log.d("TAG load", "from server")
-            } catch (error: Throwable) {
-                _loadMovieLiveData.postValue(AppState.Error(error))
-            }
+            getMovieByIdUseCase(movieId)
+                .catch { error ->
+                    _loadMovieLiveData.postValue(AppState.Error(error))
+                }
+                .collect { movie ->
+                    _loadMovieLiveData.value = AppState.SuccessMovieInfo(movie)
+                }
         }
     }
 
     fun loadMovieTrailer(movieId: String) {
         viewModelCustomScope.launch {
-            try {
-                val trailer = getMoviesTrailerUseCase(movieId)
-                _loadTrailerLiveData.value = AppState.SuccessTrailer(trailer.videoId)
-            } catch (error: Throwable) {
-                _loadTrailerLiveData.postValue(AppState.Error(error))
-            }
+            getMoviesTrailerUseCase(movieId)
+                .catch { error ->
+                    _loadTrailerLiveData.postValue(AppState.Error(error))
+                }
+                .collect { trailer ->
+                    _loadTrailerLiveData.value = AppState.SuccessTrailer(trailer.videoId)
+                }
         }
     }
 

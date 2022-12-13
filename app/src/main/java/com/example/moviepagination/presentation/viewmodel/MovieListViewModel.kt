@@ -8,6 +8,7 @@ import com.example.moviepagination.domain.usecases.GetComingSoonMovieUseCase
 import com.example.moviepagination.domain.usecases.GetMostPopularMoviesUseCase
 import com.example.moviepagination.domain.usecases.GetMostPopularTVsUseCase
 import com.example.moviepagination.presentation.core.BaseViewModel
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class MovieListViewModel(
@@ -26,36 +27,39 @@ class MovieListViewModel(
     fun loadComingSoonMovies() {
         _comingSoonLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
-            try {
-                val movies = getComingSoonUseCase()
-                _comingSoonLiveData.value = AppState.Success(movies)
-            } catch (error: Throwable) {
-                _comingSoonLiveData.postValue(AppState.Error(error))
-            }
+            getComingSoonUseCase()
+                .catch { error ->
+                    _comingSoonLiveData.postValue(AppState.Error(error))
+                }
+                .collect { movies ->
+                    _comingSoonLiveData.value = AppState.Success(movies)
+                }
         }
     }
 
     fun loadMostPopularMovies() {
         _popularMoviesLiveData.postValue(AppState.Loading)
         viewModelScope.launch() {
-            try {
-                val movies = getPopularMoviesUseCase()
-                _popularMoviesLiveData.postValue(AppState.Success(movies))
-            } catch (error: Throwable) {
-                _popularMoviesLiveData.postValue(AppState.Error(error))
-            }
+            getPopularMoviesUseCase()
+                .catch { error ->
+                    _popularMoviesLiveData.postValue(AppState.Error(error))
+                }
+                .collect { movies ->
+                    _popularMoviesLiveData.postValue(AppState.Success(movies))
+                }
         }
     }
 
     fun loadMostPopularTVs() {
         _popularTVsLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
-            try {
-                val series = getMostPopularTVsUseCase()
-                _popularTVsLiveData.value = AppState.Success(series)
-            } catch (error: Throwable) {
-                _popularTVsLiveData.postValue(AppState.Error(error))
-            }
+            getMostPopularTVsUseCase()
+                .catch { error ->
+                    _popularTVsLiveData.postValue(AppState.Error(error))
+                }
+                .collect { series ->
+                    _popularTVsLiveData.value = AppState.Success(series)
+                }
         }
     }
 }

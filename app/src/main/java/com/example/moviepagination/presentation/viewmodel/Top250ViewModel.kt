@@ -1,6 +1,5 @@
 package com.example.moviepagination.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -8,6 +7,7 @@ import com.example.moviepagination.domain.AppState
 import com.example.moviepagination.domain.usecases.GetTop250MoviesUseCase
 import com.example.moviepagination.domain.usecases.GetTop250TvsUseCase
 import com.example.moviepagination.presentation.core.BaseViewModel
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class Top250ViewModel(
@@ -20,29 +20,29 @@ class Top250ViewModel(
     val top250MoviesLiveData: LiveData<AppState> get() = _top250MoviesLiveData
     val top250TVShowLiveData: LiveData<AppState> get() = _top250TVShowLiveData
 
-   fun loadTop250Movies() {
+    fun loadTop250Movies() {
         _top250MoviesLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
-            try {
-                val movies = getTop250MoviesUseCase()
-                _top250MoviesLiveData.value = AppState.Success(movies)
-            } catch (error: Throwable) {
-                _top250MoviesLiveData.postValue(AppState.Error(error))
-                Log.d("TAG VM 250 Movie", error.message.toString())
-            }
+            getTop250MoviesUseCase()
+                .catch { error ->
+                    _top250MoviesLiveData.postValue(AppState.Error(error))
+                }
+                .collect { movies ->
+                    _top250MoviesLiveData.value = AppState.Success(movies)
+                }
         }
     }
 
     fun loadTop250TVs() {
         _top250TVShowLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
-            try {
-                val series = getTop250TvsUseCase()
-                _top250TVShowLiveData.value = AppState.Success(series)
-            } catch (error: Throwable) {
-                _top250TVShowLiveData.postValue(AppState.Error(error))
-                Log.d("TAG VM 250 TV", error.message.toString())
-            }
+            getTop250TvsUseCase()
+                .catch { error ->
+                    _top250TVShowLiveData.postValue(AppState.Error(error))
+                }
+                .collect { series ->
+                    _top250TVShowLiveData.value = AppState.Success(series)
+                }
         }
     }
 }
