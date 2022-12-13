@@ -24,11 +24,11 @@ class MovieInfoViewModel(
     val loadMovieLiveData: LiveData<AppState> get() = _loadMovieLiveData
     val loadTrailerLiveData: MutableLiveData<AppState> get() = _loadTrailerLiveData
 
-   private fun loadMovieByIdFromServer(movieId: String) {
+    private fun loadMovieByIdFromServer(movieId: String) {
         _loadMovieLiveData.postValue(AppState.Loading)
         viewModelCustomScope.launch {
             try {
-                  val movie =  getMovieByIdUseCase(movieId)
+                val movie = getMovieByIdUseCase(movieId)
                 _loadMovieLiveData.value = AppState.SuccessMovieInfo(movie)
                 Log.d("TAG load", "from server")
             } catch (error: Throwable) {
