@@ -7,6 +7,14 @@ This appliction demonstartes information about movies and TV shows in different 
 - Searching 
 - Adding content to your list
 
+| Main Screen | Movie Info|
+| ------------- | ------------- |
+|<img src="app/src/main/res/drawable/screen_main.png" width="200" height="400" />|<img src="app/src/main/res/drawable/screen_movie_info.png" width="200" height="400" />
+
+|TOP 250|Actor Info|
+| ------------- | ------------- |
+| <img src="app/src/main/res/drawable/screen_top250.png" width="200" height="400"/>  | <img src="app/src/main/res/drawable/screen_actor_info.png" width="200" height="400"/> |
+
 ## Tech stack & Open-source libraries
 * Minimum SDK level 23
 #### 1. Architecture
