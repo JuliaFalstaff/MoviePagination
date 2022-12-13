@@ -1,5 +1,5 @@
 # Watch Out!
-This application demonstartes information about movies and TV shows in different categories:
+This application demonstrates information about movies and TV shows in different categories:
 - Most popular movies and series
 - Coming soon
 - Now in theatre
