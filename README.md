@@ -28,7 +28,7 @@ This application demonstrates information about movies and TV shows in different
 * Single Activity
 * Fragments
 * UseCases
-* Coroutines
+* Coroutines + Flow
 #### 4. UI
 * Glide
 * YoutubePlayer
