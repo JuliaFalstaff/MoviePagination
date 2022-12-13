@@ -8,7 +8,7 @@ import com.example.moviepagination.data.database.model.MovieInfoDbModel
 
 @Dao
 interface MovieItemListDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovieToMyList(movie: MovieInfoDbModel)
 
     @Query("SELECT * FROM movie_info")

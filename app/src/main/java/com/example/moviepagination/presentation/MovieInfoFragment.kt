@@ -127,6 +127,7 @@ class MovieInfoFragment :
             movieRunTimeTextView.text = movie.runtimeMins
             movieRatingTextView.text = movie.imDbRating
             setFavButton(isFavourite)
+            GlideFactory.loadPicture(requireView(), movie.image, smallMoviePosterImageView)
             saveToMyListImageButton.setOnClickListener {
                 if (!isFavourite) {
                     viewModel.saveMovieToMyList(movie.copy(isFavourite = !movie.isFavourite))
@@ -145,11 +146,11 @@ class MovieInfoFragment :
                 }
                 setFavButton(!isFavourite)
             }
-            GlideFactory.loadPicture(requireView(), movie.image, smallMoviePosterImageView)
         }
     }
 
     private fun setFavButton(isFav: Boolean) {
+        isFavourite = isFav
         if (isFav) {
             binding.saveToMyListImageButton.setImageResource(R.drawable.ic_added_to_my_list)
         } else {
