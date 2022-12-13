@@ -1,7 +1,6 @@
 package com.example.moviepagination.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
@@ -51,7 +50,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return when (searchQuery.trim()) {
-                    "" -> {
+                    EMPTY_SEARCH -> {
                         false
                     }
                     else -> {
@@ -75,7 +74,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
                 val data = appState.searchResult.results
                 adapter?.submitList(data)
                 binding.searchProgressBar.visibility = View.INVISIBLE
-                Log.d("TAG SUCCESS", "${appState.searchResult}")
                 binding.retryButton.visibility = View.GONE
             }
             is AppState.Error -> {
@@ -93,10 +91,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             retryButton.visibility = View.VISIBLE
             retryButton.setOnClickListener {
                 initSearch()
-                Log.d("retry", "click")
             }
         } else {
             retryButton.visibility = View.GONE
         }
+    }
+
+    companion object {
+        private const val EMPTY_SEARCH = ""
     }
 }

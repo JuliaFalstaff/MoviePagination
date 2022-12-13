@@ -1,6 +1,5 @@
 package com.example.moviepagination.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.moviepagination.domain.AppState
@@ -62,7 +61,6 @@ class MovieInfoViewModel(
             val movie = getSavedMovieByIdUseCase(movieId)
             _liveDataIsFav.value = movie.isFavourite
             if (movie.isFavourite) {
-                Log.d("TAG load", "from db Room")
                 _loadMovieLiveData.value = AppState.SuccessMovieInfo(movie)
             } else {
                 loadMovieByIdFromServer(movieId)

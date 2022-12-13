@@ -10,4 +10,4 @@ data class Genre(
     val key: String,
     @SerializedName("value")
     val value: String
-): Parcelable
+) : Parcelable

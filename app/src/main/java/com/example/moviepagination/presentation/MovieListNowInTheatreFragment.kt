@@ -1,9 +1,7 @@
 package com.example.moviepagination.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentNowInTheatreMoviesRecyclerViewBinding
 import com.example.moviepagination.domain.AppState
@@ -47,7 +45,6 @@ class MovieListNowInTheatreFragment : BaseFragment<FragmentNowInTheatreMoviesRec
 
     private fun initViewModels() {
         viewModel.nowInTheatre.observe(viewLifecycleOwner) {
-            Log.d("MOVIE", it.toString())
             renderDataInTheatre(it)
         }
         viewModel.loadMoviesNowInTheatre()
@@ -75,7 +72,6 @@ class MovieListNowInTheatreFragment : BaseFragment<FragmentNowInTheatreMoviesRec
             retryButton.visibility = View.VISIBLE
             retryButton.setOnClickListener {
                 initViewModels()
-                Log.d("retry", "click")
             }
         } else {
             retryButton.visibility = View.GONE

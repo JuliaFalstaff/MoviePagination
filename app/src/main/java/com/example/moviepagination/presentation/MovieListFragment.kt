@@ -1,9 +1,7 @@
 package com.example.moviepagination.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.moviepagination.databinding.FragmentMainMoviesRvBinding
 import com.example.moviepagination.domain.AppState
@@ -49,17 +47,14 @@ class MovieListFragment :
 
     private fun initViewModels() {
         viewModel.comingSoonLiveData.observe(viewLifecycleOwner) {
-            Log.d("MOVIE", it.toString())
             renderDataComingSoon(it)
         }
 
         viewModel.popularMoviesLiveData.observe(viewLifecycleOwner) {
-            Log.d("MOVIE", it.toString())
             renderDataPopularMovies(it)
         }
 
         viewModel.popularTVsLiveData.observe(viewLifecycleOwner) {
-            Log.d("MOVIE", it.toString())
             renderDataPopularTvs(it)
         }
         viewModel.loadMostPopularMovies()
@@ -80,7 +75,6 @@ class MovieListFragment :
             }
             is AppState.Error -> {
                 showError(state.error)
-                Log.d("TAG Popular movies", "${state.error.stackTrace}")
             }
         }
     }
@@ -98,8 +92,6 @@ class MovieListFragment :
             }
             is AppState.Error -> {
                 showError(state.error)
-                Log.d("TAG Error coming", "${state.error.localizedMessage}")
-                Log.d("TAG Error coming", "${state.error.stackTrace.toString()}")
             }
         }
     }
@@ -126,7 +118,6 @@ class MovieListFragment :
             retryButton.visibility = View.VISIBLE
             retryButton.setOnClickListener {
                 initViewModels()
-                Log.d("retry", "click")
             }
         } else {
             retryButton.visibility = View.GONE
