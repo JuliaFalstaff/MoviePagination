@@ -23,7 +23,6 @@ This application demonstrates information about movies and TV shows in different
 #### 2. Data
 * Room
 * Retrofit
-*  OkHttp
 #### 3. Base Structure
 * Single Activity
 * Fragments
