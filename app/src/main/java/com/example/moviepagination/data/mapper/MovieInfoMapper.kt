@@ -48,15 +48,15 @@ class MovieInfoMapper {
             year = movieInfoDbModel?.year,
             releaseDate = movieInfoDbModel?.releaseDate,
             image = movieInfoDbModel?.image,
-            runtimeMins = movieInfoDbModel?.runtimeMins,
-            runtimeStr = movieInfoDbModel?.runtimeStr,
+            runtimeMins = movieInfoDbModel?.runtimeMins ?: NO_DATA_STRING,
+            runtimeStr = movieInfoDbModel?.runtimeStr ?: NO_DATA_STRING,
             plot = movieInfoDbModel?.plot,
             contentRating = movieInfoDbModel?.contentRating,
             imDbRating = movieInfoDbModel?.imDbRating,
             metacriticRating = movieInfoDbModel?.metacriticRating,
             genres = movieInfoDbModel?.genres,
             genreList = convertGenreListDbModelToEntity(movieInfoDbModel?.genreList),
-            directors = movieInfoDbModel?.directors,
+            directors = movieInfoDbModel?.directors ?: NO_DATA_STRING,
             directorList = convertDirectorListDbModelToDirectorListEntity(movieInfoDbModel?.directorList),
             stars = movieInfoDbModel?.stars,
             starList = convertStarListDbModelToStarEntity(movieInfoDbModel?.starList),
@@ -259,7 +259,7 @@ class MovieInfoMapper {
 
     companion object {
         private const val EMPTY_STRING = ""
-        private const val NO_DATA_STRING = "no data"
+        private const val NO_DATA_STRING = "-"
         private const val NO_RATING_STRING = "0.0"
     }
 }
