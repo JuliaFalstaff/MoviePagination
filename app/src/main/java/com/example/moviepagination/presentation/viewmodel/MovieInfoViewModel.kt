@@ -7,6 +7,9 @@ import com.example.moviepagination.domain.entities.info.MovieInfo
 import com.example.moviepagination.domain.usecases.*
 import com.example.moviepagination.presentation.core.BaseViewModel
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class MovieInfoViewModel(
@@ -25,15 +28,18 @@ class MovieInfoViewModel(
     val loadTrailerLiveData: MutableLiveData<AppState> get() = _loadTrailerLiveData
 
     private fun loadMovieByIdFromServer(movieId: String) {
-        _loadMovieLiveData.postValue(AppState.Loading)
+
         viewModelCustomScope.launch {
             getMovieByIdUseCase(movieId)
+                .onStart {
+                    _loadMovieLiveData.postValue(AppState.Loading)
+                }
                 .catch { error ->
                     _loadMovieLiveData.postValue(AppState.Error(error))
                 }
-                .collect { movie ->
+                .onEach { movie ->
                     _loadMovieLiveData.value = AppState.SuccessMovieInfo(movie)
-                }
+                }.collect()
         }
     }
 
@@ -43,9 +49,9 @@ class MovieInfoViewModel(
                 .catch { error ->
                     _loadTrailerLiveData.postValue(AppState.Error(error))
                 }
-                .collect { trailer ->
+                .onEach { trailer ->
                     _loadTrailerLiveData.value = AppState.SuccessTrailer(trailer.videoId)
-                }
+                }.collect()
         }
     }
 

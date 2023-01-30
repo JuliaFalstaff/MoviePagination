@@ -8,6 +8,9 @@ import com.example.moviepagination.domain.usecases.GetTop250MoviesUseCase
 import com.example.moviepagination.domain.usecases.GetTop250TvsUseCase
 import com.example.moviepagination.presentation.core.BaseViewModel
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class Top250ViewModel(
@@ -21,28 +24,28 @@ class Top250ViewModel(
     val top250TVShowLiveData: LiveData<AppState> get() = _top250TVShowLiveData
 
     fun loadTop250Movies() {
-        _top250MoviesLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
             getTop250MoviesUseCase()
+                .onStart { _top250MoviesLiveData.postValue(AppState.Loading) }
                 .catch { error ->
                     _top250MoviesLiveData.postValue(AppState.Error(error))
                 }
-                .collect { movies ->
+                .onEach { movies ->
                     _top250MoviesLiveData.value = AppState.Success(movies)
-                }
+                }.collect()
         }
     }
 
     fun loadTop250TVs() {
-        _top250TVShowLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
             getTop250TvsUseCase()
+                .onStart { _top250TVShowLiveData.postValue(AppState.Loading) }
                 .catch { error ->
                     _top250TVShowLiveData.postValue(AppState.Error(error))
                 }
-                .collect { series ->
+                .onEach { series ->
                     _top250TVShowLiveData.value = AppState.Success(series)
-                }
+                }.collect()
         }
     }
 }
