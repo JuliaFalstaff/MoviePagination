@@ -9,6 +9,9 @@ import com.example.moviepagination.domain.usecases.GetMostPopularMoviesUseCase
 import com.example.moviepagination.domain.usecases.GetMostPopularTVsUseCase
 import com.example.moviepagination.presentation.core.BaseViewModel
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class MovieListViewModel(
@@ -25,41 +28,41 @@ class MovieListViewModel(
     val popularTVsLiveData: LiveData<AppState> get() = _popularTVsLiveData
 
     fun loadComingSoonMovies() {
-        _comingSoonLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
             getComingSoonUseCase()
+                .onStart { _comingSoonLiveData.postValue(AppState.Loading) }
                 .catch { error ->
                     _comingSoonLiveData.postValue(AppState.Error(error))
                 }
-                .collect { movies ->
+                .onEach { movies ->
                     _comingSoonLiveData.value = AppState.Success(movies)
-                }
+                }.collect()
         }
     }
 
     fun loadMostPopularMovies() {
-        _popularMoviesLiveData.postValue(AppState.Loading)
         viewModelScope.launch() {
             getPopularMoviesUseCase()
+                .onStart { _popularMoviesLiveData.postValue(AppState.Loading) }
                 .catch { error ->
                     _popularMoviesLiveData.postValue(AppState.Error(error))
                 }
-                .collect { movies ->
+                .onEach { movies ->
                     _popularMoviesLiveData.postValue(AppState.Success(movies))
-                }
+                }.collect()
         }
     }
 
     fun loadMostPopularTVs() {
-        _popularTVsLiveData.postValue(AppState.Loading)
         viewModelScope.launch {
             getMostPopularTVsUseCase()
+                .onStart { _popularTVsLiveData.postValue(AppState.Loading) }
                 .catch { error ->
                     _popularTVsLiveData.postValue(AppState.Error(error))
                 }
-                .collect { series ->
+                .onEach { series ->
                     _popularTVsLiveData.value = AppState.Success(series)
-                }
+                }.collect()
         }
     }
 }
