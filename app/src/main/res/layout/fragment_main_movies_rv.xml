@@ -10,16 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/mostPopularMovieTitleTextView"
             style="@style/StyleTextTitleForRecyclerViewGroup"
@@ -30,12 +20,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <include
+            android:id="@+id/popularMoviesPlaceholder"
+            layout="@layout/shimmering_item_movie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mostPopularMovieTitleTextView" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mostPopularMovieRecyclerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_8dp"
             android:orientation="horizontal"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,16 @@
             android:text="@string/most_popular_series"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mostPopularMovieRecyclerView" />
+            app:layout_constraintTop_toBottomOf="@id/popularMoviesPlaceholder" />
+
+        <include
+            android:id="@+id/popularSeriesPlaceholder"
+            layout="@layout/shimmering_item_movie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mostPopularSeriesTitleTextView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mostPopularSeriesRecyclerView"
@@ -58,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_8dp"
             android:orientation="horizontal"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +82,17 @@
             android:text="@string/coming_soon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mostPopularSeriesRecyclerView" />
+            app:layout_constraintTop_toBottomOf="@id/popularSeriesPlaceholder" />
+
+        <include
+            android:id="@+id/comingSoonPlaceholder"
+            layout="@layout/shimmering_item_movie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comingSoonTextView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/comingSoonRecyclerView"
@@ -80,6 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_8dp"
             android:orientation="horizontal"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,14 +108,15 @@
             app:layout_constraintTop_toBottomOf="@id/comingSoonTextView"
             tools:listitem="@layout/item_actors_recycler_view" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/retryButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/retry"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/progressBar" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/retryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/retry"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

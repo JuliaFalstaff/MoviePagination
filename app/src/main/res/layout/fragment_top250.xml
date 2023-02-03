@@ -21,11 +21,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <include
+            android:id="@+id/top250MoviesPlaceholder"
+            layout="@layout/shimmering_item_movie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTop250MoviesTextView"/>
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/top250MoviesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,16 +49,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/top_250_tv_series"
-            app:layout_constraintBottom_toTopOf="@+id/top250TvSeriesRecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top250MoviesRecyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/top250MoviesPlaceholder" />
+
+        <include
+            android:id="@+id/top250SeriesPlaceholder"
+            layout="@layout/shimmering_item_movie"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/titleTop250TvSeriesTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/top250TvSeriesRecyclerView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,15 +80,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/retry"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/top250ProgressBar" />
-
-        <ProgressBar
-            android:id="@+id/top250ProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

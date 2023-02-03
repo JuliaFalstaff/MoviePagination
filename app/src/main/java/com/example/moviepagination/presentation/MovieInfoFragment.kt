@@ -1,6 +1,7 @@
 package com.example.moviepagination.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -56,6 +57,7 @@ class MovieInfoFragment :
         when (appState) {
             is AppState.SuccessTrailer -> {
                 setTrailer(appState.trailerMovie)
+                Log.d("id trailer render 1", appState.trailerMovie)
                 binding.retryButton.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
@@ -160,9 +162,11 @@ class MovieInfoFragment :
     }
 
     private fun setTrailer(videoId: String) = with(binding) {
+        Log.d("id trailer SetTrailer 2", videoId)
         lifecycle.addObserver(youtubeVideoTrailer)
         youtubeVideoTrailer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
+                Log.d("id trailer onReady 3", videoId)
                 youTubePlayer.loadVideo(videoId, 0f)
                 youTubePlayer.pause()
             }

@@ -97,4 +97,7 @@ dependencies {
     //Coroutines
     implementation(Dependencies.COROUTINES_CORE_DEP)
     implementation(Dependencies.COROUTINES_KOTLIN)
+
+    //Shimmer
+    implementation(Dependencies.SHIMMER_DEP)
 }

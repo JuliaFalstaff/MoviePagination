@@ -63,15 +63,15 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
             is AppState.Success -> {
                 val movies = appState.dataMovie.items
                 top250MoviesAdapter?.submitList(movies)
-                binding.top250ProgressBar.visibility = View.INVISIBLE
+                stopShimmering()
                 binding.retryButton.visibility = View.INVISIBLE
             }
             is AppState.Error -> {
                 showError(appState.error)
-                binding.top250ProgressBar.visibility = View.INVISIBLE
+                stopShimmering()
             }
             is AppState.Loading -> {
-                binding.top250ProgressBar.visibility = View.VISIBLE
+                startShimmering()
             }
         }
     }
@@ -81,13 +81,14 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
             is AppState.Success -> {
                 val series = appState.dataMovie.items
                 top250TvSeriesAdapter?.submitList(series)
+                stopShimmering()
             }
             is AppState.Error -> {
                 showError(appState.error)
-                binding.top250ProgressBar.visibility = View.INVISIBLE
+                stopShimmering()
             }
             is AppState.Loading -> {
-                binding.top250ProgressBar.visibility = View.VISIBLE
+                startShimmering()
             }
         }
     }
@@ -102,5 +103,19 @@ class Top250Fragment : BaseFragment<FragmentTop250Binding>(FragmentTop250Binding
         } else {
             retryButton.visibility = View.GONE
         }
+    }
+
+    private fun startShimmering() = with(binding) {
+        top250MoviesPlaceholder.shimmerMovieFrameLayout.startShimmer()
+        top250SeriesPlaceholder.shimmerMovieFrameLayout.startShimmer()
+    }
+
+    private fun stopShimmering() = with(binding) {
+        top250MoviesPlaceholder.shimmerMovieFrameLayout.stopShimmer()
+        top250SeriesPlaceholder.shimmerMovieFrameLayout.stopShimmer()
+        top250MoviesPlaceholder.shimmerMovieFrameLayout.visibility = View.INVISIBLE
+        top250SeriesPlaceholder.shimmerMovieFrameLayout.visibility = View.INVISIBLE
+        top250MoviesRecyclerView.visibility = View.VISIBLE
+        top250TvSeriesRecyclerView.visibility = View.VISIBLE
     }
 }
