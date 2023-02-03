@@ -31,6 +31,7 @@ This application demonstrates information about movies and TV shows in different
 #### 4. UI
 * Glide
 * YoutubePlayer
+* Shimmer effect
 #### 5. DI
 * Koin
 #### 5. Navigation
