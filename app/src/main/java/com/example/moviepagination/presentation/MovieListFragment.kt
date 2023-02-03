@@ -67,11 +67,11 @@ class MovieListFragment :
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
                 mostPopularMoviesAdapter?.submitList(movieList)
-                binding.progressBar.visibility = View.INVISIBLE
+                stopShimmering()
                 binding.retryButton.visibility = View.GONE
             }
             is AppState.Loading -> {
-                binding.progressBar.visibility = View.VISIBLE
+                startShimmering()
             }
             is AppState.Error -> {
                 showError(state.error)
@@ -84,11 +84,11 @@ class MovieListFragment :
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
                 comingSoonAdapter?.submitList(movieList)
-                binding.progressBar.visibility = View.INVISIBLE
+                stopShimmering()
                 binding.retryButton.visibility = View.GONE
             }
             is AppState.Loading -> {
-                binding.progressBar.visibility = View.VISIBLE
+                startShimmering()
             }
             is AppState.Error -> {
                 showError(state.error)
@@ -101,11 +101,11 @@ class MovieListFragment :
             is AppState.Success -> {
                 val movieList = state.dataMovie.items
                 mostPopularTVsAdapter?.submitList(movieList)
-                binding.progressBar.visibility = View.INVISIBLE
+                stopShimmering()
                 binding.retryButton.visibility = View.GONE
             }
             is AppState.Loading -> {
-                binding.progressBar.visibility = View.VISIBLE
+                startShimmering()
             }
             is AppState.Error -> {
                 showError(state.error)
@@ -123,4 +123,23 @@ class MovieListFragment :
             retryButton.visibility = View.GONE
         }
     }
+
+    private fun startShimmering() = with(binding) {
+        comingSoonPlaceholder.shimmerMovieFrameLayout.startShimmer()
+        popularMoviesPlaceholder.shimmerMovieFrameLayout.startShimmer()
+        popularSeriesPlaceholder.shimmerMovieFrameLayout.startShimmer()
+    }
+
+    private fun stopShimmering() = with(binding) {
+        comingSoonPlaceholder.shimmerMovieFrameLayout.stopShimmer()
+        popularMoviesPlaceholder.shimmerMovieFrameLayout.stopShimmer()
+        popularSeriesPlaceholder.shimmerMovieFrameLayout.stopShimmer()
+        comingSoonPlaceholder.shimmerMovieFrameLayout.visibility = View.INVISIBLE
+        popularMoviesPlaceholder.shimmerMovieFrameLayout.visibility = View.INVISIBLE
+        popularSeriesPlaceholder.shimmerMovieFrameLayout.visibility = View.INVISIBLE
+        comingSoonRecyclerView.visibility = View.VISIBLE
+        mostPopularSeriesRecyclerView.visibility = View.VISIBLE
+        mostPopularMovieRecyclerView.visibility = View.VISIBLE
+    }
+
 }

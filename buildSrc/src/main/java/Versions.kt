@@ -20,6 +20,7 @@ object Versions {
     const val glideVersion = "4.12.0"
     const val youtubePlayerVersion = "11.1.0"
     const val navigationVersion = "2.5.3"
+    const val shimmerVersion = "0.5.0"
 }
 
 object Dependencies {
@@ -76,4 +77,7 @@ object Dependencies {
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesCoreVersion}"
     const val COROUTINES_KOTLIN =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesAndroidVersion}"
+
+    //Shimmering
+    const val SHIMMER_DEP = "com.facebook.shimmer:shimmer:0.5.0"
 }
